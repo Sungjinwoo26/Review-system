@@ -1,32 +1,1224 @@
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Mapped 'stars' -> 'rating'
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'review_text' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Mapped 'ltv' -> 'customer_ltv'
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Mapped 'product_name' -> 'product'
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'order_value' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'days_since_purchase' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'helpful_votes' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'is_repeat_customer' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'verified_purchase' with default value
-2026-04-09 16:42:33 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 14 columns standardized
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'review_text' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'order_value' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'days_since_purchase' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'helpful_votes' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'is_repeat_customer' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'verified_purchase' with default value
-2026-04-09 16:42:33 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 11 columns standardized
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'review_text' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'customer_ltv' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'order_value' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'days_since_purchase' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'helpful_votes' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'is_repeat_customer' with default value
-2026-04-09 16:42:33 | [36mDEBUG[0m | review_system        | Created missing column 'verified_purchase' with default value
-2026-04-09 16:42:33 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 11 columns standardized
-2026-04-09 17:02:36 | [32mINFO[0m[0m | review_system        | Fetching data from custom API: http://invalid-url-12345.test
-2026-04-09 17:02:36 | [31mERROR[0m[0m | review_system        | ERROR: API_CONNECTION_ERROR - Connection error to API: HTTPConnectionPool(host='invalid-url-12345.test', port=80): Max retries exceeded with url: / (Caused by NameResolutionError("HTTPConnection(host='invalid-url-12345.test', port=80): Failed to resolve 'invalid-url-12345.test' ([Errno 11001] getaddrinfo failed)"))
+2026-04-09 22:20:35 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 22:20:35 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 22:20:35 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 22:20:35 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 22:20:35 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 22:20:36 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 22:20:36 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 22:20:36 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 22:20:36 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 22:20:37 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 22:20:37 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 22:20:37 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 22:20:37 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 22:20:38 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 22:20:38 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 22:20:38 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 22:20:38 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 22:20:39 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 22:20:39 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 22:20:39 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 22:20:39 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 22:20:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 22:20:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 22:20:40 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 22:20:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 22:20:40 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 22:20:40 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 22:20:40 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 22:20:40 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 22:20:40 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Bot keeps replying same thing. Waste of money. '}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Coupon didn't apply. Bot keeps replying same thing. Received different variant. "}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4404, 'text_preview': "Weak concentration. Received someone else's order. "}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.569, 'text_preview': 'No visible improvement. '}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6124, 'text_preview': 'Missing items in bundle. Waste of money. '}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3182, 'text_preview': 'Bottle leaked during shipping. '}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Texture changed from last order. Too expensive for quantity. '}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Expired product received. Replacement took too long. '}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:44 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3182, 'text_preview': 'Bottle leaked during shipping. Received different variant. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7003, 'text_preview': 'Agent was rude. Waste of money. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7184, 'text_preview': 'Weak concentration. Received different variant. Seal was broken. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3777, 'text_preview': 'No visible improvement. Different brand received. Price increased since last ord'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced. Found cheaper on another site.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6754, 'text_preview': 'Not bad not great.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Replacement took too long. Received different variant. Label peeled off. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.3919, 'text_preview': 'Works but slowly. Hair fall increased initially.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Received different variant. Marked delivered but not received. Color looks diffe'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7964, 'text_preview': 'Waste of money. Missing items in bundle. Delivered to wrong address. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5423, 'text_preview': 'Color looks different. Bottle leaked during shipping. Allergic reaction on scalp'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Received different variant. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.0041, 'text_preview': "Missing items in bundle. Coupon didn't apply. Stomach upset from supplements. "}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6908, 'text_preview': 'Cap was loose. Texture changed from last order. No response to complaint. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Delivered to wrong address. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Wrong delivery date shown. Bot keeps replying same thing. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6413, 'text_preview': 'Average product, expected more. No visible improvement.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6754, 'text_preview': 'Not bad not great.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Refund not processed. Texture changed from last order. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Found cheaper on another site. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6597, 'text_preview': 'Stuck in transit for a week. No response to complaint. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': "Allergic reaction on scalp. Coupon didn't apply. Expected faster results. "}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.2732, 'text_preview': 'Bot keeps replying same thing. Hidden charges at checkout. Texture changed from '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7952, 'text_preview': 'Hidden charges at checkout. No visible improvement. Cap was loose. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.1356, 'text_preview': "It's okay, nothing special. Allergic reaction on scalp."}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Bot keeps replying same thing. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special. Coupon didn't apply."}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Expected faster results. '}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:45 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Box was crushed. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.0516, 'text_preview': 'Bottle leaked during shipping. Price increased since last order. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.569, 'text_preview': 'No visible improvement. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6754, 'text_preview': 'Not bad not great.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Used for 3 months no change. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Used for 3 months no change. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6808, 'text_preview': 'Expected faster results. Allergic reaction on scalp. No response to complaint. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.2732, 'text_preview': 'Hidden charges at checkout. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Works but slowly. Used for 3 months no change.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.631, 'text_preview': 'Works but slowly. Wrong quantity sent.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Received different variant. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.1779, 'text_preview': 'Waste of money. Price increased since last order. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3818, 'text_preview': 'Different brand received. Product smell is off. Stomach upset from supplements. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Works but slowly. Received someone else's order."}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5209, 'text_preview': 'Average product, expected more. Seal was broken.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.1511, 'text_preview': "Received different variant. Coupon didn't apply. No visible improvement. "}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7717, 'text_preview': 'Skin irritation after use. No response to complaint. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6369, 'text_preview': 'Expected faster results. Cap was loose. Weak concentration. '}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Received someone else's order. Marked delivered but not received. Expected faste"}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced. Took 15 days instead of 5.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:46 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7096, 'text_preview': 'Delivered to wrong address. Waste of money. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more. Took 15 days instead of 5.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4404, 'text_preview': 'Label peeled off. Took 15 days instead of 5. Weak concentration. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Expired product received. Allergic reaction on scalp. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Used for 3 months no change. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Different brand received. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3818, 'text_preview': 'Received different variant. Stomach upset from supplements. Color looks differen'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7096, 'text_preview': "Waste of money. Wrong quantity sent. Coupon didn't apply. "}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3182, 'text_preview': 'Bottle leaked during shipping. Breaking out more than before. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5994, 'text_preview': 'Bottle leaked during shipping. Stomach upset from supplements. Too expensive for'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6754, 'text_preview': 'Not bad not great.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special. Product smell is off."}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.2638, 'text_preview': 'Wrong quantity sent. Marked delivered but not received. Weak concentration. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Delivered to wrong address. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Different brand received. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5106, 'text_preview': 'Skin irritation after use. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Label peeled off. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5106, 'text_preview': 'Skin irritation after use. Color looks different. Expected faster results. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.3501, 'text_preview': 'Not bad not great. Seal was broken.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6808, 'text_preview': 'Works but slowly. No response to complaint.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Too expensive for quantity. Waste of money. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Breaking out more than before. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced. Took 15 days instead of 5.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Seal was broken. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5267, 'text_preview': 'Too expensive for quantity. No response to complaint. '}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Breaking out more than before. Found cheaper on another site. Replacement took t'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:47 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Color looks different. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Doesn't work as advertised. "}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6908, 'text_preview': 'Weak concentration. Waste of money. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Received different variant. Refund not processed. Too expensive for quantity. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7096, 'text_preview': "Waste of money. Delivered to wrong address. Received someone else's order. "}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Missing items in bundle. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Received someone else's order. "}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5106, 'text_preview': 'Skin irritation after use. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Used for 3 months no change. Refund not processed. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7579, 'text_preview': 'Breaking out more than before. Delivered to wrong address. No response to compla'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.8434, 'text_preview': 'Cap was loose. No visible improvement. Wrong delivery date shown. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6754, 'text_preview': 'Not bad not great.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7096, 'text_preview': 'Refund not processed. Box was crushed. Wrong quantity sent. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7351, 'text_preview': 'Received different variant. Seal was broken. Delivered to wrong address. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5859, 'text_preview': 'Stomach upset from supplements. Used for 3 months no change. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Replacement took too long. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6369, 'text_preview': 'Agent was rude. Allergic reaction on scalp. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Wrong quantity sent. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Decent but overpriced. Doesn't work as advertised."}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Box was crushed. Color looks different. Replacement took too long. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.2235, 'text_preview': 'Expired product received. Refund not processed. Missing items in bundle. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7506, 'text_preview': 'Skin irritation after use. Found cheaper on another site. Delivered to wrong add'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Product smell is off. Delivered to wrong address. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Product smell is off. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.2732, 'text_preview': 'Hidden charges at checkout. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3182, 'text_preview': 'No response to complaint. Price increased since last order. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.8481, 'text_preview': 'Delivered to wrong address. Seal was broken. Agent was rude. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6754, 'text_preview': 'Not bad not great.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Found cheaper on another site. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.2732, 'text_preview': 'Hidden charges at checkout. Replacement took too long. '}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6124, 'text_preview': 'Decent but overpriced. Agent was rude.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special. Refund not processed."}
+2026-04-09 22:20:48 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4023, 'text_preview': 'Refund not processed. Skin irritation after use. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Expired product received. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special. Expected faster results."}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6486, 'text_preview': 'Seal was broken. Used for 3 months no change. Different brand received. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.8166, 'text_preview': 'Missing items in bundle. No visible improvement. Stomach upset from supplements.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.25, 'text_preview': 'Wrong quantity sent. Price increased since last order. Color looks different. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6249, 'text_preview': 'Texture changed from last order. Seal was broken. Stuck in transit for a week. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4588, 'text_preview': 'Agent was rude. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7269, 'text_preview': 'Delivered to wrong address. Agent was rude. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6908, 'text_preview': 'Delivered to wrong address. Stomach upset from supplements. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6124, 'text_preview': 'Missing items in bundle. Waste of money. Product smell is off. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6808, 'text_preview': "Received someone else's order. Waste of money. Box was crushed. "}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5106, 'text_preview': 'Skin irritation after use. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Product smell is off. Coupon didn't apply. "}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5267, 'text_preview': 'No response to complaint. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7964, 'text_preview': 'Stuck in transit for a week. Box was crushed. Skin irritation after use. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7269, 'text_preview': 'Wrong quantity sent. Agent was rude. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Breaking out more than before. Label peeled off. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3818, 'text_preview': 'Stomach upset from supplements. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3182, 'text_preview': 'Cap was loose. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.2732, 'text_preview': 'Hidden charges at checkout. Expected faster results. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.8434, 'text_preview': 'No visible improvement. Wrong quantity sent. Bottle leaked during shipping. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.2732, 'text_preview': 'Price increased since last order. Product smell is off. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.2732, 'text_preview': 'Hair fall increased initially. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Refund not processed. Breaking out more than before. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Replacement took too long. Received someone else's order. "}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5106, 'text_preview': 'Skin irritation after use. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.3724, 'text_preview': "Coupon didn't apply. Wrong delivery date shown. Refund not processed. "}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5106, 'text_preview': 'Skin irritation after use. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.25, 'text_preview': "Doesn't work as advertised. Stuck in transit for a week. Color looks different. "}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Different brand received. Delivered to wrong address. Expired product received. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3818, 'text_preview': 'Stomach upset from supplements. Product smell is off. '}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:49 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': "Delivered to wrong address. Received someone else's order. Doesn't work as adver"}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.8074, 'text_preview': 'Cap was loose. Delivered to wrong address. Weak concentration. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Bot keeps replying same thing. Received someone else's order. "}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Wrong delivery date shown. Texture changed from last order. Label peeled off. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4404, 'text_preview': 'Weak concentration. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.34, 'text_preview': 'Cap was loose. Used for 3 months no change. Price increased since last order. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Received different variant. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7077, 'text_preview': 'Missing items in bundle. No visible improvement. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Took 15 days instead of 5. Waste of money. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.327, 'text_preview': 'No visible improvement. Marked delivered but not received. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.2321, 'text_preview': 'Marked delivered but not received. Stomach upset from supplements. Waste of mone'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Wrong delivery date shown. Label peeled off. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.2732, 'text_preview': 'Price increased since last order. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.2263, 'text_preview': 'Waste of money. Product smell is off. Marked delivered but not received. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Expired product received. Too expensive for quantity. Delivered to wrong address'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6908, 'text_preview': 'Cap was loose. No response to complaint. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced. Too expensive for quantity.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.569, 'text_preview': 'No visible improvement. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5358, 'text_preview': "It's okay, nothing special. Delivered to wrong address."}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.2732, 'text_preview': 'Hair fall increased initially. Color looks different. Refund not processed. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4588, 'text_preview': 'Agent was rude. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Replacement took too long. Delivered to wrong address. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.661, 'text_preview': 'Weak concentration. Used for 3 months no change. No response to complaint. '}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:50 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Bot keeps replying same thing. Delivered to wrong address. Expected faster resul'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.569, 'text_preview': 'Replacement took too long. No visible improvement. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6908, 'text_preview': 'Too expensive for quantity. Waste of money. Weak concentration. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Missing items in bundle. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7533, 'text_preview': 'Not bad not great. Allergic reaction on scalp.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Breaking out more than before. Different brand received. Doesn't work as adverti"}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6808, 'text_preview': 'Missing items in bundle. No response to complaint. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.2023, 'text_preview': 'Stomach upset from supplements. Marked delivered but not received. Expected fast'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Different brand received. Box was crushed. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.0258, 'text_preview': 'Price increased since last order. Missing items in bundle. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7351, 'text_preview': 'Found cheaper on another site. Wrong delivery date shown. Wrong quantity sent. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Received different variant. Found cheaper on another site. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Different brand received. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Texture changed from last order. Breaking out more than before. Expected faster '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more. Texture changed from last order.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Received someone else's order. "}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.1356, 'text_preview': "It's okay, nothing special. Missing items in bundle."}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5046, 'text_preview': 'Average product, expected more. Agent was rude.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Received different variant. Product smell is off. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Expected faster results. Expired product received. Too expensive for quantity. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Works but slowly.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Coupon didn't apply. "}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Expected faster results. Allergic reaction on scalp. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.25, 'text_preview': 'Label peeled off. Stuck in transit for a week. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7965, 'text_preview': 'Not bad not great. Wrong delivery date shown.'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Waste of money. Found cheaper on another site. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Marked delivered but not received. Expected faster results. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7351, 'text_preview': 'Color looks different. Wrong quantity sent. Delivered to wrong address. '}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5267, 'text_preview': 'Too expensive for quantity. Allergic reaction on scalp. Used for 3 months no cha'}
+2026-04-09 22:20:51 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Seal was broken. Bot keeps replying same thing. Texture changed from last order.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special. Too expensive for quantity."}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Product smell is off. Refund not processed. Found cheaper on another site. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Took 15 days instead of 5. Allergic reaction on scalp. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Missing items in bundle. Texture changed from last order. Too expensive for quan'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Took 15 days instead of 5. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Waste of money. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6124, 'text_preview': 'Missing items in bundle. Waste of money. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Wrong delivery date shown. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Bot keeps replying same thing. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Received different variant. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced. Expected faster results.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.3182, 'text_preview': 'Price increased since last order. No response to complaint. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.5574, 'text_preview': 'Stomach upset from supplements. Price increased since last order. Wrong delivery'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4215, 'text_preview': 'Waste of money. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Label peeled off. Took 15 days instead of 5. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Expected faster results. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.3919, 'text_preview': 'Works but slowly. Price increased since last order.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6754, 'text_preview': 'Not bad not great.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.25, 'text_preview': 'Price increased since last order. Wrong delivery date shown. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.631, 'text_preview': 'Decent but overpriced. Wrong delivery date shown.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Breaking out more than before. Doesn't work as advertised. "}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Average product, expected more.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Received different variant. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4404, 'text_preview': 'Weak concentration. Took 15 days instead of 5. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6754, 'text_preview': 'Not bad not great.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Allergic reaction on scalp. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.569, 'text_preview': 'No visible improvement. Texture changed from last order. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6486, 'text_preview': 'Used for 3 months no change. Replacement took too long. Delivered to wrong addre'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Marked delivered but not received. Label peeled off. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Allergic reaction on scalp. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': "Color looks different. Delivered to wrong address. Received someone else's order"}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.1779, 'text_preview': 'Box was crushed. Hair fall increased initially. Received different variant. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Allergic reaction on scalp. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4588, 'text_preview': "Agent was rude. Coupon didn't apply. "}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Marked delivered but not received. Texture changed from last order. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special."}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Replacement took too long. Allergic reaction on scalp. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.296, 'text_preview': 'Allergic reaction on scalp. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4585, 'text_preview': 'Marked delivered but not received. Waste of money. Too expensive for quantity. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.7077, 'text_preview': 'No visible improvement. Bot keeps replying same thing. Missing items in bundle. '}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:52 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6588, 'text_preview': 'Great product, seeing results!'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Love this, will reorder.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Decent but overpriced.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': "Coupon didn't apply. "}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.8271, 'text_preview': 'Missing items in bundle. No response to complaint. Seal was broken. '}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6249, 'text_preview': 'Expected faster results. Weak concentration. Allergic reaction on scalp. '}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.092, 'text_preview': "It's okay, nothing special. Found cheaper on another site."}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.8176, 'text_preview': 'Weak concentration. Box was crushed. Waste of money. '}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Expired product received. '}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6705, 'text_preview': 'Skin irritation after use. Missing items in bundle. '}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Different brand received. '}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.0, 'text_preview': 'Exceeded expectations.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.6124, 'text_preview': 'Decent but overpriced. Agent was rude.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.7574, 'text_preview': 'Works as promised, very happy.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.4201, 'text_preview': 'Highly recommend to everyone.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.2732, 'text_preview': 'Price increased since last order. '}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.5859, 'text_preview': 'Amazing quality and fast delivery.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': 0.6369, 'text_preview': 'Best purchase this month.'}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SENTIMENT_AI | {'method': 'vader_fallback', 'score': -0.4767, 'text_preview': 'Too expensive for quantity. Wrong delivery date shown. Refund not processed. '}
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Ashwagandha Caps 60ct: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Sleep Gummies 30ct: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Collagen Powder 250g: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Derma Roller Kit: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Multivitamin Tabs 90ct: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Minoxidil 5% Solution: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Hair Growth Serum: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Weight Loss Shake: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Hair Mask Deep Repair: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Biotin Gummies 60ct: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Beard Growth Oil: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Body Wash 300ml: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Acne Control Face Wash: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Skin Brightening Serum: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Vitamin C Moisturizer: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Iron + B12 Tabs: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Dandruff Shampoo 250ml: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Anti-Hairfall Oil 200ml: name 'prompt' is not defined
+2026-04-09 22:20:53 | [32mINFO[0m[0m | review_system        | EVENT: PIPELINE_COMPLETE | {'reviews': 500, 'products': 18}
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Ashwagandha Caps 60ct: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Biotin Gummies 60ct: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Beard Growth Oil: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Acne Control Face Wash: name 'prompt' is not defined
+2026-04-09 22:20:53 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Anti-Hairfall Oil 200ml: name 'prompt' is not defined
+2026-04-09 22:21:17 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Ashwagandha Caps 60ct: name 'prompt' is not defined
+2026-04-09 22:21:17 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Beard Growth Oil: name 'prompt' is not defined
+2026-04-09 22:21:17 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Acne Control Face Wash: name 'prompt' is not defined
+2026-04-09 22:21:17 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Biotin Gummies 60ct: name 'prompt' is not defined
+2026-04-09 22:21:17 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Anti-Hairfall Oil 200ml: name 'prompt' is not defined
+2026-04-09 22:21:24 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Ashwagandha Caps 60ct: name 'prompt' is not defined
+2026-04-09 22:21:24 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Biotin Gummies 60ct: name 'prompt' is not defined
+2026-04-09 22:21:24 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Beard Growth Oil: name 'prompt' is not defined
+2026-04-09 22:21:24 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Acne Control Face Wash: name 'prompt' is not defined
+2026-04-09 22:21:24 | [33mWARNING[0m[0m | review_system        | WARNING: AI_REC_FALLBACK - Ollama failed for Anti-Hairfall Oil 200ml: name 'prompt' is not defined
+2026-04-09 22:31:21 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 22:31:21 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 22:31:21 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 22:31:21 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 22:31:21 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 22:31:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 22:31:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 22:31:23 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 22:31:23 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 22:31:24 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 22:31:24 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 22:31:24 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 22:31:24 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 22:31:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 22:31:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 22:31:25 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 22:31:25 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 22:31:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 22:31:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 22:31:26 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 22:31:26 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 22:31:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 22:31:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 22:31:27 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 22:31:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 22:31:27 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 22:31:27 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 22:31:27 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 22:31:27 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 22:31:27 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 22:31:27 | [31mERROR[0m[0m | review_system        | ERROR: DATA_LOAD_FAILED - name 'groq_api_key' is not defined
+2026-04-09 22:31:48 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 22:31:48 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 22:31:48 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 22:31:48 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 22:31:48 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 22:31:49 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 22:31:49 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 22:31:49 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 22:31:49 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 22:31:50 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 22:31:50 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 22:31:50 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 22:31:50 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 22:31:51 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 22:31:51 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 22:31:51 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 22:31:51 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 22:31:52 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 22:31:52 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 22:31:52 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 22:31:52 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 22:31:53 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 22:31:53 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 22:31:53 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 22:31:53 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 22:31:53 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 22:31:53 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 22:31:53 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 22:31:53 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 22:31:53 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 22:31:53 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 22:31:54 | [31mERROR[0m[0m | review_system        | ERROR: PIPELINE_FAILED - make_decisions() got an unexpected keyword argument 'groq_key'
+2026-04-09 22:31:54 | [31mERROR[0m[0m | review_system        | ERROR: DATA_LOAD_FAILED - make_decisions() got an unexpected keyword argument 'groq_key'
+2026-04-09 22:32:23 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 22:32:23 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 22:32:23 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 22:32:23 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 22:32:23 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 22:32:24 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 22:32:24 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 22:32:24 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 22:32:24 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 22:32:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 22:32:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 22:32:25 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 22:32:25 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 22:32:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 22:32:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 22:32:26 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 22:32:26 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 22:32:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 22:32:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 22:32:27 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 22:32:27 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 22:32:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 22:32:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 22:32:28 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 22:32:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 22:32:28 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 22:32:28 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 22:32:28 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 22:32:28 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 22:32:28 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 22:32:28 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 22:32:28 | [31mERROR[0m[0m | review_system        | ERROR: PIPELINE_FAILED - make_decisions() got an unexpected keyword argument 'groq_key'
+2026-04-09 22:32:28 | [31mERROR[0m[0m | review_system        | ERROR: DATA_LOAD_FAILED - make_decisions() got an unexpected keyword argument 'groq_key'
+2026-04-09 22:38:27 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 22:38:27 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 22:38:27 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 22:38:27 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 22:38:27 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 22:38:29 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 22:38:29 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 22:38:29 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 22:38:29 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 22:38:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 22:38:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 22:38:30 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 22:38:30 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 22:38:31 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 22:38:31 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 22:38:31 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 22:38:31 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 22:38:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 22:38:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 22:38:32 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 22:38:32 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 22:38:33 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 22:38:33 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 22:38:33 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 22:38:33 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 22:38:33 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 22:38:33 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 22:38:33 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 22:38:33 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 22:38:33 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 22:38:33 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 22:38:33 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:34 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:35 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:35 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:36 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:36 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:37 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:38 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:38 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:39 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:39 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:40 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:41 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:41 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:42 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:42 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:43 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:44 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:44 | [32mINFO[0m[0m | review_system        | EVENT: PIPELINE_COMPLETE | {'reviews': 500, 'products': 18}
+2026-04-09 22:38:44 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:45 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:45 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:46 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:38:47 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:42:56 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 22:42:56 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 22:42:56 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 22:42:56 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 22:42:56 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 22:42:57 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 22:42:57 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 22:42:57 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 22:42:57 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 22:42:58 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 22:42:58 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 22:42:58 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 22:42:58 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 22:42:59 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 22:42:59 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 22:42:59 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 22:42:59 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 22:43:00 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 22:43:00 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 22:43:00 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 22:43:00 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 22:43:01 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 22:43:01 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 22:43:01 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 22:43:01 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 22:43:01 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 22:43:01 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 22:43:01 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 22:43:01 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 22:43:01 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 22:43:01 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 22:43:02 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Ashwagandha Caps 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:03 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Sleep Gummies 30ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:04 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Collagen Powder 250g', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:06 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Multivitamin Tabs 90ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:08 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Derma Roller Kit', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:09 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Minoxidil 5% Solution', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:10 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Weight Loss Shake', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:11 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Growth Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:12 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Mask Deep Repair', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:14 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Biotin Gummies 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:15 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Body Wash 300ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:16 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Beard Growth Oil', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:17 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Acne Control Face Wash', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:18 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Skin Brightening Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:19 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Vitamin C Moisturizer', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:20 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Dandruff Shampoo 250ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:21 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Iron + B12 Tabs', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:43:21 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:43:21 | [32mINFO[0m[0m | review_system        | EVENT: PIPELINE_COMPLETE | {'reviews': 500, 'products': 18}
+2026-04-09 22:43:22 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 22:49:30 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 22:49:30 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 22:49:30 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 22:49:30 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 22:49:30 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 22:49:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 22:49:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 22:49:32 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 22:49:32 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 22:49:33 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 22:49:33 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 22:49:33 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 22:49:33 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 22:49:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 22:49:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 22:49:34 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 22:49:34 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 22:49:35 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 22:49:35 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 22:49:35 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 22:49:35 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 22:49:36 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 22:49:36 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 22:49:36 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 22:49:36 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 22:49:36 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 22:49:36 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 22:49:36 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 22:49:36 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 22:49:36 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 22:49:36 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 22:49:37 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Ashwagandha Caps 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:38 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Sleep Gummies 30ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:39 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Collagen Powder 250g', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:40 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Multivitamin Tabs 90ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:41 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Derma Roller Kit', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:43 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Minoxidil 5% Solution', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:44 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Weight Loss Shake', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:45 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Growth Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:46 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Mask Deep Repair', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:48 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Biotin Gummies 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:49 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Body Wash 300ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:50 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Beard Growth Oil', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:51 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Acne Control Face Wash', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:52 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Skin Brightening Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:53 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Vitamin C Moisturizer', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:54 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Dandruff Shampoo 250ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:55 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Iron + B12 Tabs', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:49:56 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:51:53 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 22:51:53 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 22:51:53 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 22:51:53 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 22:51:53 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 22:51:54 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 22:51:54 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 22:51:54 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 22:51:54 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 22:51:55 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 22:51:55 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 22:51:55 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 22:51:55 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 22:51:56 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 22:51:56 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 22:51:56 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 22:51:56 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 22:51:57 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 22:51:57 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 22:51:57 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 22:51:57 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 22:51:58 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 22:51:58 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 22:51:58 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 22:51:58 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 22:51:58 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 22:51:58 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 22:51:58 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 22:51:58 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 22:51:58 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 22:51:59 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 22:52:00 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Ashwagandha Caps 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:01 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Sleep Gummies 30ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:02 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Collagen Powder 250g', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:03 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Multivitamin Tabs 90ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:04 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Derma Roller Kit', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:05 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Minoxidil 5% Solution', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:06 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Weight Loss Shake', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:08 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Growth Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:09 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Mask Deep Repair', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:10 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Biotin Gummies 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:11 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Body Wash 300ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:13 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Beard Growth Oil', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:14 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Acne Control Face Wash', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:15 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Skin Brightening Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:16 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Vitamin C Moisturizer', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:17 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Dandruff Shampoo 250ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:18 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Iron + B12 Tabs', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:52:19 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 22:58:36 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 22:58:36 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 22:58:36 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 22:58:36 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 22:58:36 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 22:58:37 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 22:58:37 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 22:58:38 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 22:58:38 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 22:58:38 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 22:58:38 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 22:58:39 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 22:58:39 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 22:58:39 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 22:58:39 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 22:58:40 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 22:58:40 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 22:58:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 22:58:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 22:58:41 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 22:58:41 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 22:58:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 22:58:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 22:58:42 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 22:58:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 22:58:42 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 22:58:42 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 22:58:42 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 22:58:42 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 22:58:42 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 23:00:04 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 23:00:04 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 23:00:04 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 23:00:04 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 23:00:04 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 23:00:05 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 23:00:05 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 23:00:05 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 23:00:05 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 23:00:06 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 23:00:06 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 23:00:06 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 23:00:06 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 23:00:07 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 23:00:07 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 23:00:07 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 23:00:07 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 23:00:08 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 23:00:08 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 23:00:08 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 23:00:08 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 23:00:09 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 23:00:09 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 23:00:09 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 23:00:09 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 23:00:09 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 23:00:09 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 23:00:09 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 23:00:09 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 23:00:09 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 23:00:09 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 23:00:10 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Ashwagandha Caps 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:12 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Sleep Gummies 30ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:13 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Collagen Powder 250g', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:14 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Multivitamin Tabs 90ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:15 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Derma Roller Kit', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:16 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Minoxidil 5% Solution', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:17 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Weight Loss Shake', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:18 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Growth Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:19 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Mask Deep Repair', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:20 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Biotin Gummies 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:22 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Body Wash 300ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:23 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Beard Growth Oil', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:25 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Acne Control Face Wash', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:26 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Skin Brightening Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:27 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:00:28 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Dandruff Shampoo 250ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:00:29 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:00:29 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:00:30 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:01:29 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 23:01:29 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 23:01:29 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 23:01:29 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 23:01:29 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 23:01:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 23:01:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 23:01:30 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 23:01:30 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 23:01:31 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 23:01:31 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 23:01:31 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 23:01:31 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 23:01:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 23:01:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 23:01:32 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 23:01:32 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 23:01:33 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 23:01:33 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 23:01:33 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 23:01:33 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 23:01:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 23:01:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 23:01:34 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 23:01:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 23:01:34 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 23:01:34 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 23:01:34 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 23:01:34 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 23:01:34 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 23:01:35 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 23:01:36 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Ashwagandha Caps 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:37 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Sleep Gummies 30ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:38 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Collagen Powder 250g', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:39 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Multivitamin Tabs 90ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:40 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Derma Roller Kit', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:42 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Minoxidil 5% Solution', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:43 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Weight Loss Shake', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:45 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Growth Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:46 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Mask Deep Repair', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:47 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Biotin Gummies 60ct', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:49 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Body Wash 300ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:50 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Beard Growth Oil', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:52 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Acne Control Face Wash', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:53 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Skin Brightening Serum', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:54 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Vitamin C Moisturizer', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:56 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Dandruff Shampoo 250ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:57 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Iron + B12 Tabs', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:01:58 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'llama-3.1-8b-instant'}
+2026-04-09 23:02:33 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 23:02:33 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 23:02:33 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 23:02:33 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 23:02:33 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 23:02:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 23:02:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 23:02:34 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 23:02:34 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 23:02:35 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 23:02:35 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 23:02:35 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 23:02:35 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 23:02:36 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 23:02:36 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 23:02:36 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 23:02:36 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 23:02:37 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 23:02:37 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 23:02:37 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 23:02:37 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 23:02:38 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 23:02:38 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 23:02:38 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 23:02:38 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 23:02:38 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 23:02:38 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 23:02:38 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 23:02:38 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 23:02:38 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 23:02:38 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 23:06:59 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 23:06:59 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 23:06:59 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 23:06:59 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 23:06:59 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 23:07:01 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 23:07:01 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 23:07:01 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 23:07:01 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 23:07:02 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 23:07:02 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 23:07:02 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 23:07:02 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 23:07:03 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 23:07:03 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 23:07:03 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 23:07:03 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 23:07:04 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 23:07:04 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 23:07:04 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 23:07:04 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 23:07:05 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 23:07:05 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 23:07:05 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 23:07:05 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 23:07:05 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 23:07:05 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 23:07:05 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 23:07:05 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 23:07:05 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 23:07:05 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 23:07:07 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Ashwagandha Caps 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:08 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Sleep Gummies 30ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:10 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Collagen Powder 250g', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:11 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Multivitamin Tabs 90ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:13 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Derma Roller Kit', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:15 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Minoxidil 5% Solution', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:16 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Weight Loss Shake', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:18 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Growth Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:19 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Mask Deep Repair', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:21 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Biotin Gummies 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:23 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Body Wash 300ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:24 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Beard Growth Oil', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:25 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:07:27 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Skin Brightening Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:07:27 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:07:28 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:07:28 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:07:29 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:07:30 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-09 23:07:31 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:15 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 23:11:15 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 23:11:15 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 23:11:15 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 23:11:15 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 23:11:17 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 23:11:17 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 23:11:17 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 23:11:17 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 23:11:18 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 23:11:18 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 23:11:18 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 23:11:18 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 23:11:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 23:11:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 23:11:19 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 23:11:19 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 23:11:20 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 23:11:20 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 23:11:20 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 23:11:20 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 23:11:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 23:11:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 23:11:21 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 23:11:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 23:11:21 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 23:11:21 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 23:11:21 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 23:11:21 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 23:11:21 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 23:11:21 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 23:11:22 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Ashwagandha Caps 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:23 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Sleep Gummies 30ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:24 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Collagen Powder 250g', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:25 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Multivitamin Tabs 90ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:28 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Derma Roller Kit', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:29 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Minoxidil 5% Solution', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:29 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Weight Loss Shake', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:30 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Growth Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:31 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Mask Deep Repair', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:33 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Biotin Gummies 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:34 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Body Wash 300ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:35 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Beard Growth Oil', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:36 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Acne Control Face Wash', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:37 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Skin Brightening Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:38 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Vitamin C Moisturizer', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:39 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Dandruff Shampoo 250ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:40 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Iron + B12 Tabs', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:11:41 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:13:49 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 23:13:49 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 23:13:49 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 23:13:49 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 23:13:49 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 23:13:50 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 23:13:50 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 23:13:50 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 23:13:50 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 23:13:51 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 23:13:51 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 23:13:51 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 23:13:51 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 23:13:52 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 23:13:52 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 23:13:52 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 23:13:52 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 23:13:53 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 23:13:53 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 23:13:53 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 23:13:53 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 23:13:54 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 23:13:54 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 23:13:54 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 23:13:54 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 23:13:54 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 23:13:54 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 23:13:54 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 23:13:54 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 23:13:54 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 23:13:54 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 23:13:55 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Ashwagandha Caps 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:13:56 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Sleep Gummies 30ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:13:57 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Collagen Powder 250g', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:13:58 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Multivitamin Tabs 90ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:13:59 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Derma Roller Kit', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:00 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Minoxidil 5% Solution', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:01 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Weight Loss Shake', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:02 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Growth Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:04 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Mask Deep Repair', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:05 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Biotin Gummies 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:06 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Body Wash 300ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:07 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Beard Growth Oil', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:08 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Acne Control Face Wash', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:09 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Skin Brightening Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:10 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Vitamin C Moisturizer', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:11 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Dandruff Shampoo 250ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:12 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Iron + B12 Tabs', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:14:13 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:16:49 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-09 23:16:49 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-09 23:16:49 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-09 23:16:49 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-09 23:16:49 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-09 23:16:51 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-09 23:16:51 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-09 23:16:51 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-09 23:16:51 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-09 23:16:52 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-09 23:16:52 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-09 23:16:52 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-09 23:16:52 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-09 23:16:53 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-09 23:16:53 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-09 23:16:53 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-09 23:16:53 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-09 23:16:54 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-09 23:16:54 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-09 23:16:54 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-09 23:16:54 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-09 23:16:55 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-09 23:16:55 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-09 23:16:55 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-09 23:16:55 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-09 23:16:55 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-09 23:16:55 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-09 23:16:55 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-09 23:16:55 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-09 23:16:55 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-09 23:16:55 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-09 23:16:56 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Ashwagandha Caps 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:16:57 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Sleep Gummies 30ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:16:58 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Collagen Powder 250g', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:16:59 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Multivitamin Tabs 90ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:00 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Derma Roller Kit', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:01 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Minoxidil 5% Solution', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:02 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Weight Loss Shake', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:03 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Growth Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:04 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Hair Mask Deep Repair', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:05 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Biotin Gummies 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:06 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Body Wash 300ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:07 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Beard Growth Oil', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:08 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Acne Control Face Wash', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:09 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Skin Brightening Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:10 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Vitamin C Moisturizer', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:11 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Dandruff Shampoo 250ml', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:12 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Iron + B12 Tabs', 'model': 'qwen/qwen3-32b'}
+2026-04-09 23:17:13 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}

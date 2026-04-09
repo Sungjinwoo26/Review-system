@@ -26,56 +26,11 @@ import numpy as np
 
 def compute_scores(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Compute weighted importance scores for each review (Layer 3).
-    
-    Combines customer importance (CIS) and issue severity to quantify
-    which reviews matter most to the business.
-    
-    FORMULA LAYER 3:
-    ---------------
-    CIS = (0.30 × LTV_norm) + (0.20 × OrderValue_norm) + (0.15 × Repeat) 
-          + (0.10 × Verified) + (0.10 × Helpful_norm) + (0.15 × Recency)
-    
-    FORMULA LAYER 5:
-    FinalScore = ln(1 + TotalImpact) × (1 + PPS)
-    
-    Severity = (0.60 × SeverityRating) + (0.40 × (1 - SentimentScore))
-    
-    Impact Score = CIS × Severity
-    
-    Args:
-        df: DataFrame containing preprocessed and engineered features
-        
-    Required Input Columns:
-        - ltv_norm, order_norm, helpful_norm (from preprocessing)
-        - repeat, verified (from preprocessing, binary 0/1)
-        - severity_rating, recency, sentiment_score (from feature engineering)
-        - rating (original rating for validation)
-        - customer_ltv (original LTV for validation)
-        
-    Returns:
-        DataFrame with new scoring columns:
-        - CIS: Customer Importance Score [0, 1]
-        - severity: Issue Severity Score [0, 1]
-        - impact_score: Review Impact = CIS × Severity [0, 1]
-        
-    Constraints:
-        - All outputs clipped to [0, 1] range
-        - No NaN values in output (filled with 0)
-        - Vectorized operations only (no loops)
+    Compute weighted importance scores with enhanced multipliers.
     """
     df = df.copy()
     
     # ===== LAYER 3: CUSTOMER IMPORTANCE SCORE (CIS) =====
-    # Purpose: Quantifies how important the customer is to the business
-    # Weight Rationale:
-    #   - 30% LTV: Direct financial value
-    #   - 20% Order Value: Purchase power indicator
-    #   - 15% Repeat: Customer loyalty
-    #   - 10% Verified: Purchase authenticity
-    #   - 10% Helpful Votes: Influence on others
-    #   - 15% Recency: How recent the complaint is
-    
     df['CIS'] = (
         0.30 * df['ltv_norm'] +
         0.20 * df['order_norm'] +
@@ -85,30 +40,28 @@ def compute_scores(df: pd.DataFrame) -> pd.DataFrame:
         0.15 * df['recency']
     )
     
-    # ===== LAYER 3B: ISSUE SEVERITY SCORE =====
-    # Purpose: Measures how bad the complaint is
-    # Weight Rationale:
-    #   - 60% Severity Rating: Quantifies poor experience (1-5 scale)
-    #   - 40% Sentiment Negativity: Emotional negativity of complaint
-    # NOTE: We invert sentiment_score (1 - sentiment_score) so that:
-    #   - Positive sentiment (1.0) reduces severity
-    #   - Negative sentiment (0.0) increases severity
-    #   - Example: 5-star positive = severity 0; 1-star negative = severity 1
+    # ENHANCEMENT: Loyal Advocate Multiplier (1.2x)
+    loyalty_mask = (df['repeat'] == 1) & (df['verified'] == 1)
+    df['CIS'] = np.where(loyalty_mask, df['CIS'] * 1.2, df['CIS'])
+    df['CIS'] = df['CIS'].clip(0, 1)
     
+    # ===== LAYER 3B: ISSUE SEVERITY SCORE =====
+    # Enhanced: Handle numerical sentiment_score [0, 1]
+    # If sentiment_score is 0 (Negative), (1-score) is 1.0 (Critical)
     df['severity'] = (
         0.60 * df['severity_rating'] +
         0.40 * (1.0 - df['sentiment_score'])
     )
     
     # ===== LAYER 4: REVIEW IMPACT SCORE =====
-    # Purpose: Captures true business impact
-    # Logic: High-value customers with bad experiences matter more
-    # Example: 1★ from $10k LTV customer >> 1★ from $100 LTV customer
-    
     df['impact_score'] = df['CIS'] * df['severity']
     
+    # ENHANCEMENT: Crisis Factor
+    # Boost impact for VIPs with Critical Issues
+    crisis_mask = (df['CIS'] > 0.7) & (df['severity'] > 0.7)
+    df['impact_score'] = np.where(crisis_mask, df['impact_score'] * 1.5, df['impact_score'])
+    
     # ===== VALIDATION & SAFETY =====
-    # Clip all scores to [0, 1] range for consistency
     df['CIS'] = df['CIS'].clip(0, 1)
     df['severity'] = df['severity'].clip(0, 1)
     df['impact_score'] = df['impact_score'].clip(0, 1)

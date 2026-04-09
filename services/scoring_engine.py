@@ -1,3 +1,4 @@
+from __future__ import annotations
 """Advanced Scoring Engine - Review Intelligence System.
 
 Implements a 4-layer hierarchy to prioritize customer complaints based on
@@ -19,9 +20,13 @@ Key Features:
 
 import pandas as pd
 import numpy as np
-from typing import Dict, Tuple
+from typing import Dict, Tuple, Union, Optional
 import warnings
 
+from services.sentiment import get_ai_sentiment, sentiment_to_pipeline_score
+from utils.logger import log_event, log_warning, get_logger
+
+logger = get_logger("scoring_engine")
 warnings.filterwarnings('ignore')
 
 
@@ -132,23 +137,14 @@ def calculate_recency_score(days_since_purchase: pd.Series) -> pd.Series:
     return recency_score.clip(0, 1)
 
 
-def calculate_issue_severity(rating: pd.Series, sentiment: str = 'neutral') -> pd.Series:
+def calculate_issue_severity(rating: pd.Series, sentiment: Union[pd.Series, str] = 'neutral') -> pd.Series:
     """
     Calculate balanced issue severity combining rating and sentiment.
     
-    Prevents rating and sentiment from canceling each other out.
-    
-    Formulas:
-        rating_severity = (5 - rating) / 4  [0=no issue, 1=critical]
-        sentiment_score: negative → 1.0, neutral → 0.5, positive → 0.0
-        issue_severity = 0.6 × rating_severity + 0.4 × sentiment_score
-    
-    Args:
-        rating: Series of ratings (1-5)
-        sentiment: 'negative', 'neutral', or 'positive'
-        
-    Returns:
-        Issue severity scores in [0, 1]
+    Enhanced Logic:
+    - Combines rating severity (linear) with sentiment negativity.
+    - If sentiment is numerical [0, 1], it's treated as (1 - score) for negativity.
+    - Formula: 0.6 * rating_severity + 0.4 * sentiment_negativity
     """
     # Convert rating to severity (5★ = 0 severity, 1★ = 1.0 severity)
     rating_severity = (5 - rating) / 4
@@ -157,21 +153,27 @@ def calculate_issue_severity(rating: pd.Series, sentiment: str = 'neutral') -> p
     # Sentiment mapping
     if isinstance(sentiment, str):
         if sentiment.lower() == 'negative':
-            sentiment_score = 1.0
+            sentiment_negativity = 1.0
         elif sentiment.lower() == 'positive':
-            sentiment_score = 0.0
+            sentiment_negativity = 0.0
         else:  # neutral
-            sentiment_score = 0.5
+            sentiment_negativity = 0.5
+    elif isinstance(sentiment, pd.Series):
+        if pd.api.types.is_numeric_dtype(sentiment):
+            # If numeric (expected [0, 1]), then 1.0 is positive, so negativity is (1 - sentiment)
+            sentiment_negativity = (1.0 - sentiment).clip(0, 1)
+        else:
+            # If string/object Series, map labels
+            sentiment_negativity = sentiment.map({
+                'negative': 1.0,
+                'neutral': 0.5,
+                'positive': 0.0
+            }).fillna(0.5)
     else:
-        # If sentiment is a Series, map each value
-        sentiment_score = sentiment.map({
-            'negative': 1.0,
-            'neutral': 0.5,
-            'positive': 0.0
-        }).fillna(0.5)
+        sentiment_negativity = 0.5
     
-    # Balanced formula (don't let them cancel)
-    issue_severity = (0.6 * rating_severity) + (0.4 * sentiment_score)
+    # Balanced formula
+    issue_severity = (0.6 * rating_severity) + (0.4 * sentiment_negativity)
     
     return issue_severity.clip(0, 1)
 
@@ -184,11 +186,9 @@ def compute_cis(df: pd.DataFrame) -> pd.Series:
     CIS = (0.30 × LTV_norm) + (0.20 × OrderValue_norm) + (0.15 × Repeat)
           + (0.10 × Verified) + (0.10 × Helpful_norm) + (0.15 × Recency)
     
-    Args:
-        df: DataFrame with normalized and processed columns
-        
-    Returns:
-        Series of CIS scores [0, 1]
+    ENHANCEMENT: Loyal Advocate Multiplier
+    If a customer is both Repeat AND Verified AND has >0.5 helpful votes, 
+    their CIS gets a 1.2x multiplier (max 1.0).
     """
     cis = (
         0.30 * df['ltv_norm'] +
@@ -199,29 +199,33 @@ def compute_cis(df: pd.DataFrame) -> pd.Series:
         0.15 * df['recency_score']
     )
     
+    # Apply Loyalty Boost
+    loyalty_mask = (df['repeat'] == 1) & (df['verified'] == 1) & (df['helpful_norm'] > 0.5)
+    cis = pd.Series(np.where(loyalty_mask, cis * 1.2, cis), index=df.index)
+    
     return cis.clip(0, 1)
 
 
 def compute_impact_score(df: pd.DataFrame) -> pd.Series:
     """
-    Compute Impact Score (Layer 2).
+    Compute Impact Score (Layer 2) with non-linear "Crisis Factor".
     
-    Formula:
-    impact_score = CIS × issue_severity
+    Logic:
+    - Base Impact = CIS × issue_severity
+    - ZERO-GATE: If rating > 3, force impact_score = 0
     
-    ZERO-GATE: If rating > 3, force impact_score = 0
-    (Don't prioritize positive reviews)
-    
-    Args:
-        df: DataFrame with CIS and issue_severity
-        
-    Returns:
-        Series of impact scores [0, 1]
+    ENHANCEMENT: Exponential Crisis Multiplier
+    If both CIS > 0.7 (VIP) and Severity > 0.7 (Critical), the impact 
+    is boosted by 1.5x to highlight immediate revenue risks.
     """
     impact = df['CIS'] * df['issue_severity']
     
+    # Apply Crisis Multiplier for VIPs with Critical Issues
+    crisis_mask = (df['CIS'] > 0.7) & (df['issue_severity'] > 0.7)
+    impact = pd.Series(np.where(crisis_mask, impact * 1.5, impact), index=df.index)
+    
     # ZERO-GATE: Positive reviews (rating > 3) have zero impact
-    impact = impact.where(df['rating'] <= 3, 0)
+    impact = impact.where(df['rating'] <= 3.0, 0)
     
     return impact.clip(0, 1)
 
@@ -301,63 +305,78 @@ def compute_final_score(product_df: pd.DataFrame) -> pd.Series:
 
 def calculate_revenue_at_risk(df: pd.DataFrame) -> Dict[str, float]:
     """
-    Calculate Revenue at Risk based on customer LTV for negative reviews.
+    Calculate Revenue at Risk scaled by issue severity.
     
-    Logic:
-    rev_risk = sum(customer_ltv) for all reviews where rating <= 2.5
-    
-    Args:
-        df: DataFrame with customer_ltv and rating
-        
-    Returns:
-        dict with:
-            - 'total_rev_risk': Total revenue at risk
-            - 'num_risky_reviews': Count of risky reviews
-            - 'avg_ltv_per_risk': Average LTV per risky review
+    IMPROVED Logic:
+    - Instead of just sum(LTV), we use LTV * issue_severity.
+    - This reflects that a minor complaint from an MVP customer is less 
+      risky than a total product failure from the same customer.
     """
-    risky_reviews = df[df['rating'] <= 2.5]
+    # Use issue_severity as a weight for the LTV risk
+    df = df.copy()
+    if 'issue_severity' not in df.columns:
+        df['issue_severity'] = calculate_issue_severity(df['rating'])
     
-    total_rev_risk = risky_reviews['customer_ltv'].sum()
+    # Only consider negative/neutral reviews for risk
+    risky_reviews = df[df['rating'] <= 3]
+    
+    weighted_rev_risk = (risky_reviews['customer_ltv'] * risky_reviews['issue_severity']).sum()
     num_risky_reviews = len(risky_reviews)
-    avg_ltv_per_risk = risky_reviews['customer_ltv'].mean() if num_risky_reviews > 0 else 0
+    
+    # Also track 'Hard Risk' (Legacy sum of LTV for very negative reviews)
+    hard_risk = df[df['rating'] <= 2.5]['customer_ltv'].sum()
     
     return {
-        'total_rev_risk': total_rev_risk,
+        'total_rev_risk': weighted_rev_risk,
+        'hard_risk': hard_risk,
         'num_risky_reviews': num_risky_reviews,
-        'avg_ltv_per_risk': avg_ltv_per_risk
+        'avg_ltv_per_risk': weighted_rev_risk / num_risky_reviews if num_risky_reviews > 0 else 0
     }
 
 
-def apply_scoring_pipeline(df: pd.DataFrame) -> pd.DataFrame:
+def apply_scoring_pipeline(df: pd.DataFrame, groq_key: Optional[str] = None) -> pd.DataFrame:
     """
-    Apply complete scoring pipeline: preprocess → features → scores.
-    
-    Args:
-        df: Raw review DataFrame
-        
-    Returns:
-        DataFrame with all scoring columns added
+    Apply ENHANCED scoring pipeline with AI sentiment.
     """
     # Step 1: Preprocess and validate
     df = preprocess_and_validate(df)
     
-    # Step 2: Create is_negative flag EARLY (needed downstream)
+    # Step 2: AI Sentiment Score (Layer 0)
+    def _safe_get_sentiment(text):
+        if not text or not isinstance(text, str) or not text.strip():
+            return 0.5
+        try:
+            raw = get_ai_sentiment(text, groq_key=groq_key)
+            return sentiment_to_pipeline_score(raw)
+        except:
+            return 0.5
+
+    # Check if we should run AI (only if text exists)
+    if 'review_text' in df.columns:
+        # Note: In a real prod env, we might use batching or async here
+        df['sentiment_score'] = df['review_text'].apply(_safe_get_sentiment)
+    else:
+        df['sentiment_score'] = 0.5
+        
+    # Step 3: Create is_negative flag EARLY
     df['is_negative'] = np.where(df['rating'] <= 2, 1, 0)
     
-    # Step 3: Calculate recency with 10-day plateau
+    # Step 4: Calculate recency with 10-day plateau
     df['recency_score'] = calculate_recency_score(df['days_since_purchase'])
     
-    # Step 4: Calculate issue severity (rating + sentiment)
-    df['issue_severity'] = calculate_issue_severity(df['rating'])
+    # Step 5: Calculate issue severity (rating + AI sentiment)
+    df['issue_severity'] = calculate_issue_severity(df['rating'], df['sentiment_score'])
     
-    # Step 5: Compute CIS (Layer 1)
+    # Step 6: Compute CIS (Layer 1) with Loyalty Boost
     df['CIS'] = compute_cis(df)
     
-    # Step 6: Compute impact score (Layer 2) with zero-gate
+    # Step 7: Compute impact score (Layer 2) with Crisis Multiplier
     df['impact_score'] = compute_impact_score(df)
     
     # Ensure no NaNs
     df = df.fillna(0)
+    
+    log_event("SCORING_PIPELINE_RUN", {"total_rows": len(df)})
     
     return df
 
@@ -418,22 +437,34 @@ def aggregate_to_products(df: pd.DataFrame) -> pd.DataFrame:
     product_df['negative_ratio'] = product_df['negative_count'] / product_df['total_reviews']
     
     # Calculate revenue at risk per product
-    # Use robust filtering: rating <= 2.5 indicates high risk
-    negative_reviews = df[df['rating'] <= 2.5]
-    rev_at_risk = negative_reviews.groupby('product')['customer_ltv'].sum().reset_index()
+    # ENHANCED: Weighted Risk = LTV * issue_severity (proportional risk)
+    df['weighted_risk_val'] = df['customer_ltv'] * df['issue_severity']
+    
+    # Factor: Only apply risk to reviews that are actually problematic (rating <= 3)
+    # Neutral/Positive reviews don't contribute to 'risk' even if they have some severity
+    df['active_risk'] = np.where(df['rating'] <= 3.0, df['weighted_risk_val'], 0)
+    
+    rev_at_risk = df.groupby('product')['active_risk'].sum().reset_index()
     rev_at_risk.columns = ['product', 'total_revenue_at_risk']
     
+    # Also calculate 'Hard Risk' (Legacy: full LTV of negative reviews rating <= 2)
+    hard_risk = df[df['rating'] <= 2.0].groupby('product')['customer_ltv'].sum().reset_index()
+    hard_risk.columns = ['product', 'hard_revenue_risk']
+    
     product_df = product_df.merge(rev_at_risk, on='product', how='left')
+    product_df = product_df.merge(hard_risk, on='product', how='left')
+    
     product_df['total_revenue_at_risk'] = product_df['total_revenue_at_risk'].fillna(0)
+    product_df['hard_revenue_risk'] = product_df['hard_revenue_risk'].fillna(0)
     
     # DEBUG: Log revenue at risk details
     print(f"\n[DEBUG] Revenue at Risk Calculation:")
-    print(f"  - Negative reviews selected (rating <= 2.5): {len(negative_reviews)}")
-    print(f"  - Total revenue at risk: ₹{product_df['total_revenue_at_risk'].sum():,.2f}")
+    print(f"  - Risky reviews analyzed (rating <= 3.0): {len(df[df['rating'] <= 3.0])}")
+    print(f"  - Total revenue at risk: INR {product_df['total_revenue_at_risk'].sum():,.2f}")
     print(f"  - Revenue by product (top 5):")
     top_rev = product_df.nlargest(5, 'total_revenue_at_risk')[['product', 'total_revenue_at_risk']]
     for idx, row in top_rev.iterrows():
-        print(f"    - {row['product']}: ₹{row['total_revenue_at_risk']:,.2f}")
+        print(f"    - {row['product']}: INR {row['total_revenue_at_risk']:,.2f}")
     
     # Backward compatibility: create alias for existing code that uses 'revenue_at_risk'
     product_df['revenue_at_risk'] = product_df['total_revenue_at_risk']
@@ -449,7 +480,7 @@ def aggregate_to_products(df: pd.DataFrame) -> pd.DataFrame:
     
     print(f"\n[DEBUG] Aggregation Output:")
     print(f"  - Products: {len(product_df)}")
-    print(f"  - Avg revenue at risk per product: ₹{product_df['total_revenue_at_risk'].mean():,.2f}")
+    print(f"  - Avg revenue at risk per product: INR {product_df['total_revenue_at_risk'].mean():,.2f}")
     
     return product_df
 
