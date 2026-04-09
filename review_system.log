@@ -203,3 +203,35 @@
 2026-04-09 23:32:09 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
 2026-04-09 23:32:09 | [32mINFO[0m[0m | review_system        | EVENT: PIPELINE_COMPLETE | {'reviews': 500, 'products': 18}
 2026-04-09 23:32:09 | [32mINFO[0m[0m | review_system        | EVENT: ML_PREDICTIONS_COMPLETE | {'products': 18, 'high_risk_count': 3, 'avg_risk_probability': 0.2778001502054911}
+2026-04-10 00:01:16 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:01:16 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:01:16 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:01:16 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:01:16 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:01:17 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:01:17 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:01:17 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:01:17 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:01:18 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:01:18 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:01:18 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:01:18 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:01:18 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:01:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:01:19 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:01:19 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:01:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:01:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:01:19 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:01:19 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:01:20 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:01:20 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:01:20 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:01:20 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:01:20 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:01:20 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:01:20 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:01:20 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:01:20 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:01:20 | [32mINFO[0m[0m | review_system        | EVENT: PIPELINE_COMPLETE | {'reviews': 500, 'products': 18}
+2026-04-10 00:01:20 | [32mINFO[0m[0m | review_system        | EVENT: ML_PREDICTIONS_COMPLETE | {'products': 18, 'high_risk_count': 3, 'avg_risk_probability': 0.2778001502054911}
