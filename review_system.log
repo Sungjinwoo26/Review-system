@@ -821,3 +821,686 @@
 2026-04-10 01:59:09 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 5000 reviews
 2026-04-10 01:59:09 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 5000, 'pages': 50, 'failed_pages': 0, 'columns': 16, 'errors': 0, 'warnings': 0}
 2026-04-10 01:59:09 | [32mINFO[0m[0m | review_system        | Successfully fetched 5000 reviews from 50 pages (0 failed)
+2026-04-10 02:05:18 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 02:05:18 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=50)
+2026-04-10 02:05:18 | [32mINFO[0m[0m | review_system        | Starting concurrent review fetch from API
+2026-04-10 02:05:18 | [32mINFO[0m[0m | review_system        | Fetching 50 pages with 10 concurrent workers
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 6 from API
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 7 from API
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 8 from API
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 9 from API
+2026-04-10 02:05:18 | [36mDEBUG[0m | review_system        | Fetching page 10 from API
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 8: 100 records
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 7: 100 records
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 11 from API
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 6: 100 records
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 6, 'records': 100}
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 10: 100 records
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 8, 'records': 100}
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 7, 'records': 100}
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 12 from API
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 13 from API
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 14 from API
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 9: 100 records
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 15 from API
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 9, 'records': 100}
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 17 from API
+2026-04-10 02:05:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 10, 'records': 100}
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 16 from API
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 18 from API
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 19 from API
+2026-04-10 02:05:21 | [36mDEBUG[0m | review_system        | Fetching page 20 from API
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 17: 100 records
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 17, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 11: 100 records
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 21 from API
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 11, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 22 from API
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 14: 100 records
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 14, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 23 from API
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 15: 100 records
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 15, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 24 from API
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 16: 100 records
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 16, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 25 from API
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 12: 100 records
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 18: 100 records
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 20: 100 records
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 12, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 26 from API
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 18, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 27 from API
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 20, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 28 from API
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 19: 100 records
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 19, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 29 from API
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 13: 100 records
+2026-04-10 02:05:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 13, 'records': 100}
+2026-04-10 02:05:23 | [36mDEBUG[0m | review_system        | Fetching page 30 from API
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 21: 100 records
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 21, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 31 from API
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 24: 100 records
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 24, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 32 from API
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 22: 100 records
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 22, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 33 from API
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 23: 100 records
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 23, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 34 from API
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 27: 100 records
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 27, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 35 from API
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 26: 100 records
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 25: 100 records
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 26, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 36 from API
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 25, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 37 from API
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 28: 100 records
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 28, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 38 from API
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 29: 100 records
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 29, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 39 from API
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 30: 100 records
+2026-04-10 02:05:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 30, 'records': 100}
+2026-04-10 02:05:25 | [36mDEBUG[0m | review_system        | Fetching page 40 from API
+2026-04-10 02:05:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 31: 100 records
+2026-04-10 02:05:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 31, 'records': 100}
+2026-04-10 02:05:26 | [36mDEBUG[0m | review_system        | Fetching page 41 from API
+2026-04-10 02:05:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 33: 100 records
+2026-04-10 02:05:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 33, 'records': 100}
+2026-04-10 02:05:26 | [36mDEBUG[0m | review_system        | Fetching page 42 from API
+2026-04-10 02:05:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 34: 100 records
+2026-04-10 02:05:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 34, 'records': 100}
+2026-04-10 02:05:26 | [36mDEBUG[0m | review_system        | Fetching page 43 from API
+2026-04-10 02:05:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 35: 100 records
+2026-04-10 02:05:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 35, 'records': 100}
+2026-04-10 02:05:26 | [36mDEBUG[0m | review_system        | Fetching page 44 from API
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 36: 100 records
+2026-04-10 02:05:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 36, 'records': 100}
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Fetching page 45 from API
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 32: 100 records
+2026-04-10 02:05:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 32, 'records': 100}
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Fetching page 46 from API
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 37: 100 records
+2026-04-10 02:05:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 37, 'records': 100}
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Fetching page 47 from API
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 39: 100 records
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 38: 100 records
+2026-04-10 02:05:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 39, 'records': 100}
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Fetching page 48 from API
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 40: 100 records
+2026-04-10 02:05:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 38, 'records': 100}
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Fetching page 49 from API
+2026-04-10 02:05:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 40, 'records': 100}
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Fetching page 50 from API
+2026-04-10 02:05:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 41: 100 records
+2026-04-10 02:05:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 41, 'records': 100}
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 42: 100 records
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 42, 'records': 100}
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 43: 100 records
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 45: 100 records
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 43, 'records': 100}
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 45, 'records': 100}
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 46: 100 records
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 46, 'records': 100}
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 44: 100 records
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 44, 'records': 100}
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 48: 100 records
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 49: 100 records
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 48, 'records': 100}
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 49, 'records': 100}
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 47: 100 records
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 47, 'records': 100}
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 50: 100 records
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 50, 'records': 100}
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 5000 reviews
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 5000, 'pages': 50, 'failed_pages': 0, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | Successfully fetched 5000 reviews from 50 pages (0 failed)
+2026-04-10 02:05:28 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 5000, 'columns': 17}
+2026-04-10 02:05:28 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 5000 rows, 17 columns
+2026-04-10 02:05:29 | [32mINFO[0m[0m | review_system        | EVENT: PIPELINE_COMPLETE | {'reviews': 5000, 'products': 18}
+2026-04-10 02:05:29 | [32mINFO[0m[0m | review_system        | EVENT: ML_PREDICTIONS_COMPLETE | {'products': 18, 'high_risk_count': 3, 'avg_risk_probability': 0.27779128936796427}
+2026-04-10 02:05:29 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Body Wash 300ml', 'source': 'rule_based'}
+2026-04-10 02:05:29 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Biotin Gummies 60ct', 'source': 'rule_based'}
+2026-04-10 02:05:29 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Hair Mask Deep Repair', 'source': 'rule_based'}
+2026-04-10 02:05:29 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Minoxidil 5% Solution', 'source': 'rule_based'}
+2026-04-10 02:05:29 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Multivitamin Tabs 90ct', 'source': 'rule_based'}
+2026-04-10 02:21:24 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 02:21:24 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=50)
+2026-04-10 02:21:24 | [32mINFO[0m[0m | review_system        | Starting concurrent review fetch from API
+2026-04-10 02:21:24 | [32mINFO[0m[0m | review_system        | Fetching 50 pages with 10 concurrent workers
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 6 from API
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 7 from API
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 8 from API
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 9 from API
+2026-04-10 02:21:24 | [36mDEBUG[0m | review_system        | Fetching page 10 from API
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 6: 100 records
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 9: 100 records
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 7: 100 records
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 8: 100 records
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 6, 'records': 100}
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 11 from API
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 9, 'records': 100}
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 12 from API
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 13 from API
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 7, 'records': 100}
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 14 from API
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 8, 'records': 100}
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 15 from API
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 16 from API
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 17 from API
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 18 from API
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 19 from API
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 10: 100 records
+2026-04-10 02:21:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 10, 'records': 100}
+2026-04-10 02:21:26 | [36mDEBUG[0m | review_system        | Fetching page 20 from API
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 12: 100 records
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 12, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 21 from API
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 13: 100 records
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 13, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 22 from API
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 11: 100 records
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 11, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 23 from API
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 14: 100 records
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 15: 100 records
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 14, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 24 from API
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 15, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 25 from API
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 17: 100 records
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 20: 100 records
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 17, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 26 from API
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 20, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 27 from API
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 16: 100 records
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 16, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 28 from API
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 18: 100 records
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 18, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 29 from API
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Successfully fetched page 19: 100 records
+2026-04-10 02:21:28 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 19, 'records': 100}
+2026-04-10 02:21:28 | [36mDEBUG[0m | review_system        | Fetching page 30 from API
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 21: 100 records
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 21, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 31 from API
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 22: 100 records
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 22, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 32 from API
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 26: 100 records
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 26, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 33 from API
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 27: 100 records
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 27, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 34 from API
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 24: 100 records
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 25: 100 records
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 24, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 35 from API
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 25, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 36 from API
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 28: 100 records
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 23: 100 records
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 28, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 37 from API
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 23, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 38 from API
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 29: 100 records
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Successfully fetched page 30: 100 records
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 29, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 39 from API
+2026-04-10 02:21:30 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 30, 'records': 100}
+2026-04-10 02:21:30 | [36mDEBUG[0m | review_system        | Fetching page 40 from API
+2026-04-10 02:21:31 | [36mDEBUG[0m | review_system        | Successfully fetched page 31: 100 records
+2026-04-10 02:21:31 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 31, 'records': 100}
+2026-04-10 02:21:31 | [36mDEBUG[0m | review_system        | Fetching page 41 from API
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 32: 100 records
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 32, 'records': 100}
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Fetching page 42 from API
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 33: 100 records
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 33, 'records': 100}
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Fetching page 43 from API
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 38: 100 records
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 38, 'records': 100}
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Fetching page 44 from API
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 34: 100 records
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 34, 'records': 100}
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Fetching page 45 from API
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 35: 100 records
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 35, 'records': 100}
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Fetching page 46 from API
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 39: 100 records
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 36: 100 records
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 37: 100 records
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 39, 'records': 100}
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Fetching page 47 from API
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 36, 'records': 100}
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Fetching page 48 from API
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 37, 'records': 100}
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Fetching page 49 from API
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 40: 100 records
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 40, 'records': 100}
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Fetching page 50 from API
+2026-04-10 02:21:32 | [36mDEBUG[0m | review_system        | Successfully fetched page 41: 100 records
+2026-04-10 02:21:32 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 41, 'records': 100}
+2026-04-10 02:21:33 | [36mDEBUG[0m | review_system        | Successfully fetched page 42: 100 records
+2026-04-10 02:21:33 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 42, 'records': 100}
+2026-04-10 02:21:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 43: 100 records
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 43, 'records': 100}
+2026-04-10 02:21:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 44: 100 records
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 44, 'records': 100}
+2026-04-10 02:21:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 45: 100 records
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 45, 'records': 100}
+2026-04-10 02:21:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 46: 100 records
+2026-04-10 02:21:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 48: 100 records
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 46, 'records': 100}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 48, 'records': 100}
+2026-04-10 02:21:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 50: 100 records
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 50, 'records': 100}
+2026-04-10 02:21:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 49: 100 records
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 49, 'records': 100}
+2026-04-10 02:21:34 | [36mDEBUG[0m | review_system        | Successfully fetched page 47: 100 records
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 47, 'records': 100}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 5000 reviews
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 5000, 'pages': 50, 'failed_pages': 0, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | Successfully fetched 5000 reviews from 50 pages (0 failed)
+2026-04-10 02:21:34 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 5000, 'columns': 17}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 5000 rows, 17 columns
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: PIPELINE_COMPLETE | {'reviews': 5000, 'products': 18}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: ML_PREDICTIONS_COMPLETE | {'products': 18, 'high_risk_count': 3, 'avg_risk_probability': 0.27779128936796427}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Body Wash 300ml', 'source': 'rule_based'}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Biotin Gummies 60ct', 'source': 'rule_based'}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Hair Mask Deep Repair', 'source': 'rule_based'}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Minoxidil 5% Solution', 'source': 'rule_based'}
+2026-04-10 02:21:34 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Multivitamin Tabs 90ct', 'source': 'rule_based'}
+2026-04-10 02:25:17 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 02:25:17 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=50)
+2026-04-10 02:25:17 | [32mINFO[0m[0m | review_system        | Starting concurrent review fetch from API
+2026-04-10 02:25:17 | [32mINFO[0m[0m | review_system        | Fetching 50 pages with 10 concurrent workers
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 6 from API
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 7 from API
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 8 from API
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 9 from API
+2026-04-10 02:25:17 | [36mDEBUG[0m | review_system        | Fetching page 10 from API
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 7: 100 records
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 6: 100 records
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 7, 'records': 100}
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 10: 100 records
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 9: 100 records
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 11 from API
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 10, 'records': 100}
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 13 from API
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 12 from API
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 8: 100 records
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 6, 'records': 100}
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 14 from API
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 9, 'records': 100}
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 15 from API
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 16 from API
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 17 from API
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 18 from API
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 8, 'records': 100}
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 19 from API
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 02:25:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 02:25:19 | [36mDEBUG[0m | review_system        | Fetching page 20 from API
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 12: 100 records
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 12, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 21 from API
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 17: 100 records
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 17, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 22 from API
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 13: 100 records
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 13, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 11: 100 records
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 23 from API
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 11, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 24 from API
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 16: 100 records
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 14: 100 records
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 18: 100 records
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 19: 100 records
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 16, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 15: 100 records
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 25 from API
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 14, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 26 from API
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 18, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 27 from API
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 19, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 28 from API
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 15, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 29 from API
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Successfully fetched page 20: 100 records
+2026-04-10 02:25:21 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 20, 'records': 100}
+2026-04-10 02:25:21 | [36mDEBUG[0m | review_system        | Fetching page 30 from API
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 22: 100 records
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 22, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 31 from API
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 23: 100 records
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 23, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 32 from API
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 30: 100 records
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 30, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 33 from API
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 21: 100 records
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 21, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 34 from API
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 27: 100 records
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 27, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 35 from API
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 24: 100 records
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 28: 100 records
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 25: 100 records
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 26: 100 records
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Successfully fetched page 29: 100 records
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 24, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 36 from API
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 28, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 37 from API
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 25, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 38 from API
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 26, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 39 from API
+2026-04-10 02:25:23 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 29, 'records': 100}
+2026-04-10 02:25:23 | [36mDEBUG[0m | review_system        | Fetching page 40 from API
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 31: 100 records
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 31, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 41 from API
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 32: 100 records
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 32, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 42 from API
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 33: 100 records
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 33, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 43 from API
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 37: 100 records
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 37, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 44 from API
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 35: 100 records
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 36: 100 records
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 35, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 45 from API
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 36, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 39: 100 records
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 34: 100 records
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 40: 100 records
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 46 from API
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 39, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Successfully fetched page 38: 100 records
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 47 from API
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 34, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 48 from API
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 40, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 49 from API
+2026-04-10 02:25:25 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 38, 'records': 100}
+2026-04-10 02:25:25 | [36mDEBUG[0m | review_system        | Fetching page 50 from API
+2026-04-10 02:25:26 | [36mDEBUG[0m | review_system        | Successfully fetched page 41: 100 records
+2026-04-10 02:25:26 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 41, 'records': 100}
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 42: 100 records
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 42, 'records': 100}
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 43: 100 records
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 43, 'records': 100}
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 46: 100 records
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 46, 'records': 100}
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 47: 100 records
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 47, 'records': 100}
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 45: 100 records
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 45, 'records': 100}
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 44: 100 records
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 48: 100 records
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 50: 100 records
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Successfully fetched page 49: 100 records
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 44, 'records': 100}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 48, 'records': 100}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 50, 'records': 100}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 49, 'records': 100}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 5000 reviews
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 5000, 'pages': 50, 'failed_pages': 0, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | Successfully fetched 5000 reviews from 50 pages (0 failed)
+2026-04-10 02:25:27 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 5000, 'columns': 17}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 5000 rows, 17 columns
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: PIPELINE_COMPLETE | {'reviews': 5000, 'products': 18}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: ML_PREDICTIONS_COMPLETE | {'products': 18, 'high_risk_count': 3, 'avg_risk_probability': 0.27779128936796427}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Body Wash 300ml', 'source': 'rule_based'}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Biotin Gummies 60ct', 'source': 'rule_based'}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Hair Mask Deep Repair', 'source': 'rule_based'}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Minoxidil 5% Solution', 'source': 'rule_based'}
+2026-04-10 02:25:27 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Multivitamin Tabs 90ct', 'source': 'rule_based'}
+2026-04-10 02:26:55 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Ashwagandha Caps 60ct', 'source': 'rule_based'}
+2026-04-10 02:26:55 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Hair Mask Deep Repair', 'source': 'rule_based'}
+2026-04-10 02:26:55 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Body Wash 300ml', 'source': 'rule_based'}
+2026-04-10 02:26:55 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Vitamin C Moisturizer', 'source': 'rule_based'}
+2026-04-10 02:26:55 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Biotin Gummies 60ct', 'source': 'rule_based'}
+2026-04-10 02:26:59 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Anti-Hairfall Oil 200ml', 'source': 'rule_based'}
+2026-04-10 02:27:07 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Body Wash 300ml', 'source': 'rule_based'}
+2026-04-10 02:27:07 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Hair Mask Deep Repair', 'source': 'rule_based'}
+2026-04-10 02:27:07 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Minoxidil 5% Solution', 'source': 'rule_based'}
+2026-04-10 02:27:07 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Vitamin C Moisturizer', 'source': 'rule_based'}
+2026-04-10 02:27:07 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Biotin Gummies 60ct', 'source': 'rule_based'}
+2026-04-10 02:45:37 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 02:45:37 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=50)
+2026-04-10 02:45:37 | [32mINFO[0m[0m | review_system        | Starting concurrent review fetch from API
+2026-04-10 02:45:37 | [32mINFO[0m[0m | review_system        | Fetching 50 pages with 10 concurrent workers
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 6 from API
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 7 from API
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 8 from API
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 9 from API
+2026-04-10 02:45:37 | [36mDEBUG[0m | review_system        | Fetching page 10 from API
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 11 from API
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 9: 100 records
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 6: 100 records
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 12 from API
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 7: 100 records
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 8: 100 records
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 9, 'records': 100}
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 6, 'records': 100}
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 7, 'records': 100}
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 13 from API
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 8, 'records': 100}
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 14 from API
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 15 from API
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 10: 100 records
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 16 from API
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 17 from API
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 18 from API
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 19 from API
+2026-04-10 02:45:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 10, 'records': 100}
+2026-04-10 02:45:40 | [36mDEBUG[0m | review_system        | Fetching page 20 from API
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 11: 100 records
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 11, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 21 from API
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 14: 100 records
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 14, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 22 from API
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 13: 100 records
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 13, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 23 from API
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 15: 100 records
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 12: 100 records
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 19: 100 records
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 15, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 24 from API
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 12, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 25 from API
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 19, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 26 from API
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 18: 100 records
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 18, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 27 from API
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 17: 100 records
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 16: 100 records
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 20: 100 records
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 17, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 28 from API
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 16, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 29 from API
+2026-04-10 02:45:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 20, 'records': 100}
+2026-04-10 02:45:42 | [36mDEBUG[0m | review_system        | Fetching page 30 from API
+2026-04-10 02:45:43 | [36mDEBUG[0m | review_system        | Successfully fetched page 21: 100 records
+2026-04-10 02:45:43 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 21, 'records': 100}
+2026-04-10 02:45:43 | [36mDEBUG[0m | review_system        | Fetching page 31 from API
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 22: 100 records
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 22, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 32 from API
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 23: 100 records
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 23, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 33 from API
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 25: 100 records
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 25, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 34 from API
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 27: 100 records
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 29: 100 records
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 27, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 35 from API
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 29, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 36 from API
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 26: 100 records
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 28: 100 records
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 26, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 37 from API
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 24: 100 records
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 30: 100 records
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 28, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 38 from API
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 24, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 39 from API
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 30, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 40 from API
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 31: 100 records
+2026-04-10 02:45:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 31, 'records': 100}
+2026-04-10 02:45:44 | [36mDEBUG[0m | review_system        | Fetching page 41 from API
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 32: 100 records
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 32, 'records': 100}
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Fetching page 42 from API
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 34: 100 records
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 34, 'records': 100}
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Fetching page 43 from API
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 33: 100 records
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 33, 'records': 100}
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Fetching page 44 from API
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 36: 100 records
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 36, 'records': 100}
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Fetching page 45 from API
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 40: 100 records
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 40, 'records': 100}
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Fetching page 46 from API
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 39: 100 records
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 37: 100 records
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 35: 100 records
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 39, 'records': 100}
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Fetching page 47 from API
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 38: 100 records
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 37, 'records': 100}
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Fetching page 48 from API
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 35, 'records': 100}
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Fetching page 49 from API
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 38, 'records': 100}
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Fetching page 50 from API
+2026-04-10 02:45:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 41: 100 records
+2026-04-10 02:45:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 41, 'records': 100}
+2026-04-10 02:45:47 | [36mDEBUG[0m | review_system        | Successfully fetched page 42: 100 records
+2026-04-10 02:45:47 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 42, 'records': 100}
+2026-04-10 02:45:47 | [36mDEBUG[0m | review_system        | Successfully fetched page 43: 100 records
+2026-04-10 02:45:47 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 43, 'records': 100}
+2026-04-10 02:45:47 | [36mDEBUG[0m | review_system        | Successfully fetched page 44: 100 records
+2026-04-10 02:45:47 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 44, 'records': 100}
+2026-04-10 02:45:47 | [36mDEBUG[0m | review_system        | Successfully fetched page 45: 100 records
+2026-04-10 02:45:47 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 45, 'records': 100}
+2026-04-10 02:45:48 | [36mDEBUG[0m | review_system        | Successfully fetched page 46: 100 records
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 46, 'records': 100}
+2026-04-10 02:45:48 | [36mDEBUG[0m | review_system        | Successfully fetched page 48: 100 records
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 48, 'records': 100}
+2026-04-10 02:45:48 | [36mDEBUG[0m | review_system        | Successfully fetched page 47: 100 records
+2026-04-10 02:45:48 | [36mDEBUG[0m | review_system        | Successfully fetched page 49: 100 records
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 47, 'records': 100}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 49, 'records': 100}
+2026-04-10 02:45:48 | [36mDEBUG[0m | review_system        | Successfully fetched page 50: 100 records
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 50, 'records': 100}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 5000 reviews
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 5000, 'pages': 50, 'failed_pages': 0, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | Successfully fetched 5000 reviews from 50 pages (0 failed)
+2026-04-10 02:45:48 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 5000, 'columns': 17}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 5000 rows, 17 columns
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: PIPELINE_COMPLETE | {'reviews': 5000, 'products': 18}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: ML_PREDICTIONS_COMPLETE | {'products': 18, 'high_risk_count': 3, 'avg_risk_probability': 0.27779128936796427}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Body Wash 300ml', 'source': 'rule_based'}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Biotin Gummies 60ct', 'source': 'rule_based'}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Hair Mask Deep Repair', 'source': 'rule_based'}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Minoxidil 5% Solution', 'source': 'rule_based'}
+2026-04-10 02:45:48 | [32mINFO[0m[0m | review_system        | EVENT: LLM_OUTPUT_READY | {'product': 'Multivitamin Tabs 90ct', 'source': 'rule_based'}

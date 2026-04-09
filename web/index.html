@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReviewIntel | Review Intelligence Engine</title>
+  <meta name="description" content="ReviewIntel helps businesses prioritize customer review issues by business impact.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="container nav-row">
+        <a class="brand" href="#top">ReviewIntel</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+        <nav class="nav-menu" id="nav-menu" aria-label="Primary">
+          <a href="#dashboard-section">Product</a>
+          <a href="#solutions">Solutions</a>
+          <a href="#resources">Resources</a>
+          <a href="#pricing">Pricing</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="text-link" href="#dashboard-section">Sign in</a>
+          <a class="button button-primary" href="#final-cta">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Review Intelligence Engine</p>
+            <h1>Turn customer reviews into decision ready intelligence</h1>
+            <p class="hero-text">ReviewIntel analyzes customer feedback, clusters patterns, highlights risk, and helps teams prioritize issues by business impact.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#dashboard-section">Get Started</a>
+              <a class="button button-secondary" href="#dashboard-preview">View Demo</a>
+            </div>
+            <div class="hero-meta">
+              <span>Prioritize issues by business impact</span>
+              <span>Built for product, support, and operations teams</span>
+            </div>
+          </div>
+
+          <div class="hero-preview card">
+            <div class="preview-topline">
+              <div>
+                <p class="preview-label">Live product snapshot</p>
+                <h2>Review Intelligence Engine</h2>
+              </div>
+              <span class="preview-chip">Updated 8 min ago</span>
+            </div>
+            <div class="preview-filters">
+              <span>All Products</span>
+              <span>Last 90 days</span>
+              <span>Threshold 0.70</span>
+            </div>
+            <div class="preview-kpis">
+              <article><p>Revenue at risk</p><strong>$2.84M</strong></article>
+              <article><p>Negative reviews</p><strong>22.6%</strong></article>
+              <article><p>High risk products</p><strong>4</strong></article>
+            </div>
+            <div class="preview-grid">
+              <div class="preview-table">
+                <div class="preview-table-row preview-table-head"><span>Product</span><span>Score</span><span>Risk</span></div>
+                <div class="preview-table-row"><span>Atlas Desk</span><span>0.91</span><span class="risk-high">Fire Fight</span></div>
+                <div class="preview-table-row"><span>Pulse Earbuds</span><span>0.84</span><span class="risk-high">Fire Fight</span></div>
+                <div class="preview-table-row"><span>North Mug</span><span>0.73</span><span class="risk-medium">VIP Nudge</span></div>
+              </div>
+              <div class="preview-quadrant">
+                <div class="mini-axis mini-axis-x"></div>
+                <div class="mini-axis mini-axis-y"></div>
+                <span class="mini-point fire" style="left:68%;top:26%;"></span>
+                <span class="mini-point fire" style="left:75%;top:34%;"></span>
+                <span class="mini-point vip" style="left:38%;top:22%;"></span>
+                <span class="mini-point slow" style="left:70%;top:63%;"></span>
+                <span class="mini-point noise" style="left:28%;top:72%;"></span>
+              </div>
+            </div>
+            <div class="preview-insight">
+              <p class="preview-label">AI Insight</p>
+              <p>Revenue risk is concentrated in delivery delays and inconsistent quality for Atlas Desk and Pulse Earbuds. Packaging issues remain frequent but lower impact.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-row">
+        <div class="container trust-inner">
+          <p>Trusted by modern product and support teams</p>
+          <div class="trust-markers" aria-label="Trust markers">
+            <span>Northstar Retail</span>
+            <span>Oakline</span>
+            <span>FieldHouse</span>
+            <span>Meridian</span>
+            <span>Common Table</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="solutions">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Value</p>
+            <h2>From raw reviews to operational priorities</h2>
+            <p>ReviewIntel helps teams move from scattered feedback to a focused action queue grounded in risk.</p>
+          </div>
+          <div class="value-grid">
+            <article class="card value-card"><span class="value-icon">C</span><h3>Collect</h3><p>Aggregate review data from multiple sources into one structured stream.</p></article>
+            <article class="card value-card"><span class="value-icon">A</span><h3>Analyze</h3><p>Detect sentiment, themes, and recurring issues across products and segments.</p></article>
+            <article class="card value-card"><span class="value-icon">A</span><h3>Act</h3><p>Prioritize what matters by revenue risk, severity, and business impact.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section feature-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Capabilities</p>
+            <h2>Built for calm, practical review analysis</h2>
+          </div>
+          <div class="feature-grid">
+            <article class="card feature-card"><h3>Review aggregation</h3><p>Bring together marketplace, app, and support review streams in one place.</p></article>
+            <article class="card feature-card"><h3>Sentiment and topic clustering</h3><p>Surface recurring issues and patterns without forcing teams into manual review sweeps.</p></article>
+            <article class="card feature-card"><h3>Revenue risk scoring</h3><p>Estimate business exposure so teams can separate noise from material customer issues.</p></article>
+            <article class="card feature-card"><h3>Quadrant prioritization</h3><p>See which products need immediate action, careful monitoring, or low-touch follow-up.</p></article>
+            <article class="card feature-card"><h3>LLM powered insights</h3><p>Generate short executive summaries that explain what changed and where to focus.</p></article>
+            <article class="card feature-card"><h3>Product drill downs</h3><p>Review score, trend, issue mix, and revenue exposure at the product level.</p></article>
+            <article class="card feature-card"><h3>Filters and segmentation</h3><p>Slice results by product, date range, severity, and threshold in a few clicks.</p></article>
+            <article class="card feature-card"><h3>Export ready reporting</h3><p>Package findings for operating reviews, support retrospectives, and leadership updates.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section how-section" id="resources">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">How It Works</p>
+            <h2>A simple workflow for serious teams</h2>
+          </div>
+          <div class="steps-grid">
+            <article class="card step-card"><span class="step-number">01</span><h3>Connect data</h3><p>Import reviews and related metrics from your current workflow.</p></article>
+            <article class="card step-card"><span class="step-number">02</span><h3>Analyze patterns</h3><p>The engine scores risk, clusters issues, and organizes the signal.</p></article>
+            <article class="card step-card"><span class="step-number">03</span><h3>Prioritize action</h3><p>Teams focus first on products with the highest business impact.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section preview-section" id="dashboard-preview">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Dashboard Preview</p>
+            <h2>The working interface teams rely on</h2>
+            <p>A realistic operational view with filters, KPIs, prioritization, and executive summaries.</p>
+          </div>
+          <div class="card dashboard-preview-shell">
+            <div class="dashboard-preview-head">
+              <div>
+                <h3>Review Intelligence Engine</h3>
+                <p>Prioritize issues by business impact</p>
+              </div>
+              <button class="button button-secondary" type="button" data-scroll-target="#dashboard-section">Open Dashboard</button>
+            </div>
+            <div class="dashboard-preview-filters">
+              <span>Product: All</span>
+              <span>Date: Last 90 days</span>
+              <span>Severity: All</span>
+              <span>Risk threshold: 0.70</span>
+            </div>
+            <div class="dashboard-preview-body">
+              <div class="preview-card-grid">
+                <article class="card preview-kpi-card"><p>Total Revenue at Risk</p><strong>$2.84M</strong><span>+8.2% vs last period</span></article>
+                <article class="card preview-kpi-card"><p>Total Reviews</p><strong>24,680</strong><span>1,942 in the last 30 days</span></article>
+                <article class="card preview-kpi-card"><p>Negative Review Percentage</p><strong>22.6%</strong><span>Down 1.4 pts</span></article>
+                <article class="card preview-kpi-card"><p>Average Risk Probability</p><strong>0.71</strong><span>Across active products</span></article>
+              </div>
+              <div class="preview-main-grid">
+                <div class="card preview-table-panel">
+                  <div class="mini-panel-head"><strong>Products</strong><span>Sorted by final score</span></div>
+                  <div class="preview-table-row preview-table-head"><span>Product</span><span>Revenue</span><span>Quadrant</span></div>
+                  <div class="preview-table-row"><span>Atlas Desk</span><span>$920K</span><span class="risk-high">Fire Fight</span></div>
+                  <div class="preview-table-row"><span>Pulse Earbuds</span><span>$640K</span><span class="risk-high">Fire Fight</span></div>
+                  <div class="preview-table-row"><span>North Mug</span><span>$410K</span><span class="risk-medium">VIP Nudge</span></div>
+                  <div class="preview-table-row"><span>Harbor Lamp</span><span>$285K</span><span class="risk-low">Slow Burn</span></div>
+                </div>
+                <div class="card preview-chart-panel">
+                  <div class="mini-panel-head"><strong>Impact vs Frequency</strong><span>Decision map</span></div>
+                  <div class="preview-quadrant large">
+                    <div class="mini-axis mini-axis-x"></div>
+                    <div class="mini-axis mini-axis-y"></div>
+                    <span class="mini-point fire" style="left:74%;top:24%;"></span>
+                    <span class="mini-point fire" style="left:80%;top:38%;"></span>
+                    <span class="mini-point vip" style="left:34%;top:20%;"></span>
+                    <span class="mini-point slow" style="left:69%;top:66%;"></span>
+                    <span class="mini-point slow" style="left:56%;top:59%;"></span>
+                    <span class="mini-point noise" style="left:22%;top:70%;"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="card preview-insights-panel">
+                <div class="mini-panel-head"><strong>AI Insights</strong><span>Powered by Grok</span></div>
+                <p>Atlas Desk and Pulse Earbuds drive the largest revenue exposure because negative review volume remains elevated while issue severity has intensified around delivery and quality. North Mug merits targeted intervention: issue frequency is lower, but impact per complaint remains high. Packaging noise is broad but commercially modest.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dashboard-section" id="dashboard-section">
+        <div class="container">
+          <div class="dashboard-head">
+            <div>
+              <p class="eyebrow">Product Dashboard</p>
+              <h2>Review Intelligence Engine</h2>
+              <p>Prioritize issues by business impact</p>
+            </div>
+            <div class="dashboard-head-actions">
+              <span id="last-updated">Last updated: Apr 10, 2026 10:12 IST</span>
+              <button class="button button-secondary" type="button" id="refresh-dashboard">Refresh</button>
+            </div>
+          </div>
+          <section class="card filter-card" aria-labelledby="filter-heading">
+            <div class="filter-card-head">
+              <h3 id="filter-heading">Filters</h3>
+              <button class="text-link debug-toggle" type="button" id="debug-toggle">Show Debug Panel</button>
+            </div>
+            <div class="filter-grid">
+              <label class="field field-wide">
+                <span>Product</span>
+                <select id="product-filter" multiple size="6"></select>
+                <small>Default state: All</small>
+              </label>
+              <label class="field">
+                <span>Start date</span>
+                <input id="date-start" type="date">
+              </label>
+              <label class="field">
+                <span>End date</span>
+                <input id="date-end" type="date">
+              </label>
+              <label class="field">
+                <span>Severity</span>
+                <select id="severity-filter">
+                  <option value="All">All</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+              </label>
+              <label class="field field-slider">
+                <span>Risk threshold <strong id="threshold-value">0.70</strong></span>
+                <input id="risk-threshold" type="range" min="0" max="1" step="0.01" value="0.7">
+              </label>
+              <div class="filter-actions">
+                <button class="button button-primary" type="button" id="apply-filters">Apply filters</button>
+                <button class="button button-secondary" type="button" id="reset-filters">Reset filters</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="kpi-grid" id="kpi-grid" aria-label="KPI cards"></section>
+
+          <section class="main-grid">
+            <article class="card table-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Product Prioritization</h3>
+                  <p>Sorted view of products by issue exposure and business impact.</p>
+                </div>
+                <label class="search-field">
+                  <span class="sr-only">Search products</span>
+                  <input id="table-search" type="search" placeholder="Search products">
+                </label>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th><button class="sort-button" data-sort="name">Product Name</button></th>
+                      <th><button class="sort-button" data-sort="score">Final Score</button></th>
+                      <th><button class="sort-button" data-sort="revenue">Revenue at Risk</button></th>
+                      <th><button class="sort-button" data-sort="probability">Average Risk Probability</button></th>
+                      <th><button class="sort-button" data-sort="negative">Negative Review Percentage</button></th>
+                      <th><button class="sort-button" data-sort="quadrant">Quadrant</button></th>
+                      <th><button class="sort-button" data-sort="trend">Trend Indicator</button></th>
+                    </tr>
+                  </thead>
+                  <tbody id="product-table-body"></tbody>
+                </table>
+              </div>
+              <div class="empty-state hidden" id="table-empty">No products match the current filters.</div>
+            </article>
+
+            <article class="card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Impact vs Frequency</h3>
+                  <p>Frequency / Volume on X-axis and Impact Score on Y-axis.</p>
+                </div>
+              </div>
+              <div id="quadrant-chart" class="chart-surface"></div>
+            </article>
+          </section>
+
+          <section class="chart-grid">
+            <article class="card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Revenue at Risk</h3>
+                  <p>Products ranked by revenue exposure.</p>
+                </div>
+              </div>
+              <div id="revenue-chart" class="chart-surface compact"></div>
+            </article>
+
+            <article class="card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Rating vs Risk</h3>
+                  <p>Average rating against risk probability.</p>
+                </div>
+              </div>
+              <div id="rating-risk-chart" class="chart-surface compact"></div>
+            </article>
+          </section>
+
+          <section class="chart-grid lower-chart-grid">
+            <article class="card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Top Issues Breakdown</h3>
+                  <p>Issue volume split across delivery, quality, packaging, and support.</p>
+                </div>
+              </div>
+              <div id="issues-chart" class="chart-surface compact"></div>
+            </article>
+
+            <article class="card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>High Risk Share</h3>
+                  <p>Risk category distribution across current products.</p>
+                </div>
+              </div>
+              <div id="risk-share-chart" class="chart-surface compact"></div>
+            </article>
+          </section>
+
+          <section class="card insights-panel">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title-row">
+                  <h3>AI Insights</h3>
+                  <span class="powered-label">Powered by Grok</span>
+                </div>
+                <p>Generated executive summary based on current filters.</p>
+              </div>
+              <div class="insight-actions">
+                <button class="button button-primary" type="button" id="generate-insights">Generate Insights</button>
+                <button class="button button-secondary" type="button" id="refresh-insights">Refresh Insights</button>
+                <button class="button button-secondary" type="button" id="copy-insights">Copy</button>
+              </div>
+            </div>
+            <div class="insight-body">
+              <div class="insight-loading hidden" id="insight-loading">Generating summary...</div>
+              <div class="insight-error hidden" id="insight-error">Unable to generate insights for the current filter set.</div>
+              <article class="insight-copy" id="insight-copy"></article>
+            </div>
+          </section>
+
+          <section class="card debug-panel hidden" id="debug-panel">
+            <div class="panel-head">
+              <div>
+                <h3>Developer Debug Panel</h3>
+                <p>Pipeline inspection output for local verification.</p>
+              </div>
+            </div>
+            <div class="debug-grid">
+              <article>
+                <h4>Feature shape</h4>
+                <pre id="debug-feature-shape"></pre>
+              </article>
+              <article>
+                <h4>Risk prediction sample</h4>
+                <pre id="debug-risk-sample"></pre>
+              </article>
+              <article>
+                <h4>Aggregated data snapshot</h4>
+                <pre id="debug-data-snapshot"></pre>
+              </article>
+              <article>
+                <h4>LLM input preview</h4>
+                <pre id="debug-llm-input"></pre>
+              </article>
+              <article class="debug-span">
+                <h4>Raw LLM output</h4>
+                <pre id="debug-llm-output"></pre>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="section final-cta" id="final-cta">
+        <div class="container">
+          <div class="card final-cta-card">
+            <p class="eyebrow">Start With Clarity</p>
+            <h2>Stop reading reviews manually. Start understanding what customers are actually telling you.</h2>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#dashboard-section">Get Started</a>
+              <a class="button button-secondary" href="#dashboard-section">See the dashboard</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="pricing">
+      <div class="container footer-row">
+        <p>ReviewIntel</p>
+        <nav aria-label="Footer">
+          <a href="#dashboard-section">Product</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#top">Terms</a>
+          <a href="#top">Privacy</a>
+          <a href="#top">Contact</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <div class="tooltip hidden" id="chart-tooltip"></div>
+  <script src="script.js"></script>
+</body>
+</html>
