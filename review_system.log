@@ -1222,3 +1222,532 @@
 2026-04-09 23:17:11 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Dandruff Shampoo 250ml', 'model': 'qwen/qwen3-32b'}
 2026-04-09 23:17:12 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Iron + B12 Tabs', 'model': 'qwen/qwen3-32b'}
 2026-04-09 23:17:13 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:06:07 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:06:07 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:06:07 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:06:07 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:06:07 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:06:08 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:06:08 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:06:08 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:06:08 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:06:09 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:06:09 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:06:09 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:06:09 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:06:10 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:06:10 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:06:10 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:06:10 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:06:11 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:06:11 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:06:11 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:06:11 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:06:12 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:06:12 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:06:12 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:06:12 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:06:12 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:06:12 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:06:12 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:06:12 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:06:12 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:06:12 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:12 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:13 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:13 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:13 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:13 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:06:13 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:53 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:53 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:53 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:53 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:53 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:07:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:24 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:29 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:29 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:29 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:29 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:08:29 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:40 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:10:40 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:10:40 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:10:40 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:10:40 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:10:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:10:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:10:42 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:10:42 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:10:43 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:10:43 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:10:43 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:10:43 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:10:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:10:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:10:44 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:10:44 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:10:45 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:10:45 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:10:45 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:10:45 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:10:46 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:10:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:10:46 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:10:46 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:10:46 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:10:46 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:10:46 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:10:46 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:10:46 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:10:46 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:10:46 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:33 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:14:33 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:14:33 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:14:33 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:14:33 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:14:35 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:14:35 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:14:35 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:14:35 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:14:36 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:14:36 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:14:36 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:14:36 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:14:37 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:14:37 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:14:37 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:14:37 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:14:38 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:14:38 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:14:38 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:14:38 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:14:39 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:14:39 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:14:39 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:14:39 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:14:39 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:14:39 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:14:39 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:14:39 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:14:39 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:14:39 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:14:39 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:39 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:39 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:14:40 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:53 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:16:53 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:16:53 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:16:53 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:16:53 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:16:55 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:16:55 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:16:55 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:16:55 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:16:56 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:16:56 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:16:56 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:16:56 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:16:57 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:16:57 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:16:57 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:16:57 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:16:58 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:16:58 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:16:58 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:16:58 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:16:58 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:16:58 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:16:59 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:16:59 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:16:59 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:16:59 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:16:59 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:16:59 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:16:59 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:16:59 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:16:59 | [33mWARNING[0m[0m | review_system        | WARNING: GROQ_KEY_MISSING - Using fallback recommendation
+2026-04-10 00:21:08 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:21:08 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:21:08 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:21:08 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:21:08 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:21:09 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:21:09 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:21:09 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:21:09 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:21:10 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:21:10 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:21:10 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:21:10 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:21:11 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:21:11 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:21:11 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:21:11 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:21:12 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:21:12 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:21:12 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:21:12 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:21:13 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:21:13 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:21:13 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:21:13 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:21:13 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:21:13 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:21:13 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:21:13 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:21:13 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:21:13 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:21:14 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Ashwagandha Caps 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:15 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Sleep Gummies 30ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:16 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Collagen Powder 250g', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:17 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Multivitamin Tabs 90ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:18 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Derma Roller Kit', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:19 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Minoxidil 5% Solution', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:20 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Weight Loss Shake', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:21 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Growth Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:22 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Mask Deep Repair', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:22 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:21:23 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:21:24 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Beard Growth Oil', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:24 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:21:25 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:21:26 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:21:26 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:21:27 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:21:28 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:21:28 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:21:29 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:23:41 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:23:41 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:23:41 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:23:41 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:23:41 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:23:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:23:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:23:42 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:23:42 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:23:43 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:23:43 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:23:43 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:23:43 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:23:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:23:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:23:45 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:23:45 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:23:45 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:23:45 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:23:46 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:23:46 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:23:47 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:23:47 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:23:47 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:23:47 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:23:47 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:23:47 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:23:47 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:23:47 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:23:47 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:23:47 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:23:48 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Ashwagandha Caps 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:49 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Sleep Gummies 30ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:50 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Collagen Powder 250g', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:51 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Multivitamin Tabs 90ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:52 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Derma Roller Kit', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:53 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Minoxidil 5% Solution', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:54 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Weight Loss Shake', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:55 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Growth Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:56 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Mask Deep Repair', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:57 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Biotin Gummies 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:57 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Body Wash 300ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:58 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Beard Growth Oil', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:23:59 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Acne Control Face Wash', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:24:00 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Skin Brightening Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:24:01 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Vitamin C Moisturizer', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:24:02 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Dandruff Shampoo 250ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:24:03 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Iron + B12 Tabs', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:24:04 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:39 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:28:39 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:28:39 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:28:39 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:28:39 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:28:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:28:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:28:40 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:28:40 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:28:41 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:28:41 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:28:41 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:28:41 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:28:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:28:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:28:42 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:28:42 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:28:43 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:28:43 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:28:43 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:28:43 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:28:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:28:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:28:44 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:28:45 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:28:45 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:28:45 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:28:45 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:28:45 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:28:45 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:28:45 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:28:46 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Ashwagandha Caps 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:47 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Sleep Gummies 30ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:48 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Collagen Powder 250g', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:49 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Multivitamin Tabs 90ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:50 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Derma Roller Kit', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:51 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Minoxidil 5% Solution', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:52 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Weight Loss Shake', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:53 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Growth Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:54 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Mask Deep Repair', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:55 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Biotin Gummies 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:56 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Body Wash 300ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:57 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Beard Growth Oil', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:28:59 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Acne Control Face Wash', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:29:01 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Skin Brightening Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:29:02 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Vitamin C Moisturizer', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:29:03 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Dandruff Shampoo 250ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:29:04 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Iron + B12 Tabs', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:29:04 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:13 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:33:13 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:33:13 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:33:13 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:33:13 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:33:14 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:33:14 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:33:15 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:33:15 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:33:15 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:33:15 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:33:16 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:33:16 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:33:16 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:33:16 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:33:17 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:33:17 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:33:18 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:33:18 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:33:18 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:33:18 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:33:19 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:33:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:33:19 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:33:19 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:33:19 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:33:19 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:33:19 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:33:19 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:33:19 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:33:19 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:33:20 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Ashwagandha Caps 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:21 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Sleep Gummies 30ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:22 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Collagen Powder 250g', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:23 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Multivitamin Tabs 90ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:24 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Derma Roller Kit', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:25 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Minoxidil 5% Solution', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:26 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Weight Loss Shake', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:27 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Growth Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:28 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Mask Deep Repair', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:29 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Biotin Gummies 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:30 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Body Wash 300ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:30 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Beard Growth Oil', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:31 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Acne Control Face Wash', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:33 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Skin Brightening Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:33 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Vitamin C Moisturizer', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:35 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Dandruff Shampoo 250ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:35 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Iron + B12 Tabs', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:33:36 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:39 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:40:39 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:40:39 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:40:39 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:40:39 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:40:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:40:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:40:41 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:40:41 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:40:41 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:40:41 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:40:42 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:40:42 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:40:43 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:40:43 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:40:43 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:40:43 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:40:44 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:40:44 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:40:44 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:40:44 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:40:45 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:40:45 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:40:45 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:40:45 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:40:45 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:40:45 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:40:45 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:40:45 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:40:45 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:40:45 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:40:46 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Ashwagandha Caps 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:47 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Sleep Gummies 30ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:48 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Collagen Powder 250g', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:49 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Multivitamin Tabs 90ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:50 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Derma Roller Kit', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:51 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Minoxidil 5% Solution', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:52 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Weight Loss Shake', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:53 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Growth Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:54 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Hair Mask Deep Repair', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:55 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Biotin Gummies 60ct', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:40:56 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:40:56 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:40:57 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:40:57 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:40:58 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:40:59 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Dandruff Shampoo 250ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:41:00 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:41:00 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:41:01 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:41:01 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:41:02 | [33mWARNING[0m[0m | review_system        | WARNING: DEEP_RECOMMENDATION_FAILED - 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions
+2026-04-10 00:41:37 | [32mINFO[0m[0m | review_system        | Loading data via mode: API
+2026-04-10 00:41:37 | [32mINFO[0m[0m | review_system        | Detected Mosaic API - using paginated fetch (max_pages=5)
+2026-04-10 00:41:37 | [32mINFO[0m[0m | review_system        | Starting review fetch from API
+2026-04-10 00:41:37 | [36mDEBUG[0m | review_system        | Fetching page 1/5
+2026-04-10 00:41:37 | [36mDEBUG[0m | review_system        | Fetching page 1 from API
+2026-04-10 00:41:38 | [36mDEBUG[0m | review_system        | Successfully fetched page 1: 100 records
+2026-04-10 00:41:38 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 1, 'records': 100}
+2026-04-10 00:41:38 | [36mDEBUG[0m | review_system        | Fetching page 2/5
+2026-04-10 00:41:38 | [36mDEBUG[0m | review_system        | Fetching page 2 from API
+2026-04-10 00:41:39 | [36mDEBUG[0m | review_system        | Successfully fetched page 2: 100 records
+2026-04-10 00:41:39 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 2, 'records': 100}
+2026-04-10 00:41:39 | [36mDEBUG[0m | review_system        | Fetching page 3/5
+2026-04-10 00:41:39 | [36mDEBUG[0m | review_system        | Fetching page 3 from API
+2026-04-10 00:41:40 | [36mDEBUG[0m | review_system        | Successfully fetched page 3: 100 records
+2026-04-10 00:41:40 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 3, 'records': 100}
+2026-04-10 00:41:40 | [36mDEBUG[0m | review_system        | Fetching page 4/5
+2026-04-10 00:41:40 | [36mDEBUG[0m | review_system        | Fetching page 4 from API
+2026-04-10 00:41:41 | [36mDEBUG[0m | review_system        | Successfully fetched page 4: 100 records
+2026-04-10 00:41:41 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 4, 'records': 100}
+2026-04-10 00:41:41 | [36mDEBUG[0m | review_system        | Fetching page 5/5
+2026-04-10 00:41:41 | [36mDEBUG[0m | review_system        | Fetching page 5 from API
+2026-04-10 00:41:42 | [36mDEBUG[0m | review_system        | Successfully fetched page 5: 100 records
+2026-04-10 00:41:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_PAGE | {'page': 5, 'records': 100}
+2026-04-10 00:41:42 | [32mINFO[0m[0m | review_system        | Creating DataFrame from 500 reviews
+2026-04-10 00:41:42 | [32mINFO[0m[0m | review_system        | EVENT: FETCH_COMPLETE | {'total_reviews': 500, 'pages': 5, 'columns': 16, 'errors': 0, 'warnings': 0}
+2026-04-10 00:41:42 | [32mINFO[0m[0m | review_system        | Successfully fetched 500 reviews from 5 pages
+2026-04-10 00:41:42 | [36mDEBUG[0m | review_system        | Created missing column 'sentiment_score' with default value
+2026-04-10 00:41:42 | [32mINFO[0m[0m | review_system        | Schema normalization complete: 17 columns standardized
+2026-04-10 00:41:42 | [32mINFO[0m[0m | review_system        | EVENT: DATA_LOADED | {'mode': 'API', 'rows': 500, 'columns': 17}
+2026-04-10 00:41:42 | [32mINFO[0m[0m | review_system        | Data loaded successfully: 500 rows, 17 columns
+2026-04-10 00:41:42 | [32mINFO[0m[0m | review_system        | EVENT: SCORING_PIPELINE_RUN | {'total_rows': 500}
+2026-04-10 00:41:43 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Body Wash 300ml', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:41:44 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Beard Growth Oil', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:41:45 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Acne Control Face Wash', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:41:46 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Skin Brightening Serum', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:41:47 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Vitamin C Moisturizer', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:41:48 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Iron + B12 Tabs', 'model': 'qwen/qwen3-32b'}
+2026-04-10 00:41:49 | [32mINFO[0m[0m | review_system        | EVENT: DEEP_AI_RECOMMENDATION_V2 | {'product': 'Anti-Hairfall Oil 200ml', 'model': 'qwen/qwen3-32b'}

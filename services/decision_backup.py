@@ -60,60 +60,49 @@ def generate_ai_recommendation(
     top_complaints: List[str],
     priority_score: float,
     revenue_at_risk: float = 0.0
-) -> dict:
-    """
-    Generate structured AI recommendation using Groq.
-    Returns a dict with keys: root_cause, action, impact, kpi, raw_fallback.
-    """
-    import json as _json
-
-    _FALLBACK = {
-        "root_cause": "Insufficient data to determine root cause.",
-        "action": "Monitor product reviews and escalate if complaints increase.",
-        "impact": f"Revenue at risk: ₹{revenue_at_risk:,.0f}",
-        "kpi": "Negative review rate",
-        "raw_fallback": True,
-    }
-
+) -> str:
+    """Generate deep recommendation using Groq with improved prompt for Qwen3"""
     if not top_complaints:
-        _FALLBACK["root_cause"] = "No significant complaints detected."
-        _FALLBACK["action"] = "Continue monitoring — no action required."
-        return _FALLBACK
+        return "Monitor – No significant complaints detected."
 
     if not GROQ_API_KEY:
         log_warning("GROQ_KEY_MISSING", "Using fallback recommendation")
-        return _FALLBACK
+        return f"Immediate Fix Required – Revenue at risk: ₹{revenue_at_risk:,.0f}"
 
     cache = get_cache()
     complaints_hash = hash(tuple(sorted(top_complaints)))
-    cache_key = f"deep_rec_v2_{product_name}_{complaints_hash}"
+    cache_key = f"deep_rec_{product_name}_{complaints_hash}"
     cached = cache.get(cache_key)
     if cached:
         return cached
 
     complaints_text = "\n".join([f"• {c}" for c in top_complaints])
 
-    system_prompt = (
-        "You are a senior e-commerce Product Manager and CX strategist. "
-        "You respond ONLY with a valid JSON object — no markdown, no backticks, no prose outside the JSON. "
-        "Never output <think> tags or reasoning. Be specific and business-focused."
-    )
+    # === STRONG PROMPT TO PREVENT <think> TAGS ===
+    system_prompt = """You are a senior e-commerce Product Manager and CX strategist.
+You give direct, concise, and actionable executive recommendations.
+Rules you MUST follow:
+- NEVER output <think>, </think>, or any thinking tags.
+- NEVER show your reasoning process.
+- NEVER say "I think", "Let me think", or explain how you arrived at the answer.
+- Respond only with the final recommendation in plain, professional English.
+- Be clear, specific, and business-focused."""
 
-    user_prompt = f"""Analyze this product's customer complaints and return a JSON object with exactly these four keys:
-
-"root_cause"  — 1–2 sentences: the most likely underlying reason customers are complaining.
-"action"      — 1–2 sentences: the specific fix, who owns it, and a realistic deadline.
-"impact"      — 1 sentence: the expected business outcome if this is resolved (mention revenue where relevant).
-"kpi"         — 1 short phrase: the single most important metric to track progress.
-
-Product: {product_name}
-Priority Score: {priority_score:.3f}
-Revenue at Risk: ₹{revenue_at_risk:,.0f}
+    user_prompt = f"""Product: **{product_name}**
+Priority Score: **{priority_score:.3f}**
+Revenue at Risk: **₹{revenue_at_risk:,.0f}**
 
 Top customer complaints:
 {complaints_text}
 
-Respond with ONLY the JSON object. /no_think"""
+Provide a concise executive recommendation (maximum 4 sentences) that covers:
+1. Likely root cause
+2. Specific action (who should do what and by when)
+3. Expected revenue impact if fixed
+4. One important KPI to track
+5. No extra formatting, just simple lines, since this is the final output that would be displayed on the site, without any processing.
+
+Be direct and actionable. /no_think"""
 
     try:
         response = requests.post(
@@ -128,36 +117,31 @@ Respond with ONLY the JSON object. /no_think"""
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
                 ],
-                "max_tokens": 512,
-                "temperature": 0.2,
+                "max_tokens": 1024
             },
             timeout=20
         )
         response.raise_for_status()
-
+        
         raw_output = response.json()["choices"][0]["message"]["content"].strip()
 
-        # Strip any leftover think tags or markdown fences
-        raw_output = re.sub(r'<think>.*?</think>', '', raw_output, flags=re.DOTALL | re.IGNORECASE)
-        raw_output = re.sub(r'```(?:json)?', '', raw_output).replace('```', '').strip()
+        # === CLEANUP: Remove any leftover <think> tags ===
+        cleaned = re.sub(r'<think>.*?</think>', '', raw_output, flags=re.DOTALL | re.IGNORECASE).strip()
+        cleaned = re.sub(r'^(Let me think|Thinking step by step).*?\n', '', cleaned, flags=re.IGNORECASE | re.DOTALL)
 
-        parsed = _json.loads(raw_output)
+        # Final safety trim
+        recommendation = cleaned.strip()
 
-        result = {
-            "root_cause": str(parsed.get("root_cause", "")).strip(),
-            "action":     str(parsed.get("action", "")).strip(),
-            "impact":     str(parsed.get("impact", "")).strip(),
-            "kpi":        str(parsed.get("kpi", "")).strip(),
-            "raw_fallback": False,
-        }
+        if not recommendation:
+            recommendation = "Immediate action recommended to address customer complaints."
 
-        cache.set(cache_key, result)
-        log_event("DEEP_AI_RECOMMENDATION_V2", {"product": product_name, "model": GROQ_MODEL})
-        return result
+        cache.set(cache_key, recommendation)
+        log_event("DEEP_AI_RECOMMENDATION", {"product": product_name, "model": GROQ_MODEL})
+        return recommendation
 
     except Exception as e:
         log_warning("DEEP_RECOMMENDATION_FAILED", str(e))
-        return _FALLBACK
+        return f"Immediate Fix Required – High revenue at risk (₹{revenue_at_risk:,.0f})"
 
 
 def make_decisions(
@@ -180,12 +164,10 @@ def make_decisions(
     high_neg_threshold = get_threshold('negative_ratio')
     low_rating_threshold = get_threshold('avg_rating', 0.25)
 
-    import json as _json
-
     def process_row(row):
         # Rule-based category
-        if (row.get('total_revenue_at_risk', 0) >= high_rev_threshold and
-                row.get('negative_ratio', 0) >= high_neg_threshold):
+        if (row.get('total_revenue_at_risk', 0) >= high_rev_threshold and 
+            row.get('negative_ratio', 0) >= high_neg_threshold):
             category = "Immediate Fix Required"
         elif row.get('total_impact', 0) >= high_impact_threshold:
             category = "Investigate Root Cause"
@@ -194,26 +176,20 @@ def make_decisions(
         else:
             category = "Monitor"
 
-        ai_rec = {
-            "root_cause": category,
-            "action": "Review complaint patterns and prioritize accordingly.",
-            "impact": f"Revenue at risk: ₹{row.get('total_revenue_at_risk', 0):,.0f}",
-            "kpi": "Negative review rate",
-            "raw_fallback": True,
-        }
+        # AI Recommendation
+        recommendation = category
         if review_df is not None:
             complaints = _get_top_complaints(review_df, row['product'])
-            ai_rec = generate_ai_recommendation(
+            recommendation = generate_ai_recommendation(
                 product_name=row['product'],
                 top_complaints=complaints,
                 priority_score=row.get('final_score', 0),
                 revenue_at_risk=row.get('total_revenue_at_risk', 0)
             )
 
-        # action = human-readable label; ai_insight = full structured JSON string
-        return pd.Series([category, _json.dumps(ai_rec)])
+        return pd.Series([recommendation, category])
 
-    df[['action', 'ai_insight']] = df.apply(process_row, axis=1)
+    df[['action', 'category']] = df.apply(process_row, axis=1)
 
     # Priority assignment
     high_score_threshold = df['final_score'].quantile(0.75) if len(df) > 1 else df['final_score'].max()
