@@ -18,10 +18,10 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     
     # 1. Handle Missing Values
-    df['customer_ltv'] = df['customer_ltv'].fillna(0)
-    df['order_value'] = df['order_value'].fillna(0)
-    df['helpful_votes'] = df['helpful_votes'].fillna(0)
-    df['days_since_purchase'] = df['days_since_purchase'].fillna(30)
+    df['customer_ltv'] = df['customer_ltv'].fillna(0).astype(float)
+    df['order_value'] = df['order_value'].fillna(0).astype(float)
+    df['helpful_votes'] = df['helpful_votes'].fillna(0).astype(float)
+    df['days_since_purchase'] = df['days_since_purchase'].fillna(30).astype(float)
     
     # 2. Apply Log Scaling
     df['ltv_log'] = np.log1p(df['customer_ltv'])
@@ -37,8 +37,8 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     df['helpful_norm'] = normalize(df['helpful_votes'])
     
     # 4. Encode Boolean Features
-    df['repeat'] = df['is_repeat_customer'].astype(int)
-    df['verified'] = df['verified_purchase'].astype(int)
+    df['repeat'] = df['is_repeat_customer'].fillna(0).astype(int)
+    df['verified'] = df['verified_purchase'].fillna(0).astype(int)
     
     # Ensure no NaNs remain
     df = df.fillna(0)

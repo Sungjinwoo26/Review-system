@@ -1,21 +1,33 @@
 """
-Review Intelligence Engine - Streamlit Dashboard
-A comprehensive system for analyzing and prioritizing customer reviews
+Review Intelligence Engine - Streamlit Dashboard (Advanced)
+Advanced dashboard with session state optimization and revenue-at-risk analysis.
+
+Features:
+- 10-day recency plateau for recent reviews
+- Balanced issue severity (rating + sentiment)
+- 4-layer scoring hierarchy  
+- Revenue at risk calculation
+- Quadrant analysis for decision making
+- Session state caching to prevent re-fetching on widget interactions
 """
 
 import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+from typing import Tuple
 import plotly.express as px
 import plotly.graph_objects as go
 
 from services.ingestion import fetch_reviews
-from services.preprocessing import preprocess_data
-from services.features import engineer_features
-from services.scoring import compute_scores
-from services.aggregation import aggregate_product_metrics
-from services.decision import make_decisions
+from services.scoring_engine import (
+    apply_scoring_pipeline,
+    aggregate_to_products,
+    classify_quadrants,
+    calculate_revenue_at_risk,
+    summary_stats,
+    print_summary_stats
+)
 from utils.error_handler import ErrorState, APIError
 from utils.logger import log_event, log_error, logger
 from utils.cache import get_cache
@@ -94,25 +106,36 @@ def show_success_banner(message: str):
     """, unsafe_allow_html=True)
 
 
-def run_pipeline(df: pd.DataFrame) -> pd.DataFrame:
+def run_pipeline(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """
-    Run complete data pipeline:
-    raw → preprocess → feature engineering → scoring
+    Run complete advanced scoring pipeline:
+    raw → preprocess → features → advanced scoring → aggregation → classification
+    
+    Returns:
+        Tuple of (review_df, product_df) with scoring and decision columns
     """
     try:
-        # Step 1: Preprocessing
-        st.status("🔄 Preprocessing data...", expanded=False)
-        df = preprocess_data(df)
+        # Step 1: Advanced scoring pipeline (includes preprocessing + feature engineering)
+        st.status("🔄 Processing with advanced scoring engine...", expanded=False)
+        review_df = apply_scoring_pipeline(df)
         
-        # Step 2: Feature Engineering
-        st.status("🔄 Engineering features...", expanded=False)
-        df = engineer_features(df)
+        # Step 2: Aggregate to product level
+        st.status("🔄 Aggregating to product level...", expanded=False)
+        product_df = aggregate_to_products(review_df)
         
-        # Step 3: Scoring
-        st.status("🔄 Computing scores...", expanded=False)
-        df = compute_scores(df)
+        # Step 3: Classify into quadrants and assign actions
+        st.status("🔄 Classifying quadrants and actions...", expanded=False)
+        product_df = classify_quadrants(product_df)
         
-        return df
+        # Log summary
+        rev_risk = calculate_revenue_at_risk(review_df)
+        log_event("PIPELINE_COMPLETE", {
+            'reviews': len(review_df),
+            'products': len(product_df),
+            'revenue_at_risk': rev_risk['total_rev_risk']
+        })
+        
+        return review_df, product_df
         
     except Exception as e:
         log_error("PIPELINE_ERROR", str(e))

@@ -90,9 +90,20 @@ def aggregate_product_metrics(df: pd.DataFrame) -> pd.DataFrame:
     ).clip(0, 1)
     
     # Step 6: Compute Final Priority Score
+    # FORMULA LAYER 5:
+    # FinalScore = ln(1 + TotalImpact) × (1 + PPS)
     product_df['final_score'] = (
         np.log1p(product_df['total_impact']) * (1 + product_df['PPS'])
     )
+    
+    # ===== CRITICAL LOGIC GATE: ZERO-IMPACT TRAP =====
+    # If a product has ONLY positive reviews (TotalImpact = 0),
+    # force FinalScore to 0 to prevent "perfect" high-volume products
+    # from cluttering the action list.
+    # 
+    # Rationale: We want to prioritize products with issues, not
+    # reward perfect products that don't need attention.
+    product_df.loc[product_df['total_impact'] == 0, 'final_score'] = 0
     
     # Step 7: Optional spike detection (if review_date available)
     if 'review_date' in df.columns:
