@@ -527,111 +527,243 @@ def render_table(aggregated_df: pd.DataFrame) -> None:
     )
 
 
-def render_risk_distribution(aggregated_df: pd.DataFrame) -> None:
+def render_revenue_at_risk_chart(aggregated_df: pd.DataFrame) -> None:
     """
-    Render ML risk probability distribution visualization
-    
-    Args:
-        aggregated_df: Product-level aggregated data with risk_probability
+    Render horizontal bar chart: Revenue at Risk per product, sorted descending.
+    Top 3 products are visually highlighted.
+    """
+    if aggregated_df is None or aggregated_df.empty:
+        st.warning("No data available for Revenue at Risk chart")
+        return
+    if 'total_revenue_at_risk' not in aggregated_df.columns or 'product' not in aggregated_df.columns:
+        st.warning("Required columns (product, total_revenue_at_risk) not found")
+        return
+
+    df = aggregated_df[['product', 'total_revenue_at_risk']].copy()
+    if 'risk_probability' in aggregated_df.columns:
+        df['risk_probability'] = aggregated_df['risk_probability']
+    else:
+        df['risk_probability'] = None
+
+    df = df.sort_values('total_revenue_at_risk', ascending=True)  # ascending for horizontal bar
+
+    # Colour: top 3 (last 3 after sort asc) = red, rest = steelblue
+    n = len(df)
+    colors = ['#c0392b' if i >= n - 3 else '#2980b9' for i in range(n)]
+
+    hover_parts = (
+        '<b>%{y}</b><br>'
+        'Revenue at Risk: ₹%{x:,.0f}'
+    )
+    if df['risk_probability'].notna().any():
+        df['risk_pct'] = (df['risk_probability'] * 100).round(1).astype(str) + '%'
+        customdata = df['risk_pct'].values
+        hover_parts += '<br>Avg Risk: %{customdata}<extra></extra>'
+    else:
+        customdata = None
+        hover_parts += '<extra></extra>'
+
+    fig = go.Figure()
+    trace_kwargs = dict(
+        x=df['total_revenue_at_risk'],
+        y=df['product'],
+        orientation='h',
+        marker=dict(color=colors, line=dict(width=0.5, color='white')),
+        text=df['total_revenue_at_risk'].apply(lambda v: f'₹{v:,.0f}'),
+        textposition='outside',
+        hovertemplate=hover_parts,
+    )
+    if customdata is not None:
+        trace_kwargs['customdata'] = customdata
+
+    fig.add_trace(go.Bar(**trace_kwargs))
+
+    fig.update_layout(
+        title='💸 Revenue at Risk by Product',
+        xaxis_title='Revenue at Risk (₹)',
+        yaxis_title='Product',
+        height=max(400, 30 * n + 120),
+        margin=dict(l=10, r=80, t=50, b=40),
+        plot_bgcolor='rgba(245,245,250,0.8)',
+        showlegend=False,
+        xaxis=dict(showgrid=True, gridcolor='rgba(200,200,200,0.4)'),
+    )
+    st.plotly_chart(fig, use_container_width=True)
+    st.caption('🔴 Red bars = top 3 products by revenue at risk')
+
+
+def render_rating_vs_risk_scatter(aggregated_df: pd.DataFrame) -> None:
+    """
+    Render scatter plot: avg_rating (X) vs risk_probability (Y) per product.
+    Validates ML behaviour — low-rated products should show high risk.
+    """
+    if aggregated_df is None or aggregated_df.empty:
+        st.warning("No data available for Rating vs Risk chart")
+        return
+    required = {'product', 'avg_rating', 'risk_probability'}
+    missing = required - set(aggregated_df.columns)
+    if missing:
+        st.warning(f"Missing columns for Rating vs Risk chart: {missing}")
+        return
+
+    df = aggregated_df[['product', 'avg_rating', 'risk_probability']].dropna().copy()
+
+    # Colour by risk category bucket
+    def risk_color(p):
+        if p >= 0.7:
+            return '#e74c3c'
+        elif p >= 0.4:
+            return '#f39c12'
+        return '#27ae60'
+
+    df['color'] = df['risk_probability'].apply(risk_color)
+    df['risk_pct'] = (df['risk_probability'] * 100).round(1)
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df['avg_rating'],
+        y=df['risk_probability'],
+        mode='markers',
+        marker=dict(
+            color=df['color'],
+            size=12,
+            opacity=0.85,
+            line=dict(width=1, color='white'),
+        ),
+        text=df['product'],
+        customdata=df['risk_pct'],
+        hovertemplate=(
+            '<b>%{text}</b><br>'
+            'Avg Rating: %{x:.2f} ⭐<br>'
+            'Risk Probability: %{customdata}%'
+            '<extra></extra>'
+        ),
+    ))
+
+    # Reference lines
+    fig.add_vline(x=3, line_dash='dash', line_color='grey', opacity=0.5,
+                  annotation_text='Rating = 3', annotation_position='top right')
+    fig.add_hline(y=0.5, line_dash='dash', line_color='grey', opacity=0.5,
+                  annotation_text='Risk = 50%', annotation_position='top right')
+
+    fig.update_layout(
+        title='⭐ Rating vs Predicted Risk (ML Validation)',
+        xaxis_title='Average Rating',
+        yaxis_title='Risk Probability',
+        xaxis=dict(range=[0.8, 5.2], showgrid=True, gridcolor='rgba(200,200,200,0.4)'),
+        yaxis=dict(range=[-0.05, 1.05], tickformat='.0%', showgrid=True, gridcolor='rgba(200,200,200,0.4)'),
+        height=400,
+        plot_bgcolor='rgba(245,245,250,0.8)',
+        showlegend=False,
+    )
+    st.plotly_chart(fig, use_container_width=True)
+    st.caption('🔴 High risk  |  🟡 Medium risk  |  🟢 Low risk')
+
+
+def render_high_risk_donut(aggregated_df: pd.DataFrame) -> None:
+    """
+    Render donut chart: proportion of products in High / Medium / Low risk buckets.
     """
     if aggregated_df is None or aggregated_df.empty or 'risk_probability' not in aggregated_df.columns:
-        st.warning("No risk probability data available")
+        st.warning("No risk probability data available for donut chart")
         return
-    
-    # Create bins for risk categories
-    bins = [0, 0.3, 0.7, 1.0]
-    labels = ['Low (0-30%)', 'Medium (30-70%)', 'High (70-100%)']
-    
-    aggregated_df_copy = aggregated_df.copy()
-    aggregated_df_copy['risk_bin'] = pd.cut(
-        aggregated_df_copy['risk_probability'],
-        bins=bins,
+
+    df = aggregated_df['risk_probability'].dropna()
+    high   = int((df >= 0.7).sum())
+    medium = int(((df >= 0.4) & (df < 0.7)).sum())
+    low    = int((df < 0.4).sum())
+
+    labels = ['High Risk (≥70%)', 'Medium Risk (40-70%)', 'Low Risk (<40%)']
+    values = [high, medium, low]
+    colors = ['#e74c3c', '#f39c12', '#27ae60']
+
+    fig = go.Figure(go.Pie(
         labels=labels,
-        include_lowest=True
-    )
-    
-    # Count by risk category
-    risk_counts = aggregated_df_copy['risk_bin'].value_counts().sort_index()
-    
-    # Create bar chart
-    fig = go.Figure()
-    
-    colors = ['#2ecc71', '#f1c40f', '#e74c3c']  # Green, Yellow, Red
-    
-    fig.add_trace(go.Bar(
-        x=risk_counts.index.astype(str),
-        y=risk_counts.values,
-        marker=dict(color=colors),
-        text=risk_counts.values,
-        textposition='auto',
-        hovertemplate='<b>%{x}</b><br>Count: %{y}<extra></extra>'
+        values=values,
+        hole=0.52,
+        marker=dict(colors=colors, line=dict(color='white', width=2)),
+        textinfo='label+percent',
+        hovertemplate='<b>%{label}</b><br>Products: %{value}<br>Share: %{percent}<extra></extra>',
+        textfont=dict(size=12),
     ))
-    
-    fig.update_layout(
-        title="📊 ML Risk Distribution by Category",
-        xaxis_title="Risk Category",
-        yaxis_title="Number of Products",
-        height=400,
-        showlegend=False,
-        plot_bgcolor='rgba(240,240,240,0.5)'
+
+    total = high + medium + low
+    fig.add_annotation(
+        text=f'<b>{total}</b><br>Products',
+        x=0.5, y=0.5,
+        font=dict(size=14, color='#2c3e50'),
+        showarrow=False,
     )
-    
+
+    fig.update_layout(
+        title='🍩 Overall Risk Distribution',
+        height=400,
+        showlegend=True,
+        legend=dict(orientation='h', yanchor='bottom', y=-0.25, xanchor='center', x=0.5),
+        margin=dict(t=50, b=60, l=20, r=20),
+    )
     st.plotly_chart(fig, use_container_width=True)
 
 
-def render_feature_importance(model_dict: Optional[Dict]) -> None:
+def render_top_issues_breakdown(review_df: pd.DataFrame) -> None:
     """
-    Render feature importance from trained ML model (if available)
-    
-    Args:
-        model_dict: Dictionary returned from train_risk_model (contains model and scaler)
+    Render stacked bar chart: issue category breakdown per product.
+    Uses keyword-classified issue_category column from the scoring pipeline.
     """
-    if model_dict is None:
-        st.info("⏳ Feature importance will be available after data loads")
+    if review_df is None or review_df.empty:
+        st.warning("No review data available")
         return
-    
-    try:
-        importance_df = get_feature_importance(model_dict)
-        
-        if importance_df is None or importance_df.empty:
-            st.warning("Could not extract feature importance")
-            return
-        
-        # Get top 5 features
-        top_features = importance_df.head(5)
-        
-        # Create horizontal bar chart
-        fig = go.Figure()
-        
-        # Color based on positive/negative coefficient
-        colors = ['#e74c3c' if x > 0 else '#3498db' for x in top_features['coefficient']]
-        
+    if 'issue_category' not in review_df.columns or 'product' not in review_df.columns:
+        st.warning("issue_category or product column missing")
+        return
+
+    CATEGORY_COLORS = {
+        'Delivery': '#3498db',
+        'Quality':  '#e74c3c',
+        'Service':  '#9b59b6',
+        'Pricing':  '#f39c12',
+        'Other':    '#95a5a6',
+    }
+
+    # Only negative reviews (where the issue actually matters)
+    neg_df = review_df[review_df['rating'] <= 3].copy() if 'rating' in review_df.columns else review_df.copy()
+
+    pivot = (
+        neg_df.groupby(['product', 'issue_category'])
+        .size()
+        .reset_index(name='count')
+        .pivot(index='product', columns='issue_category', values='count')
+        .fillna(0)
+    )
+
+    # Sort products by total issue count descending
+    pivot['_total'] = pivot.sum(axis=1)
+    pivot = pivot.sort_values('_total', ascending=False).drop(columns='_total')
+
+    categories = [c for c in ['Delivery', 'Quality', 'Service', 'Pricing', 'Other'] if c in pivot.columns]
+
+    fig = go.Figure()
+    for cat in categories:
         fig.add_trace(go.Bar(
-            y=top_features['feature'],
-            x=top_features['coefficient'],
-            orientation='h',
-            marker=dict(color=colors),
-            text=top_features['coefficient'].round(3),
-            textposition='auto',
-            hovertemplate='<b>%{y}</b><br>Coefficient: %{x:.3f}<extra></extra>'
+            name=cat,
+            x=pivot.index,
+            y=pivot[cat],
+            marker_color=CATEGORY_COLORS.get(cat, '#bdc3c7'),
+            hovertemplate=f'<b>%{{x}}</b><br>{cat}: %{{y:.0f}} reviews<extra></extra>',
         ))
-        
-        fig.update_layout(
-            title="🧠 Top Risk Drivers (Feature Importance)",
-            xaxis_title="Coefficient (Impact on Risk Probability)",
-            yaxis_title="Feature Name",
-            height=350,
-            showlegend=False,
-            plot_bgcolor='rgba(240,240,240,0.5)'
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
-        
-        # Legend
-        st.caption("🔴 Red = Increases Risk | 🔵 Blue = Decreases Risk")
-        
-    except Exception as e:
-        st.warning(f"Could not display feature importance: {str(e)}")
+
+    fig.update_layout(
+        barmode='stack',
+        title='📈 Top Issues Breakdown by Product (Rating ≤ 3)',
+        xaxis_title='Product',
+        yaxis_title='Number of Reviews',
+        xaxis=dict(tickangle=-35),
+        height=450,
+        legend=dict(orientation='h', yanchor='bottom', y=-0.35, xanchor='center', x=0.5),
+        plot_bgcolor='rgba(245,245,250,0.8)',
+        margin=dict(b=100),
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
 
 def render_ml_insights(aggregated_df: pd.DataFrame) -> None:
@@ -1289,16 +1421,16 @@ def main():
     st.subheader("📈 Prioritization Analysis")
     render_quadrant(filtered_agg)
     
-    # Step 6: Render ML risk distribution chart
+    # Step 6: ML Risk Analysis — Revenue at Risk + Rating vs Risk
     st.divider()
     st.subheader("📊 ML Risk Analysis")
     col1, col2 = st.columns(2)
-    
+
     with col1:
-        render_risk_distribution(filtered_agg)
-    
+        render_revenue_at_risk_chart(filtered_agg)
+
     with col2:
-        render_feature_importance(st.session_state.ml_model_dict)
+        render_rating_vs_risk_scatter(filtered_agg)
     
     # Step 7: Render ML insights
     st.divider()
@@ -1312,11 +1444,7 @@ def main():
     st.divider()
     render_table(filtered_agg)
 
-    # Step 10: Render debug checkpoints
-    st.divider()
-    render_debug_checkpoints(filtered_df, filtered_agg)
-    
-    # Step 11: Additional details (optional tabs)
+    # Step 10: Additional details (optional tabs)
     st.divider()
     tab1, tab2, tab3 = st.tabs(["📊 Data Preview", "📈 Charts", "ℹ️ About"])
     
@@ -1331,31 +1459,15 @@ def main():
         )
     
     with tab2:
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.subheader("Rating Distribution")
-            if 'rating' in filtered_df.columns:
-                rating_dist = filtered_df['rating'].value_counts().sort_index()
-                fig = px.bar(
-                    x=rating_dist.index,
-                    y=rating_dist.values,
-                    labels={'x': 'Rating', 'y': 'Count'},
-                    color=rating_dist.values,
-                    color_continuous_scale='RdYlGn'
-                )
-                st.plotly_chart(fig, use_container_width=True)
-        
+        # Row 1: Top Issues Breakdown (full-width stacked bar)
+        render_top_issues_breakdown(filtered_df)
+
+        st.divider()
+
+        # Row 2: High-Risk Share Donut (half-width, centred)
+        col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            st.subheader("Impact Score Distribution")
-            if 'impact_score' in filtered_df.columns:
-                fig = px.histogram(
-                    filtered_df,
-                    x='impact_score',
-                    nbins=30,
-                    labels={'impact_score': 'Impact Score', 'count': 'Frequency'}
-                )
-                st.plotly_chart(fig, use_container_width=True)
+            render_high_risk_donut(filtered_agg)
     
     with tab3:
         st.markdown("""

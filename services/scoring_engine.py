@@ -328,6 +328,57 @@ def calculate_revenue_at_risk(df: pd.DataFrame) -> Dict[str, float]:
     }
 
 
+def classify_issue_category(review_text: pd.Series) -> pd.Series:
+    """
+    Classify each review into an issue category using keyword matching.
+
+    Categories (checked in priority order):
+        Delivery  - shipping, delivery, late, delay, transit, arrived, courier
+        Quality   - quality, broken, defective, damaged, poor, bad product, stopped working
+        Service   - customer service, support, refund, return, staff, response, help
+        Pricing   - price, expensive, cheap, cost, value, overpriced, worth
+        Other     - everything else
+
+    Args:
+        review_text: Series of raw review strings
+
+    Returns:
+        Series of category labels (str)
+    """
+    KEYWORDS = {
+        'Delivery': [
+            'deliver', 'shipping', 'shipment', 'late', 'delay', 'transit',
+            'arrived', 'arrival', 'courier', 'dispatch', 'package', 'tracking',
+        ],
+        'Quality': [
+            'quality', 'broken', 'defective', 'damaged', 'poor quality',
+            'bad quality', 'stopped working', 'not working', 'faulty',
+            'material', 'build', 'durability', 'fragile', 'fell apart',
+        ],
+        'Service': [
+            'customer service', 'support', 'refund', 'return', 'staff',
+            'response', 'helpless', 'unhelpful', 'rude', 'complaint',
+            'exchange', 'replacement', 'contacted', 'no response',
+        ],
+        'Pricing': [
+            'price', 'expensive', 'overpriced', 'cheap', 'cost', 'value',
+            'worth', 'money', 'charge', 'fee', 'afford',
+        ],
+    }
+
+    text_lower = review_text.fillna('').str.lower()
+
+    categories = pd.Series(['Other'] * len(review_text), index=review_text.index)
+
+    # Apply in reverse priority so highest-priority category wins (last write wins)
+    for category in reversed(list(KEYWORDS.keys())):
+        pattern = '|'.join(KEYWORDS[category])
+        mask = text_lower.str.contains(pattern, regex=True, na=False)
+        categories[mask] = category
+
+    return categories
+
+
 def apply_scoring_pipeline(df: pd.DataFrame) -> pd.DataFrame:
     """
     Apply complete scoring pipeline: preprocess → features → scores.
@@ -355,9 +406,16 @@ def apply_scoring_pipeline(df: pd.DataFrame) -> pd.DataFrame:
     
     # Step 6: Compute impact score (Layer 2) with zero-gate
     df['impact_score'] = compute_impact_score(df)
+
+    # Step 7: Classify issue category from review text (keyword-based)
+    if 'review_text' in df.columns:
+        df['issue_category'] = classify_issue_category(df['review_text'])
+    else:
+        df['issue_category'] = 'Other'
     
-    # Ensure no NaNs
-    df = df.fillna(0)
+    # Ensure no NaNs in numeric columns (keep issue_category as string)
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    df[numeric_cols] = df[numeric_cols].fillna(0)
     
     return df
 
