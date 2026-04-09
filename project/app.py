@@ -38,6 +38,9 @@ from services.ingestion import (
     normalize_schema,
     load_data
 )
+from processing.ml.features_ml import prepare_ml_features
+from processing.ml.train import train_risk_model, get_feature_importance
+from processing.ml.predict import predict_risk, get_risk_summary
 from utils.error_handler import ErrorState, APIError, safe_divide
 from utils.logger import log_event, log_error, log_warning, logger
 from utils.cache import get_cache
@@ -92,6 +95,11 @@ def init_session_state():
         st.session_state.api_key = ""
     if 'use_default_api' not in st.session_state:
         st.session_state.use_default_api = True
+    # ML model state
+    if 'ml_model_dict' not in st.session_state:
+        st.session_state.ml_model_dict = None
+    if 'ml_features' not in st.session_state:
+        st.session_state.ml_features = None
 
 
 # ===== FILTER FUNCTIONS =====
@@ -196,11 +204,11 @@ def apply_filters(
 @st.cache_data
 def render_kpis(review_df: pd.DataFrame, product_df: pd.DataFrame) -> None:
     """
-    Render KPI cards showing high-level business metrics
+    Render KPI cards showing high-level business metrics including ML risk predictions
     
     Args:
         review_df: Review-level data with scoring
-        product_df: Product-level aggregated data
+        product_df: Product-level aggregated data (with risk_probability from ML)
     """
     # Compute metrics
     total_revenue_at_risk = safe_divide(
@@ -216,6 +224,11 @@ def render_kpis(review_df: pd.DataFrame, product_df: pd.DataFrame) -> None:
         total_reviews,
         default=0.0
     ) * 100
+    
+    # ML-based metric: High-risk products count
+    high_risk_count = 0
+    if 'risk_category' in product_df.columns:
+        high_risk_count = int((product_df['risk_category'] == 'High').sum())
     
     # Find product column name (could be 'product' or 'product_name')
     product_col = None
@@ -236,9 +249,10 @@ def render_kpis(review_df: pd.DataFrame, product_df: pd.DataFrame) -> None:
     print(f"  - Total Reviews: {total_reviews}")
     print(f"  - Negative %: {negative_pct:.1f}%")
     print(f"  - Top Product: {top_product}")
+    print(f"  - High Risk Products (ML): {high_risk_count}")
     
-    # Display KPI cards
-    col1, col2, col3, col4 = st.columns(4)
+    # Display KPI cards (5-column layout)
+    col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
         st.metric(
@@ -267,9 +281,16 @@ def render_kpis(review_df: pd.DataFrame, product_df: pd.DataFrame) -> None:
             top_product,
             delta="Highest priority"
         )
+    
+    with col5:
+        st.metric(
+            "🚨 High Risk Products",
+            high_risk_count,
+            delta="≥70% confidence"
+        )
 
 
-def render_filters(raw_df: pd.DataFrame) -> Tuple[List[str], Tuple, float]:
+def render_filters(raw_df: pd.DataFrame) -> Tuple[List[str], Tuple, float, float]:
     """
     Render filter bar for dynamic data filtering
     
@@ -277,14 +298,14 @@ def render_filters(raw_df: pd.DataFrame) -> Tuple[List[str], Tuple, float]:
         raw_df: Raw unfiltered dataframe
     
     Returns:
-        Tuple of (selected_products, date_range, severity_threshold)
+        Tuple of (selected_products, date_range, severity_threshold, risk_threshold)
     """
     if raw_df is None or raw_df.empty:
-        return [], None, 0.2
+        return [], None, 0.2, 0.0
     
     st.subheader("🔍 Filter Data")
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
     
     # Product filter
     with col1:
@@ -329,7 +350,18 @@ def render_filters(raw_df: pd.DataFrame) -> Tuple[List[str], Tuple, float]:
             help="Minimum issue severity to include"
         )
     
-    return selected_products, date_range, severity_threshold
+    # ML Risk threshold filter (NEW)
+    with col4:
+        risk_threshold = st.slider(
+            "🤖 ML Risk Threshold",
+            min_value=0.0,
+            max_value=1.0,
+            value=0.0,
+            step=0.05,
+            help="Minimum predicted risk probability to show"
+        )
+    
+    return selected_products, date_range, severity_threshold, risk_threshold
 
 
 def render_quadrant(aggregated_df: pd.DataFrame) -> None:
@@ -429,10 +461,10 @@ def render_quadrant(aggregated_df: pd.DataFrame) -> None:
 
 def render_table(aggregated_df: pd.DataFrame) -> None:
     """
-    Render product ranking table
+    Render product ranking table with ML risk predictions
     
     Args:
-        aggregated_df: Product-level aggregated data
+        aggregated_df: Product-level aggregated data (with risk_probability from ML)
     """
     if aggregated_df is None or aggregated_df.empty:
         st.warning("No data available for product ranking")
@@ -441,10 +473,11 @@ def render_table(aggregated_df: pd.DataFrame) -> None:
     # Prepare display columns
     display_df = aggregated_df.copy()
     
-    # Select and order columns
+    # Select and order columns - include ML risk metrics
     cols_to_display = [
         'product', 'total_reviews', 'avg_rating', 'negative_ratio',
-        'final_score', 'total_revenue_at_risk', 'quadrant'
+        'final_score', 'total_revenue_at_risk', 'quadrant',
+        'risk_probability', 'risk_category'
     ]
     
     available_cols = [col for col in cols_to_display if col in display_df.columns]
@@ -464,14 +497,286 @@ def render_table(aggregated_df: pd.DataFrame) -> None:
     if 'total_revenue_at_risk' in display_df.columns:
         display_df['total_revenue_at_risk'] = '₹' + display_df['total_revenue_at_risk'].round(0).astype(int).astype(str)
     
+    # Format risk probability as percentage with color indicators
+    if 'risk_probability' in display_df.columns:
+        display_df['Risk %'] = (display_df['risk_probability'] * 100).round(1).astype(str) + '%'
+        # Create a visual indicator using emoji based on risk category
+        if 'risk_category' in display_df.columns:
+            display_df['Risk Status'] = display_df['risk_category'].apply(
+                lambda x: '🟢 Low' if x == 'Low' else ('🟡 Medium' if x == 'Medium' else '🔴 High')
+            )
+            # Reorder to show Risk Status with Risk %
+            cols_to_show = []
+            for col in available_cols:
+                cols_to_show.append(col)
+            # Move risk columns to the end for visibility
+            if 'risk_probability' in cols_to_show:
+                cols_to_show.remove('risk_probability')
+            if 'risk_category' in cols_to_show:
+                cols_to_show.remove('risk_category')
+            display_df = display_df[cols_to_show + ['Risk %', 'Risk Status']]
+    
     # Display table
-    st.subheader("🎯 Product Ranking by Priority")
+    st.subheader("🎯 Product Ranking by Priority (with ML Risk Predictions)")
     st.dataframe(
         display_df,
         use_container_width=True,
         height=min(400, 50 * len(display_df)),
         hide_index=True
     )
+
+
+def render_risk_distribution(aggregated_df: pd.DataFrame) -> None:
+    """
+    Render ML risk probability distribution visualization
+    
+    Args:
+        aggregated_df: Product-level aggregated data with risk_probability
+    """
+    if aggregated_df is None or aggregated_df.empty or 'risk_probability' not in aggregated_df.columns:
+        st.warning("No risk probability data available")
+        return
+    
+    # Create bins for risk categories
+    bins = [0, 0.3, 0.7, 1.0]
+    labels = ['Low (0-30%)', 'Medium (30-70%)', 'High (70-100%)']
+    
+    aggregated_df_copy = aggregated_df.copy()
+    aggregated_df_copy['risk_bin'] = pd.cut(
+        aggregated_df_copy['risk_probability'],
+        bins=bins,
+        labels=labels,
+        include_lowest=True
+    )
+    
+    # Count by risk category
+    risk_counts = aggregated_df_copy['risk_bin'].value_counts().sort_index()
+    
+    # Create bar chart
+    fig = go.Figure()
+    
+    colors = ['#2ecc71', '#f1c40f', '#e74c3c']  # Green, Yellow, Red
+    
+    fig.add_trace(go.Bar(
+        x=risk_counts.index.astype(str),
+        y=risk_counts.values,
+        marker=dict(color=colors),
+        text=risk_counts.values,
+        textposition='auto',
+        hovertemplate='<b>%{x}</b><br>Count: %{y}<extra></extra>'
+    ))
+    
+    fig.update_layout(
+        title="📊 ML Risk Distribution by Category",
+        xaxis_title="Risk Category",
+        yaxis_title="Number of Products",
+        height=400,
+        showlegend=False,
+        plot_bgcolor='rgba(240,240,240,0.5)'
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
+
+
+def render_feature_importance(model_dict: Optional[Dict]) -> None:
+    """
+    Render feature importance from trained ML model (if available)
+    
+    Args:
+        model_dict: Dictionary returned from train_risk_model (contains model and scaler)
+    """
+    if model_dict is None:
+        st.info("⏳ Feature importance will be available after data loads")
+        return
+    
+    try:
+        importance_df = get_feature_importance(model_dict)
+        
+        if importance_df is None or importance_df.empty:
+            st.warning("Could not extract feature importance")
+            return
+        
+        # Get top 5 features
+        top_features = importance_df.head(5)
+        
+        # Create horizontal bar chart
+        fig = go.Figure()
+        
+        # Color based on positive/negative coefficient
+        colors = ['#e74c3c' if x > 0 else '#3498db' for x in top_features['coefficient']]
+        
+        fig.add_trace(go.Bar(
+            y=top_features['feature'],
+            x=top_features['coefficient'],
+            orientation='h',
+            marker=dict(color=colors),
+            text=top_features['coefficient'].round(3),
+            textposition='auto',
+            hovertemplate='<b>%{y}</b><br>Coefficient: %{x:.3f}<extra></extra>'
+        ))
+        
+        fig.update_layout(
+            title="🧠 Top Risk Drivers (Feature Importance)",
+            xaxis_title="Coefficient (Impact on Risk Probability)",
+            yaxis_title="Feature Name",
+            height=350,
+            showlegend=False,
+            plot_bgcolor='rgba(240,240,240,0.5)'
+        )
+        
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Legend
+        st.caption("🔴 Red = Increases Risk | 🔵 Blue = Decreases Risk")
+        
+    except Exception as e:
+        st.warning(f"Could not display feature importance: {str(e)}")
+
+
+def render_ml_insights(aggregated_df: pd.DataFrame) -> None:
+    """
+    Render ML-powered insights and recommendations
+    
+    Args:
+        aggregated_df: Product-level aggregated data with risk metrics
+    """
+    if aggregated_df is None or aggregated_df.empty:
+        return
+    
+    st.subheader("💡 ML-Powered Insights")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    # Insight 1: High-risk products that are NOT in Fire-Fight quadrant
+    with col1:
+        if 'risk_probability' in aggregated_df.columns and 'quadrant' in aggregated_df.columns:
+            hidden_risks = aggregated_df[
+                (aggregated_df['risk_probability'] > 0.7) & 
+                (aggregated_df['quadrant'] != 'The Fire-Fight')
+            ]
+            
+            st.metric(
+                "🎯 Hidden Risks Detected",
+                len(hidden_risks),
+                delta="Predicted but not yet flagged" if len(hidden_risks) > 0 else "None"
+            )
+    
+    # Insight 2: Average risk across quadrants
+    with col2:
+        if 'risk_probability' in aggregated_df.columns:
+            avg_risk = aggregated_df['risk_probability'].mean()
+            st.metric(
+                "📊 Portfolio Risk",
+                f"{avg_risk*100:.1f}%",
+                delta="Average across all products"
+            )
+    
+    # Insight 3: High-risk products in VIP segment
+    with col3:
+        if 'risk_probability' in aggregated_df.columns and 'total_revenue_at_risk' in aggregated_df.columns:
+            high_risk_revenue = aggregated_df[aggregated_df['risk_probability'] > 0.7]['total_revenue_at_risk'].sum()
+            st.metric(
+                "💰 Revenue at Risk (High-Risk Products)",
+                f"₹{high_risk_revenue:,.0f}",
+                delta="In predicted high-risk products"
+            )
+
+
+def render_enhanced_kpis(review_df: pd.DataFrame, product_df: pd.DataFrame) -> None:
+    """
+    Render enhanced KPI cards with ML metrics
+    
+    Args:
+        review_df: Review-level data
+        product_df: Product-level data with ML predictions
+    """
+    if review_df is None or product_df is None or product_df.empty:
+        return
+    
+    # Validate ML output
+    if 'risk_probability' not in product_df.columns:
+        product_df['risk_probability'] = 0
+    if 'risk_category' not in product_df.columns:
+        product_df['risk_category'] = 'Low'
+    
+    # Calculate metrics
+    total_revenue_at_risk = safe_divide(
+        product_df['total_revenue_at_risk'].sum() if 'total_revenue_at_risk' in product_df.columns else 0,
+        1,
+        default=0.0
+    )
+    
+    total_reviews = len(review_df)
+    
+    # DEBUG: Check is_negative column
+    has_is_negative = 'is_negative' in review_df.columns
+    negative_count = 0
+    if has_is_negative:
+        negative_count = review_df['is_negative'].sum()
+        print(f"[DEBUG] is_negative column found: {negative_count} negatives in {total_reviews} reviews")
+    else:
+        print(f"[DEBUG] is_negative column NOT found. Available columns: {review_df.columns.tolist()}")
+    
+    negative_pct = safe_divide(
+        negative_count,
+        total_reviews,
+        default=0.0
+    ) * 100
+    
+    # ML metrics
+    high_risk_count = int((product_df['risk_category'] == 'High').sum())
+    medium_risk_count = int((product_df['risk_category'] == 'Medium').sum())
+    avg_risk_prob = float(product_df['risk_probability'].mean())
+    
+    # Find top risk product
+    product_col = None
+    for col in ['product', 'product_name', 'product_id']:
+        if col in product_df.columns:
+            product_col = col
+            break
+    
+    top_product = "N/A"
+    if not product_df.empty and product_col and 'final_score' in product_df.columns:
+        top_idx = product_df['final_score'].idxmax()
+        top_product = product_df.loc[top_idx, product_col]
+    
+    # Display KPI cards (5-column layout)
+    col1, col2, col3, col4, col5 = st.columns(5)
+    
+    with col1:
+        st.metric(
+            "Total Revenue at Risk",
+            f"₹{total_revenue_at_risk:,.0f}",
+            delta="All products" if total_revenue_at_risk > 0 else None
+        )
+    
+    with col2:
+        st.metric(
+            "Total Reviews",
+            f"{total_reviews:,}",
+            delta="Analyzed data"
+        )
+    
+    with col3:
+        st.metric(
+            "% Negative Reviews",
+            f"{negative_pct:.1f}%",
+            delta="Rating ≤ 2"
+        )
+    
+    with col4:
+        st.metric(
+            "🚨 High Risk Products",
+            high_risk_count,
+            delta=f"({high_risk_count} of {len(product_df)})"
+        )
+    
+    with col5:
+        st.metric(
+            "📊 Avg Risk Probability",
+            f"{avg_risk_prob*100:.1f}%",
+            delta="ML predicted likelihood"
+        )
 
 
 # ===== UTILITY FUNCTIONS =====
@@ -526,6 +831,90 @@ def run_pipeline(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     except Exception as e:
         log_error("PIPELINE_FAILED", str(e))
         raise
+
+
+def apply_ml_predictions(aggregated_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Apply ML risk prediction model to aggregated product data.
+    
+    Process:
+    1. Prepare ML features from aggregated metrics
+    2. Train Logistic Regression model (if not cached)
+    3. Generate risk probability predictions
+    4. Add predictive columns to dataframe
+    
+    Error Handling:
+    - If ML fails, returns dataframe with default risk_probability = 0
+    - Graceful degradation to ensure system continues operating
+    - Logs warnings but doesn't break pipeline
+    
+    Args:
+        aggregated_df: Product-level DataFrame from aggregation pipeline
+    
+    Returns:
+        Enhanced DataFrame with risk_probability, risk_category, high_risk_predicted columns
+    """
+    
+    try:
+        # Step 1: Prepare ML features
+        ml_df, features = prepare_ml_features(aggregated_df)
+        
+        if ml_df is None or ml_df.empty:
+            raise ValueError("Feature preparation returned empty dataframe")
+        
+        # Step 2: Train model
+        # Note: We train on each batch to adapt to current data
+        # In production, you'd cache/persist the model
+        model_dict = train_risk_model(ml_df, features, quantile=0.75)
+        
+        if model_dict is None:
+            raise ValueError("Model training failed")
+        
+        # Cache model in session state for later use (e.g., feature importance display)
+        st.session_state.ml_model_dict = model_dict
+        st.session_state.ml_features = features
+        
+        # Step 3: Generate predictions
+        ml_df = predict_risk(model_dict, ml_df)
+        
+        # Step 4: Merge predictions back to aggregated dataframe
+        # Keep only product identifier and ML columns
+        ml_predictions = ml_df[['product', 'risk_probability', 'risk_category', 'high_risk_predicted']].copy()
+        
+        # Merge back to original dataframe
+        aggregated_df = aggregated_df.merge(
+            ml_predictions,
+            on='product',
+            how='left'
+        )
+        
+        # Fill any missing predictions with defaults (graceful degradation)
+        aggregated_df['risk_probability'] = aggregated_df['risk_probability'].fillna(0)
+        aggregated_df['high_risk_predicted'] = aggregated_df['high_risk_predicted'].fillna(0).astype(int)
+        aggregated_df['risk_category'] = aggregated_df['risk_category'].fillna('Low')
+        
+        # Log success
+        log_event("ML_PREDICTIONS_COMPLETE", {
+            'products': len(aggregated_df),
+            'high_risk_count': int((aggregated_df['risk_category'] == 'High').sum()),
+            'avg_risk_probability': float(aggregated_df['risk_probability'].mean())
+        })
+        
+        return aggregated_df
+    
+    except Exception as e:
+        # Graceful degradation: add default columns and continue
+        log_warning("ML_PREDICTION_FAILED", f"Risk prediction failed: {str(e)}")
+        
+        # Add default columns if they don't exist
+        if 'risk_probability' not in aggregated_df.columns:
+            aggregated_df['risk_probability'] = 0.0
+        if 'high_risk_predicted' not in aggregated_df.columns:
+            aggregated_df['high_risk_predicted'] = 0
+        if 'risk_category' not in aggregated_df.columns:
+            aggregated_df['risk_category'] = 'Low'
+        
+        return aggregated_df
 
 
 # ===== MAIN APPLICATION =====
@@ -652,9 +1041,13 @@ def main():
             with st.spinner("🔄 Processing pipeline..."):
                 processed_df, aggregated_df = run_pipeline(raw_df)
                 st.session_state.processed_data = processed_df
-                st.session_state.aggregated_data = aggregated_df
                 st.session_state.data_fetched = True
                 st.session_state.last_refresh = datetime.now()
+            
+            # Apply ML risk predictions
+            with st.spinner("🤖 Generating risk predictions..."):
+                aggregated_df = apply_ml_predictions(aggregated_df)
+                st.session_state.aggregated_data = aggregated_df
             
             st.success(f"✅ Loaded {len(raw_df)} reviews across {len(aggregated_df)} products from {input_mode}")
         
@@ -702,13 +1095,14 @@ def main():
     # Step 2: Apply filters
     st.divider()
     render_filters_result = render_filters(raw_df)
-    selected_products, date_range, severity_threshold = render_filters_result
+    selected_products, date_range, severity_threshold, risk_threshold = render_filters_result
     
     # DEBUG: Show filter state
     print(f"\n[DEBUG] Filter Application:")
     print(f"  - Selected products: {selected_products}")
     print(f"  - Date range: {date_range}")
     print(f"  - Severity threshold: {severity_threshold}")
+    print(f"  - Risk threshold (ML): {risk_threshold}")
     print(f"  - Pre-filter rows: {len(processed_df)}")
     
     # Apply filters to processed data
@@ -730,20 +1124,64 @@ def main():
     if len(filtered_df) < len(processed_df):
         filtered_agg = aggregate_to_products(filtered_df)
         filtered_agg = classify_quadrants(filtered_agg)
+        
+        # CRITICAL FIX: Restore ML columns from original aggregated_df
+        # When re-aggregating, we lose the ML predictions, so merge them back
+        ml_columns = ['risk_probability', 'risk_category', 'high_risk_predicted']
+        if all(col in aggregated_df.columns for col in ml_columns):
+            ml_data = aggregated_df[['product'] + ml_columns].copy()
+            filtered_agg = filtered_agg.merge(ml_data, on='product', how='left')
+            # Fill any missing ML values with defaults
+            filtered_agg['risk_probability'] = filtered_agg['risk_probability'].fillna(0.0)
+            filtered_agg['risk_category'] = filtered_agg['risk_category'].fillna('Low')
+            filtered_agg['high_risk_predicted'] = filtered_agg['high_risk_predicted'].fillna(0).astype(int)
     else:
         filtered_agg = aggregated_df
     
-    # Step 4: Render KPI cards
+    # Step 3b: Apply ML risk threshold filter
+    if risk_threshold > 0:
+        if 'risk_probability' in filtered_agg.columns:
+            pre_risk_filter = len(filtered_agg)
+            filtered_agg = filtered_agg[filtered_agg['risk_probability'] >= risk_threshold]
+            print(f"  - After risk filter: {len(filtered_agg)} products (filtered {pre_risk_filter - len(filtered_agg)})")
+            
+            # Also filter reviews to match the remaining products
+            product_col = None
+            for col in ['product', 'product_name', 'product_id']:
+                if col in filtered_df.columns and col in filtered_agg.columns:
+                    product_col = col
+                    break
+            
+            if product_col:
+                filtered_df = filtered_df[filtered_df[product_col].isin(filtered_agg[product_col])]
+                print(f"  - Filtered reviews: {len(filtered_df)} reviews from {len(filtered_agg)} products")
+    
+    # Step 4: Render enhanced KPI cards with ML metrics
     st.divider()
     st.subheader("📊 Key Performance Indicators")
-    render_kpis(filtered_df, filtered_agg)
+    render_enhanced_kpis(filtered_df, filtered_agg)
     
     # Step 5: Render quadrant visualization
     st.divider()
     st.subheader("📈 Prioritization Analysis")
     render_quadrant(filtered_agg)
     
-    # Step 6: Render ranking table
+    # Step 6: Render ML risk distribution chart
+    st.divider()
+    st.subheader("📊 ML Risk Analysis")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        render_risk_distribution(filtered_agg)
+    
+    with col2:
+        render_feature_importance(st.session_state.ml_model_dict)
+    
+    # Step 7: Render ML insights
+    st.divider()
+    render_ml_insights(filtered_agg)
+    
+    # Step 8: Render ranking table
     st.divider()
     render_table(filtered_agg)
     
