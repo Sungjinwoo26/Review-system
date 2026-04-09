@@ -41,6 +41,7 @@ from services.ingestion import (
 from processing.ml.features_ml import prepare_ml_features
 from processing.ml.train import train_risk_model, get_feature_importance
 from processing.ml.predict import predict_risk, get_risk_summary
+from llm import enrich_products_with_llm_insights
 from utils.error_handler import ErrorState, APIError, safe_divide
 from utils.logger import log_event, log_error, log_warning, logger
 from utils.cache import get_cache
@@ -313,7 +314,7 @@ def render_filters(raw_df: pd.DataFrame) -> Tuple[List[str], Tuple, float, float
         selected_products = st.multiselect(
             "📦 Select Products",
             options=available_products,
-            default=available_products if len(available_products) <= 5 else available_products[:5],
+            default=available_products,
             help="Select which products to analyze"
         )
     
@@ -345,9 +346,9 @@ def render_filters(raw_df: pd.DataFrame) -> Tuple[List[str], Tuple, float, float
             "⚠️ Severity Threshold",
             min_value=0.0,
             max_value=1.0,
-            value=0.2,
+            value=0.0,
             step=0.05,
-            help="Minimum issue severity to include"
+            help="Minimum issue severity to include (0 = show all reviews)"
         )
     
     # ML Risk threshold filter (NEW)
@@ -787,6 +788,112 @@ def show_error(message: str) -> None:
     st.stop()
 
 
+def apply_llm_insights(aggregated_df: pd.DataFrame, groq_api_key: str = "") -> pd.DataFrame:
+    """
+    Apply downstream LLM insights to already-aggregated product metrics.
+
+    This function does not alter scoring, aggregation, or ML outputs.
+    """
+    if aggregated_df is None or aggregated_df.empty:
+        return aggregated_df
+
+    ml_snapshot = []
+    if 'risk_probability' in aggregated_df.columns:
+        ml_snapshot = aggregated_df[['product', 'risk_probability', 'risk_category']].head(5).to_dict('records')
+    print(f"\n[DEBUG] ML Output Checkpoint: {ml_snapshot}")
+
+    agg_cols = [
+        col for col in [
+            'product', 'total_reviews', 'avg_rating', 'negative_ratio',
+            'total_impact', 'total_revenue_at_risk', 'final_score',
+            'quadrant', 'priority', 'action'
+        ] if col in aggregated_df.columns
+    ]
+    print(f"[DEBUG] Aggregated Metrics Checkpoint: {aggregated_df[agg_cols].head(5).to_dict('records')}")
+
+    llm_df = enrich_products_with_llm_insights(
+        aggregated_df,
+        api_key=groq_api_key,
+        max_products=5
+    )
+
+    llm_input_snapshot = []
+    llm_output_snapshot = []
+    if 'llm_payload' in llm_df.columns:
+        llm_input_snapshot = llm_df.loc[llm_df['llm_payload'] != '', ['product', 'llm_payload']].head(3).to_dict('records')
+    if 'llm_summary' in llm_df.columns:
+        llm_output_snapshot = llm_df.loc[llm_df['llm_summary'] != '', ['product', 'llm_source', 'llm_summary']].head(3).to_dict('records')
+    print(f"[DEBUG] LLM Input Checkpoint: {llm_input_snapshot}")
+    print(f"[DEBUG] LLM Output Checkpoint: {llm_output_snapshot}")
+
+    return llm_df
+
+
+def render_llm_insights(aggregated_df: pd.DataFrame) -> None:
+    """Render downstream LLM insights without changing core metrics."""
+    if aggregated_df is None or aggregated_df.empty:
+        return
+
+    if 'llm_summary' not in aggregated_df.columns:
+        st.info("Add a Groq API key in the sidebar to generate LLM insights, or use the rule-based fallback for top products.")
+        return
+
+    insight_df = aggregated_df[aggregated_df['llm_summary'] != ''].copy()
+    if insight_df.empty:
+        st.info("Add a Groq API key in the sidebar to generate LLM insights, or use the rule-based fallback for top products.")
+        return
+
+    st.subheader("LLM Insights")
+    for _, row in insight_df.head(5).iterrows():
+        source = row.get('llm_source', 'unknown')
+        with st.expander(f"{row.get('product', 'Unknown')} ({source})", expanded=False):
+            st.write(f"**Summary:** {row.get('llm_summary', '')}")
+            st.write(f"**Driver:** {row.get('llm_driver', '')}")
+            st.write(f"**Recommendation:** {row.get('llm_recommendation', '')}")
+
+
+def render_debug_checkpoints(review_df: pd.DataFrame, aggregated_df: pd.DataFrame) -> None:
+    """Render lightweight debug checkpoints for validation."""
+    with st.expander("Debug Checkpoints", expanded=False):
+        st.write("**ML outputs**")
+        ml_cols = [col for col in ['product', 'risk_probability', 'risk_category'] if col in aggregated_df.columns]
+        if ml_cols:
+            st.dataframe(aggregated_df[ml_cols].head(10), use_container_width=True, hide_index=True)
+        else:
+            st.write("ML output columns not available.")
+
+        st.write("**Aggregated metrics**")
+        agg_cols = [
+            col for col in [
+                'product', 'total_reviews', 'avg_rating', 'negative_ratio',
+                'total_revenue_at_risk', 'final_score', 'quadrant', 'priority', 'action'
+            ] if col in aggregated_df.columns
+        ]
+        st.dataframe(aggregated_df[agg_cols].head(10), use_container_width=True, hide_index=True)
+
+        st.write("**LLM input**")
+        llm_input_cols = [col for col in ['product', 'llm_payload'] if col in aggregated_df.columns]
+        if len(llm_input_cols) == 2:
+            st.dataframe(
+                aggregated_df.loc[aggregated_df['llm_payload'] != '', llm_input_cols].head(5),
+                use_container_width=True,
+                hide_index=True
+            )
+        else:
+            st.write("LLM input payload not generated yet.")
+
+        st.write("**LLM output**")
+        llm_output_cols = [col for col in ['product', 'llm_source', 'llm_summary', 'llm_recommendation'] if col in aggregated_df.columns]
+        if len(llm_output_cols) >= 3:
+            st.dataframe(
+                aggregated_df.loc[aggregated_df['llm_summary'] != '', llm_output_cols].head(5),
+                use_container_width=True,
+                hide_index=True
+            )
+        else:
+            st.write("LLM output not generated yet.")
+
+
 def run_pipeline(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """
     Run complete scoring pipeline:
@@ -984,6 +1091,15 @@ def main():
             api_key = None
         
         st.divider()
+
+        st.subheader("LLM Settings")
+        groq_api_key = st.text_input(
+            "Groq API Key (Optional)",
+            type="password",
+            help="Used only for downstream product insights after ML and aggregation."
+        )
+
+        st.divider()
         
         col1, col2 = st.columns(2)
         with col1:
@@ -1047,6 +1163,10 @@ def main():
             # Apply ML risk predictions
             with st.spinner("🤖 Generating risk predictions..."):
                 aggregated_df = apply_ml_predictions(aggregated_df)
+
+            # Apply downstream LLM insights
+            with st.spinner("🧠 Generating downstream product insights..."):
+                aggregated_df = apply_llm_insights(aggregated_df, groq_api_key)
                 st.session_state.aggregated_data = aggregated_df
             
             st.success(f"✅ Loaded {len(raw_df)} reviews across {len(aggregated_df)} products from {input_mode}")
@@ -1135,6 +1255,7 @@ def main():
             filtered_agg['risk_probability'] = filtered_agg['risk_probability'].fillna(0.0)
             filtered_agg['risk_category'] = filtered_agg['risk_category'].fillna('Low')
             filtered_agg['high_risk_predicted'] = filtered_agg['high_risk_predicted'].fillna(0).astype(int)
+
     else:
         filtered_agg = aggregated_df
     
@@ -1155,6 +1276,8 @@ def main():
             if product_col:
                 filtered_df = filtered_df[filtered_df[product_col].isin(filtered_agg[product_col])]
                 print(f"  - Filtered reviews: {len(filtered_df)} reviews from {len(filtered_agg)} products")
+
+    filtered_agg = apply_llm_insights(filtered_agg, groq_api_key)
     
     # Step 4: Render enhanced KPI cards with ML metrics
     st.divider()
@@ -1181,11 +1304,19 @@ def main():
     st.divider()
     render_ml_insights(filtered_agg)
     
-    # Step 8: Render ranking table
+    # Step 8: Render downstream LLM insights
+    st.divider()
+    render_llm_insights(filtered_agg)
+
+    # Step 9: Render ranking table
     st.divider()
     render_table(filtered_agg)
+
+    # Step 10: Render debug checkpoints
+    st.divider()
+    render_debug_checkpoints(filtered_df, filtered_agg)
     
-    # Step 7: Additional details (optional tabs)
+    # Step 11: Additional details (optional tabs)
     st.divider()
     tab1, tab2, tab3 = st.tabs(["📊 Data Preview", "📈 Charts", "ℹ️ About"])
     
