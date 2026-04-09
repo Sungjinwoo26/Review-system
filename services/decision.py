@@ -95,7 +95,7 @@ Revenue at Risk: **₹{revenue_at_risk:,.0f}**
 Top customer complaints:
 {complaints_text}
 
-Provide a concise executive recommendation (maximum 4 sentences) that covers:
+Provide a concise executive recommendation that covers:
 1. Likely root cause
 2. Specific action (who should do what and by when)
 3. Expected revenue impact if fixed
