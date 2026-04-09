@@ -341,16 +341,19 @@ def apply_scoring_pipeline(df: pd.DataFrame) -> pd.DataFrame:
     # Step 1: Preprocess and validate
     df = preprocess_and_validate(df)
     
-    # Step 2: Calculate recency with 10-day plateau
+    # Step 2: Create is_negative flag EARLY (needed downstream)
+    df['is_negative'] = np.where(df['rating'] <= 2, 1, 0)
+    
+    # Step 3: Calculate recency with 10-day plateau
     df['recency_score'] = calculate_recency_score(df['days_since_purchase'])
     
-    # Step 3: Calculate issue severity (rating + sentiment)
+    # Step 4: Calculate issue severity (rating + sentiment)
     df['issue_severity'] = calculate_issue_severity(df['rating'])
     
-    # Step 4: Compute CIS (Layer 1)
+    # Step 5: Compute CIS (Layer 1)
     df['CIS'] = compute_cis(df)
     
-    # Step 5: Compute impact score (Layer 2) with zero-gate
+    # Step 6: Compute impact score (Layer 2) with zero-gate
     df['impact_score'] = compute_impact_score(df)
     
     # Ensure no NaNs
@@ -369,9 +372,25 @@ def aggregate_to_products(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         Product-level DataFrame with PPS and final scores
     """
-    # Handle missing product column
+    # Ensure product column exists and is valid
     if 'product' not in df.columns:
         df['product'] = 'General'
+    
+    # Clean product column: remove NaN, empty strings, convert to string
+    df['product'] = df['product'].fillna('Unknown').astype(str).str.strip()
+    df = df[df['product'] != '']
+    
+    # Ensure customer_ltv is numeric
+    if 'customer_ltv' not in df.columns:
+        df['customer_ltv'] = 0
+    df['customer_ltv'] = pd.to_numeric(df['customer_ltv'], errors='coerce').fillna(0)
+    
+    # DEBUG: Log data overview
+    print(f"\n[DEBUG] Aggregation Input:")
+    print(f"  - Total reviews: {len(df)}")
+    print(f"  - Unique products: {df['product'].nunique()}")
+    print(f"  - Customer LTV range: {df['customer_ltv'].min()} to {df['customer_ltv'].max()}")
+    print(f"  - Negative reviews (rating <= 2.5): {len(df[df['rating'] <= 2.5])}")
     
     # Group by product
     product_df = df.groupby('product', as_index=False).agg({
@@ -399,8 +418,25 @@ def aggregate_to_products(df: pd.DataFrame) -> pd.DataFrame:
     product_df['negative_ratio'] = product_df['negative_count'] / product_df['total_reviews']
     
     # Calculate revenue at risk per product
-    product_df['revenue_at_risk'] = df[df['rating'] <= 2.5].groupby('product')['customer_ltv'].sum()
-    product_df['revenue_at_risk'] = product_df['revenue_at_risk'].fillna(0)
+    # Use robust filtering: rating <= 2.5 indicates high risk
+    negative_reviews = df[df['rating'] <= 2.5]
+    rev_at_risk = negative_reviews.groupby('product')['customer_ltv'].sum().reset_index()
+    rev_at_risk.columns = ['product', 'total_revenue_at_risk']
+    
+    product_df = product_df.merge(rev_at_risk, on='product', how='left')
+    product_df['total_revenue_at_risk'] = product_df['total_revenue_at_risk'].fillna(0)
+    
+    # DEBUG: Log revenue at risk details
+    print(f"\n[DEBUG] Revenue at Risk Calculation:")
+    print(f"  - Negative reviews selected (rating <= 2.5): {len(negative_reviews)}")
+    print(f"  - Total revenue at risk: ₹{product_df['total_revenue_at_risk'].sum():,.2f}")
+    print(f"  - Revenue by product (top 5):")
+    top_rev = product_df.nlargest(5, 'total_revenue_at_risk')[['product', 'total_revenue_at_risk']]
+    for idx, row in top_rev.iterrows():
+        print(f"    - {row['product']}: ₹{row['total_revenue_at_risk']:,.2f}")
+    
+    # Backward compatibility: create alias for existing code that uses 'revenue_at_risk'
+    product_df['revenue_at_risk'] = product_df['total_revenue_at_risk']
     
     # Compute PPS (Layer 3)
     product_df['PPS'] = compute_pps(product_df)
@@ -411,6 +447,10 @@ def aggregate_to_products(df: pd.DataFrame) -> pd.DataFrame:
     # Sort by final score (descending)
     product_df = product_df.sort_values('final_score', ascending=False).reset_index(drop=True)
     
+    print(f"\n[DEBUG] Aggregation Output:")
+    print(f"  - Products: {len(product_df)}")
+    print(f"  - Avg revenue at risk per product: ₹{product_df['total_revenue_at_risk'].mean():,.2f}")
+    
     return product_df
 
 
@@ -419,9 +459,9 @@ def classify_quadrants(product_df: pd.DataFrame) -> pd.DataFrame:
     Classify products using quadrant analysis based on 75th percentile.
     
     Quadrants:
-        1. "The Fire-Fight": rev_risk > p75 AND neg_ratio > p75 → "Immediate Fix Required"
+        1. "The Fire-Fight": total_revenue_at_risk > p75 AND neg_ratio > p75 → "Immediate Fix Required"
         2. "The VIP Nudge": total_impact > p75 AND neg_ratio < p75 → "High-Value Outreach"
-        3. "The Slow Burn": rev_risk < p75 AND neg_ratio > p75 → "Product Experience Gap"
+        3. "The Slow Burn": total_revenue_at_risk < p75 AND neg_ratio > p75 → "Product Experience Gap"
         4. "The Noise": Everything else → "Monitor / Backlog"
     
     Args:
@@ -430,14 +470,21 @@ def classify_quadrants(product_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         DataFrame with 'quadrant' and 'action' columns
     """
+    # Ensure total_revenue_at_risk column exists (handle backward compatibility)
+    if 'total_revenue_at_risk' not in product_df.columns and 'revenue_at_risk' in product_df.columns:
+        product_df['total_revenue_at_risk'] = product_df['revenue_at_risk']
+    
+    if 'total_revenue_at_risk' not in product_df.columns:
+        product_df['total_revenue_at_risk'] = 0.0
+    
     # Calculate 75th percentiles
-    p75_rev = product_df['revenue_at_risk'].quantile(0.75)
+    p75_rev = product_df['total_revenue_at_risk'].quantile(0.75)
     p75_neg = product_df['negative_ratio'].quantile(0.75)
     p75_impact = product_df['total_impact'].quantile(0.75)
     
     # Classify by quadrant
     def classify(row):
-        rev_risk = row['revenue_at_risk']
+        rev_risk = row['total_revenue_at_risk']
         neg_ratio = row['negative_ratio']
         total_impact = row['total_impact']
         
