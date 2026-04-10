@@ -160,7 +160,6 @@ function bindEvents() {
   document.getElementById("generate-insights").addEventListener("click", () => generateInsights(true));
   document.getElementById("refresh-insights").addEventListener("click", () => generateInsights(false));
   document.getElementById("copy-insights").addEventListener("click", copyInsights);
-  document.getElementById("debug-toggle").addEventListener("click", toggleDebug);
 
   // Data source configuration handlers
   document.getElementById("use-api-btn").addEventListener("click", onUseApi);
@@ -389,9 +388,9 @@ function renderQuadrantChart(products) {
     return;
   }
 
-  const width = target.clientWidth || 420;
-  const height = target.clientHeight || 400;
-  const margin = { top: 24, right: 28, bottom: 48, left: 52 };
+  const width = 500;
+  const height = 320;
+  const margin = { top: 24, right: 24, bottom: 60, left: 56 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
   const xMax = Math.max(...products.map((p) => p.frequency)) * 1.1;
@@ -411,19 +410,56 @@ function renderQuadrantChart(products) {
     `;
   }).join("");
 
+  // X-axis labels
+  const xLabels = [];
+  for (let i = 0; i <= 4; i++) {
+    const value = (xMax / 4) * i;
+    const x = margin.left + (i * chartWidth / 4);
+    xLabels.push(`<text x="${x}" y="${height - 42}" text-anchor="middle" fill="#A3A3A3" font-size="11">${Math.round(value)}</text>`);
+  }
+
+  // Y-axis labels
+  const yLabels = [];
+  for (let i = 0; i <= 4; i++) {
+    const value = (yMax / 4) * i;
+    const y = margin.top + chartHeight - (i * chartHeight / 4);
+    yLabels.push(`<text x="${margin.left - 12}" y="${y + 4}" text-anchor="end" fill="#A3A3A3" font-size="11">${Math.round(value)}</text>`);
+  }
+
+  // Quadrant labels positioned safely within quadrants
+  const quadrantLabels = [
+    { x: margin.left + chartWidth * 0.75, y: margin.top + 20, text: "Fire Fight", opacity: 0.7 },
+    { x: margin.left + 12, y: margin.top + 20, text: "VIP Nudge", opacity: 0.7 },
+    { x: margin.left + chartWidth * 0.75, y: height - margin.bottom + 12, text: "Slow Burn", opacity: 0.7 },
+    { x: margin.left + 12, y: height - margin.bottom + 12, text: "Noise", opacity: 0.7 }
+  ];
+
   target.innerHTML = `
-    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Impact vs Frequency chart">
+    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Impact vs Frequency chart" preserveAspectRatio="xMidYMid meet">
       <rect x="0" y="0" width="${width}" height="${height}" fill="#FFFFFF"></rect>
-      <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="#DADADA"></line>
-      <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="#DADADA"></line>
-      <line x1="${margin.left + chartWidth / 2}" y1="${margin.top}" x2="${margin.left + chartWidth / 2}" y2="${height - margin.bottom}" stroke="#E7E7E7" stroke-dasharray="4 4"></line>
-      <line x1="${margin.left}" y1="${margin.top + chartHeight / 2}" x2="${width - margin.right}" y2="${margin.top + chartHeight / 2}" stroke="#E7E7E7" stroke-dasharray="4 4"></line>
-      <text x="${width / 2}" y="${height - 12}" text-anchor="middle" fill="#6B6B6B" font-size="12">Frequency / Volume</text>
-      <text x="16" y="${height / 2}" text-anchor="middle" fill="#6B6B6B" font-size="12" transform="rotate(-90 16 ${height / 2})">Impact Score</text>
-      <text x="${margin.left + chartWidth * 0.75}" y="${margin.top + 18}" fill="#A3A3A3" font-size="12">Fire Fight</text>
-      <text x="${margin.left + 12}" y="${margin.top + 18}" fill="#A3A3A3" font-size="12">VIP Nudge</text>
-      <text x="${margin.left + chartWidth * 0.75}" y="${height - margin.bottom - 12}" fill="#A3A3A3" font-size="12">Slow Burn</text>
-      <text x="${margin.left + 12}" y="${height - margin.bottom - 12}" fill="#A3A3A3" font-size="12">Noise</text>
+      
+      <!-- Axes -->
+      <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="#DADADA" stroke-width="1"></line>
+      <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="#DADADA" stroke-width="1"></line>
+      
+      <!-- Quadrant lines -->
+      <line x1="${margin.left + chartWidth / 2}" y1="${margin.top}" x2="${margin.left + chartWidth / 2}" y2="${height - margin.bottom}" stroke="#E7E7E7" stroke-width="1" stroke-dasharray="4 4"></line>
+      <line x1="${margin.left}" y1="${margin.top + chartHeight / 2}" x2="${width - margin.right}" y2="${margin.top + chartHeight / 2}" stroke="#E7E7E7" stroke-width="1" stroke-dasharray="4 4"></line>
+      
+      <!-- Axis labels -->
+      <text x="${width / 2}" y="${height - 8}" text-anchor="middle" fill="#6B6B6B" font-size="12" font-weight="600">Frequency / Volume</text>
+      <text x="20" y="${height / 2}" text-anchor="middle" fill="#6B6B6B" font-size="12" font-weight="600" transform="rotate(-90 20 ${height / 2})">Impact Score</text>
+      
+      <!-- X-axis labels -->
+      ${xLabels.join('')}
+      
+      <!-- Y-axis labels -->
+      ${yLabels.join('')}
+      
+      <!-- Quadrant labels -->
+      ${quadrantLabels.map((label) => `<text x="${label.x}" y="${label.y}" text-anchor="middle" fill="#A3A3A3" font-size="12" opacity="${label.opacity}" font-weight="500">${label.text}</text>`).join('')}
+      
+      <!-- Points -->
       ${points}
     </svg>
     <div class="chart-legend">
@@ -445,34 +481,51 @@ function renderRevenueChart(products) {
     return;
   }
 
-  const width = target.clientWidth || 420;
-  const height = target.clientHeight || 320;
-  const margin = { top: 22, right: 20, bottom: 70, left: 58 };
+  const width = 500;
+  const height = 320;
+  const margin = { top: 24, right: 24, bottom: 80, left: 64 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
   const maxValue = Math.max(...sorted.map((p) => p.revenueAtRisk)) * 1.1;
-  const barWidth = chartWidth / sorted.length * 0.62;
+  const barWidth = Math.max(12, chartWidth / (sorted.length * 1.5));
 
   const bars = sorted.map((product, index) => {
-    const x = margin.left + (index + 0.2) * (chartWidth / sorted.length);
+    const x = margin.left + (index * (chartWidth / sorted.length)) + (chartWidth / sorted.length - barWidth) / 2;
     const barHeight = (product.revenueAtRisk / maxValue) * chartHeight;
     const y = margin.top + chartHeight - barHeight;
     const ratio = product.revenueAtRisk / maxValue;
     const fill = ratio > 0.7 ? "#DC2626" : ratio > 0.45 ? "#EE8B7D" : "#C9D7F2";
     return `
       <g>
-        <rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" rx="8" fill="${fill}" data-tooltip="${escapeHtml(`${product.name}<br>Revenue at risk: ${formatCurrency(product.revenueAtRisk)}`)}"></rect>
-        <text x="${x + barWidth / 2}" y="${height - 28}" text-anchor="middle" fill="#6B6B6B" font-size="11">${truncate(product.name, 10)}</text>
+        <rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" rx="6" fill="${fill}" data-tooltip="${escapeHtml(`${product.name}<br>Revenue at risk: ${formatCurrency(product.revenueAtRisk)}`)}"></rect>
+        <text x="${x + barWidth / 2}" y="${height - 24}" text-anchor="middle" fill="#6B6B6B" font-size="10" font-weight="500">${truncate(product.name, 8)}</text>
       </g>
     `;
   }).join("");
 
+  // Y-axis labels
+  const yLabels = [];
+  for (let i = 0; i <= 4; i++) {
+    const value = (maxValue / 4) * i;
+    const y = margin.top + chartHeight - (i * chartHeight / 4);
+    yLabels.push(`<text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#A3A3A3" font-size="11">${formatCurrency(value)}</text>`);
+  }
+
   target.innerHTML = `
-    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Revenue at Risk bar chart">
-      <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="#DADADA"></line>
-      <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="#DADADA"></line>
-      <text x="18" y="${margin.top + 10}" fill="#6B6B6B" font-size="12">Revenue</text>
+    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Revenue at Risk bar chart" preserveAspectRatio="xMidYMid meet">
+      <!-- Grid lines -->
+      <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="#E5E5E5" stroke-width="1"></line>
+      <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="#E5E5E5" stroke-width="1"></line>
+      
+      <!-- Y-axis labels -->
+      ${yLabels.join('')}
+      
+      <!-- Bars -->
       ${bars}
+      
+      <!-- Axis labels -->
+      <text x="${width / 2}" y="${height - 4}" text-anchor="middle" fill="#6B6B6B" font-size="12" font-weight="600">Products by Revenue at Risk</text>
+      <text x="24" y="${height / 2}" text-anchor="middle" fill="#6B6B6B" font-size="12" font-weight="600" transform="rotate(-90 24 ${height / 2})">Revenue at Risk (₹)</text>
     </svg>
   `;
   bindTooltip(target);
@@ -485,32 +538,62 @@ function renderRatingRiskChart(products) {
     return;
   }
 
-  const width = target.clientWidth || 420;
-  const height = target.clientHeight || 320;
-  const margin = { top: 20, right: 26, bottom: 48, left: 50 };
+  const width = 500;
+  const height = 320;
+  const margin = { top: 24, right: 24, bottom: 64, left: 60 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
 
   const dots = products.map((product) => {
     const x = margin.left + ((product.rating - 2.5) / (4.5 - 2.5)) * chartWidth;
-    const y = margin.top + chartHeight - ((product.riskProbability - 0.3) / (1.0 - 0.3)) * chartHeight;
+    const y = margin.top + chartHeight - ((product.riskProbability - 0.0) / (1.0 - 0.0)) * chartHeight;
     return `
-      <circle cx="${x}" cy="${y}" r="7" fill="${riskColor(product.riskProbability)}" data-tooltip="${escapeHtml(`${product.name}<br>Rating: ${product.rating.toFixed(1)}<br>Risk probability: ${product.riskProbability.toFixed(2)}`)}"></circle>
+      <circle cx="${x}" cy="${y}" r="6" fill="${riskColor(product.riskProbability)}" opacity="0.8" data-tooltip="${escapeHtml(`${product.name}<br>Rating: ${product.rating.toFixed(1)}<br>Risk: ${product.riskProbability.toFixed(2)}`)}"></circle>
     `;
   }).join("");
 
+  // X-axis labels (ratings)
+  const xLabels = [];
+  for (let rating = 2.5; rating <= 4.5; rating += 0.5) {
+    const x = margin.left + ((rating - 2.5) / 2.0) * chartWidth;
+    xLabels.push(`<text x="${x}" y="${height - 44}" text-anchor="middle" fill="#A3A3A3" font-size="11">${rating.toFixed(1)}</text>`);
+  }
+
+  // Y-axis labels (risk probability)
+  const yLabels = [];
+  for (let i = 0; i <= 5; i++) {
+    const risk = i * 0.2;
+    const y = margin.top + chartHeight - (i * chartHeight / 5);
+    yLabels.push(`<text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#A3A3A3" font-size="11">${risk.toFixed(1)}</text>`);
+  }
+
   target.innerHTML = `
-    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Rating vs Risk scatter plot">
-      <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="#DADADA"></line>
-      <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="#DADADA"></line>
-      <text x="${width / 2}" y="${height - 10}" text-anchor="middle" fill="#6B6B6B" font-size="12">Average Rating</text>
-      <text x="18" y="${height / 2}" text-anchor="middle" fill="#6B6B6B" font-size="12" transform="rotate(-90 18 ${height / 2})">Risk Probability</text>
+    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Rating vs Risk scatter plot" preserveAspectRatio="xMidYMid meet">
+      <!-- Grid lines -->
+      <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="#E5E5E5" stroke-width="1"></line>
+      <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="#E5E5E5" stroke-width="1"></line>
+      
+      <!-- Quadrant lines -->
+      <line x1="${margin.left + (3.5 - 2.5) / 2.0 * chartWidth}" y1="${margin.top}" x2="${margin.left + (3.5 - 2.5) / 2.0 * chartWidth}" y2="${height - margin.bottom}" stroke="#F0F0F0" stroke-dasharray="4,4" stroke-width="1"></line>
+      <line x1="${margin.left}" y1="${margin.top + chartHeight / 2}" x2="${width - margin.right}" y2="${margin.top + chartHeight / 2}" stroke="#F0F0F0" stroke-dasharray="4,4" stroke-width="1"></line>
+      
+      <!-- Y-axis labels -->
+      ${yLabels.join('')}
+      
+      <!-- X-axis labels -->
+      ${xLabels.join('')}
+      
+      <!-- Dots -->
       ${dots}
+      
+      <!-- Axis labels -->
+      <text x="${width / 2}" y="${height - 4}" text-anchor="middle" fill="#6B6B6B" font-size="12" font-weight="600">Customer Rating (Stars)</text>
+      <text x="24" y="${height / 2}" text-anchor="middle" fill="#6B6B6B" font-size="12" font-weight="600" transform="rotate(-90 24 ${height / 2})">Risk Probability</text>
     </svg>
     <div class="chart-legend">
-      <span><i style="background:#16A34A"></i>Low</span>
-      <span><i style="background:#F59E0B"></i>Medium</span>
-      <span><i style="background:#DC2626"></i>High</span>
+      <span><i style="background:#16A34A"></i>Low Risk</span>
+      <span><i style="background:#F59E0B"></i>Medium Risk</span>
+      <span><i style="background:#DC2626"></i>High Risk</span>
     </div>
   `;
   bindTooltip(target);
@@ -524,44 +607,62 @@ function renderIssuesChart(products) {
   }
 
   const categories = [
-    { key: "delivery", color: "#8CAEEB", label: "Delivery" },
-    { key: "quality", color: "#B6C7E8", label: "Quality" },
-    { key: "packaging", color: "#D7C28A", label: "Packaging" },
-    { key: "support", color: "#D8D8D8", label: "Support" }
+    { key: "delivery", color: "#60A5FA", label: "Delivery" },
+    { key: "quality", color: "#34D399", label: "Quality" },
+    { key: "packaging", color: "#FBBF24", label: "Packaging" },
+    { key: "support", color: "#F87171", label: "Support" }
   ];
 
-  const width = target.clientWidth || 420;
-  const height = target.clientHeight || 320;
-  const margin = { top: 20, right: 20, bottom: 70, left: 52 };
+  const width = 500;
+  const height = 320;
+  const margin = { top: 24, right: 24, bottom: 80, left: 60 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
   const totals = products.map((product) => Object.values(product.issues).reduce((sum, value) => sum + value, 0));
-  const maxValue = Math.max(...totals) * 1.1;
-  const barWidth = chartWidth / products.length * 0.62;
+  const maxValue = Math.max(...totals, 1) * 1.1;
+  const barWidth = Math.max(10, chartWidth / (products.length * 1.5));
 
   const stacks = products.map((product, index) => {
-    const x = margin.left + (index + 0.2) * (chartWidth / products.length);
+    const x = margin.left + (index * (chartWidth / products.length)) + (chartWidth / products.length - barWidth) / 2;
     let currentY = margin.top + chartHeight;
     const segments = categories.map((category) => {
       const value = product.issues[category.key];
       const segmentHeight = (value / maxValue) * chartHeight;
       currentY -= segmentHeight;
-      return `<rect x="${x}" y="${currentY}" width="${barWidth}" height="${segmentHeight}" fill="${category.color}" data-tooltip="${escapeHtml(`${product.name}<br>${category.label}: ${value}`)}"></rect>`;
+      return `<rect x="${x}" y="${currentY}" width="${barWidth}" height="${segmentHeight}" fill="${category.color}" data-tooltip="${escapeHtml(`${product.name}<br>${category.label}: ${value} issues`)}"></rect>`;
     }).join("");
 
     return `
       <g>
         ${segments}
-        <text x="${x + barWidth / 2}" y="${height - 28}" text-anchor="middle" fill="#6B6B6B" font-size="11">${truncate(product.name, 10)}</text>
+        <text x="${x + barWidth / 2}" y="${height - 24}" text-anchor="middle" fill="#6B6B6B" font-size="10" font-weight="500">${truncate(product.name, 8)}</text>
       </g>
     `;
   }).join("");
 
+  // Y-axis labels
+  const yLabels = [];
+  for (let i = 0; i <= 4; i++) {
+    const value = (maxValue / 4) * i;
+    const y = margin.top + chartHeight - (i * chartHeight / 4);
+    yLabels.push(`<text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#A3A3A3" font-size="11">${Math.round(value)}</text>`);
+  }
+
   target.innerHTML = `
-    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Top Issues Breakdown stacked bar chart">
-      <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="#DADADA"></line>
-      <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="#DADADA"></line>
+    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Top Issues Breakdown stacked bar chart" preserveAspectRatio="xMidYMid meet">
+      <!-- Grid lines -->
+      <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="#E5E5E5" stroke-width="1"></line>
+      <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="#E5E5E5" stroke-width="1"></line>
+      
+      <!-- Y-axis labels -->
+      ${yLabels.join('')}
+      
+      <!-- Stacked bars -->
       ${stacks}
+      
+      <!-- Axis labels -->
+      <text x="${width / 2}" y="${height - 4}" text-anchor="middle" fill="#6B6B6B" font-size="12" font-weight="600">Products</text>
+      <text x="24" y="${height / 2}" text-anchor="middle" fill="#6B6B6B" font-size="12" font-weight="600" transform="rotate(-90 24 ${height / 2})">Issue Count</text>
     </svg>
     <div class="chart-legend">
       ${categories.map((category) => `<span><i style="background:${category.color}"></i>${category.label}</span>`).join("")}
@@ -586,42 +687,52 @@ function renderRiskShareChart(products) {
   const slices = [
     { key: "High", color: "#DC2626", value: counts.High },
     { key: "Medium", color: "#F59E0B", value: counts.Medium },
-    { key: "Low", color: "#16A34A", value: counts.Low }
+    { key: "Low", color: "#10B981", value: counts.Low }
   ];
 
   let angle = -Math.PI / 2;
-  const radius = 96;
-  const innerRadius = 58;
-  const centerX = 150;
-  const centerY = 150;
+  const radius = 90;
+  const innerRadius = 55;
+  const centerX = 180;
+  const centerY = 160;
+  const viewBoxWidth = 360;
+  const viewBoxHeight = 320;
 
   const paths = slices.map((slice) => {
     const portion = total ? slice.value / total : 0;
+    if (portion === 0) return "";
     const endAngle = angle + portion * Math.PI * 2;
     const path = donutArc(centerX, centerY, radius, innerRadius, angle, endAngle);
     const midAngle = angle + (endAngle - angle) / 2;
-    const labelX = centerX + Math.cos(midAngle) * 76;
-    const labelY = centerY + Math.sin(midAngle) * 76;
+    const labelRadius = (radius + innerRadius) / 2;
+    const labelX = centerX + Math.cos(midAngle) * labelRadius;
+    const labelY = centerY + Math.sin(midAngle) * labelRadius;
     const label = `${Math.round(portion * 100)}%`;
     const markup = `
-      <path d="${path}" fill="${slice.color}" data-tooltip="${escapeHtml(`${slice.key} Risk<br>${slice.value} products<br>${label}`)}"></path>
-      ${slice.value ? `<text x="${labelX}" y="${labelY}" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">${label}</text>` : ""}
+      <path d="${path}" fill="${slice.color}" stroke="#FFFFFF" stroke-width="2" data-tooltip="${escapeHtml(`${slice.key} Risk<br>${slice.value} products (${label})`)}" ></path>
+      ${slice.value ? `<text x="${labelX}" y="${labelY}" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">${label}</text>` : ""}
     `;
     angle = endAngle;
     return markup;
   }).join("");
 
   target.innerHTML = `
-    <svg viewBox="0 0 300 300" role="img" aria-label="High Risk Share donut chart">
+    <svg viewBox="0 0 ${viewBoxWidth} ${viewBoxHeight}" role="img" aria-label="Risk Distribution donut chart" preserveAspectRatio="xMidYMid meet">
+      <!-- Donut segments -->
       ${paths}
-      <circle cx="${centerX}" cy="${centerY}" r="${innerRadius - 1}" fill="#FFFFFF"></circle>
-      <text x="${centerX}" y="${centerY - 4}" text-anchor="middle" fill="#1F1F1F" font-size="14" font-weight="700">${total}</text>
-      <text x="${centerX}" y="${centerY + 16}" text-anchor="middle" fill="#6B6B6B" font-size="11">Products</text>
+      
+      <!-- Center circle -->
+      <circle cx="${centerX}" cy="${centerY}" r="${innerRadius - 2}" fill="#FFFFFF" stroke="#F3F3F2" stroke-width="2"></circle>
+      
+      <!-- Center text -->
+      <text x="${centerX}" y="${centerY - 8}" text-anchor="middle" fill="#1F1F1F" font-size="22" font-weight="700">${total}</text>
+      <text x="${centerX}" y="${centerY + 14}" text-anchor="middle" fill="#6B6B6B" font-size="12">Products</text>
+      
+      <!-- Title -->
+      <text x="${centerX}" y="30" text-anchor="middle" fill="#1F1F1F" font-size="14" font-weight="600">Risk by Severity</text>
     </svg>
     <div class="chart-legend">
-      <span><i style="background:#DC2626"></i>High Risk</span>
-      <span><i style="background:#F59E0B"></i>Medium Risk</span>
-      <span><i style="background:#16A34A"></i>Low Risk</span>
+      ${slices.map((s) => `<span><i style="background:${s.color}"></i>${s.key} (${s.value})</span>`).join("")}
     </div>
   `;
   bindTooltip(target);
@@ -715,14 +826,8 @@ function copyInsights() {
   onCopied();
 }
 
-function toggleDebug() {
-  const panel = document.getElementById("debug-panel");
-  const button = document.getElementById("debug-toggle");
-  const hidden = panel.classList.toggle("hidden");
-  button.textContent = hidden ? "Show Debug Panel" : "Hide Debug Panel";
-}
-
 function renderDebug(products) {
+  // Debug function kept for potential future use but inactive
   const allProducts = PRODUCTS;
   const featureShape = { 
     rows: products.length, 

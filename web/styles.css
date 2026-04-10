@@ -321,9 +321,15 @@ h3 {
 .preview-kpis,
 .preview-card-grid,
 .kpi-grid,
-.chart-grid,
 .debug-grid {
   display: grid;
+  gap: 16px;
+}
+
+.chart-grid,
+.lower-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -814,17 +820,22 @@ tbody tr.row-selected {
 
 .chart-surface {
   min-height: 400px;
+  height: 400px;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .chart-surface.compact {
   min-height: 320px;
+  height: 320px;
 }
 
 .chart-surface svg {
   width: 100%;
   height: 100%;
   display: block;
+  overflow: visible;
 }
 
 .chart-legend {
@@ -961,36 +972,37 @@ pre {
 
 .data-source-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
 }
 
 .data-source-option {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 18px;
+  padding: 12px;
   background: #fbfbfb;
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .data-source-option h4 {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin: 0;
 }
 
 .data-source-option p {
   color: var(--text-secondary);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   margin: 0;
+  line-height: 1.3;
 }
 
 .api-input-group,
 .file-upload-group {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-top: 8px;
   max-width: 100%;
   flex-wrap: wrap;
 }
@@ -1035,10 +1047,21 @@ pre {
 /* ML INSIGHTS TABLE */
 .ml-insights-card {
   margin: 20px 0;
+  padding: 16px;
 }
 
 .ml-insights-card .table-wrap {
   max-height: 400px;
+  overflow-y: auto;
+}
+
+.ml-insights-card table {
+  font-size: 0.9rem;
+}
+
+.ml-insights-card th,
+.ml-insights-card td {
+  padding: 8px 12px;
 }
 
 /* CHART PANEL ENHANCEMENTS */
@@ -1069,8 +1092,8 @@ pre {
   display: flex;
   gap: 12px;
   align-items: flex-end;
-  margin-bottom: 20px;
-  padding: 16px;
+  margin-bottom: 12px;
+  padding: 12px;
   background: #fbfbfb;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -1154,14 +1177,14 @@ pre {
 .product-insight-display {
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 12px;
   background: var(--card);
   margin-top: 16px;
 }
 
 .product-insight-loading,
 .product-insight-error {
-  padding: 16px;
+  padding: 12px;
   border-radius: var(--radius-sm);
   text-align: center;
   font-size: 0.95rem;
@@ -1178,7 +1201,7 @@ pre {
 }
 
 .product-insight-text {
-  padding: 16px 0;
+  padding: 8px 0;
 }
 
 .insight-detail h4 {
