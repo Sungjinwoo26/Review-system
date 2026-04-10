@@ -16,7 +16,7 @@ from utils.cache import get_cache
 from utils.logger import log_event, log_warning
 
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
-GROQ_MODEL = "qwen/qwen3-32b"
+GROQ_MODEL = "mixtral-8x7b-32768"
 
 
 def _safe_float(value: Any) -> float:
@@ -79,15 +79,20 @@ def _fallback_insight(payload: Dict[str, Any]) -> Dict[str, str]:
 def _call_groq(payload: Dict[str, Any], api_key: str) -> Dict[str, str]:
     """Call Groq using aggregated product metrics only."""
     system_prompt = (
-        "You are a product analytics assistant. "
-        "Use only the provided aggregated metrics. "
-        "Do not infer from raw reviews, customer text, or hidden data. "
-        "Return only valid JSON with keys summary, driver, recommendation."
+        "You are a product analytics expert. Your task is to analyze aggregated product metrics "
+        "and provide concise, actionable insights. Use only the provided metrics. "
+        "Do not infer from raw reviews or hidden data. "
+        "Return a valid JSON response with three keys: 'summary', 'driver', 'recommendation'. "
+        "- 'summary': A 1-2 sentence executive summary of the product's current status and risk level "
+        "- 'driver': The primary factor (metric) driving the identified risk "
+        "- 'recommendation': A specific, actionable next step to address the key issue"
     )
 
     user_prompt = (
-        "Analyze this product using aggregated metrics only and return JSON.\n"
-        f"{json.dumps(payload, ensure_ascii=True)}"
+        "Based on the following aggregated product metrics, generate a comprehensive summary, "
+        "identify the key driver of risk, and provide a specific recommendation. "
+        "Return your response as valid JSON.\n\n"
+        f"{json.dumps(payload, ensure_ascii=True, indent=2)}"
     )
 
     response = requests.post(

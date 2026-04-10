@@ -570,7 +570,7 @@ h3 {
 
 .filter-grid {
   display: grid;
-  grid-template-columns: 1.25fr repeat(3, minmax(0, 0.7fr)) minmax(240px, 1fr) auto;
+  grid-template-columns: 1.2fr 1.2fr 0.8fr 1fr auto;
   gap: 16px;
   align-items: end;
   margin-top: 18px;
@@ -621,8 +621,110 @@ h3 {
   gap: 10px;
 }
 
+/* Product Filter Checkboxes */
+.product-filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-filter-container .button-small {
+  align-self: flex-start;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  min-height: auto;
+}
+
+.product-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.product-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 6px 4px;
+}
+
+.product-checkbox input[type="checkbox"] {
+  cursor: pointer;
+  min-width: 18px;
+  min-height: 18px;
+}
+
+.product-checkbox span {
+  flex: 1;
+}
+
+/* Date Row - Two columns on one line */
+.date-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.date-field label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.date-field label span {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.date-field input {
+  min-height: 44px;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 12px;
+  padding: 0 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.date-field input:focus {
+  border-color: rgba(59, 130, 246, 0.7);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.button-small {
+  padding: 10px 16px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 140ms ease;
+}
+
+.button-small:hover {
+  background: #2563EB;
+}
+
 .kpi-grid {
+  display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
   margin: 20px 0;
 }
 
@@ -852,7 +954,363 @@ pre {
   transition: opacity 180ms ease;
 }
 
+/* DATA SOURCE CONFIGURATION */
+.data-source-card {
+  margin-bottom: 20px;
+}
+
+.data-source-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.data-source-option {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  background: #fbfbfb;
+  display: grid;
+  gap: 10px;
+}
+
+.data-source-option h4 {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.data-source-option p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+.api-input-group,
+.file-upload-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.api-input-group input {
+  flex: 1;
+  min-width: 180px;
+  min-height: 40px;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-upload-group input {
+  flex: 1;
+  min-width: 180px;
+  max-width: 100%;
+}
+
+.file-name-display {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  padding: 8px 0;
+  word-break: break-all;
+}
+
+/* FILTER BAR IMPROVEMENTS */
+.filter-grid {
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
+  gap: 12px;
+}
+
+.filter-card-head h3 {
+  margin-bottom: 0;
+}
+
+/* ML INSIGHTS TABLE */
+.ml-insights-card {
+  margin: 20px 0;
+}
+
+.ml-insights-card .table-wrap {
+  max-height: 400px;
+}
+
+/* CHART PANEL ENHANCEMENTS */
+.chart-panel-full {
+  margin: 20px 0;
+}
+
+/* PRODUCT CARDS SECTION */
+.product-cards-section {
+  margin: 20px 0;
+}
+
+.section-head {
+  margin-bottom: 16px;
+}
+
+.section-head h3 {
+  margin-bottom: 4px;
+}
+
+.section-head p {
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+  margin: 0;
+}
+
+.product-cards-controls {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #fbfbfb;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.product-cards-controls .field {
+  flex: 0 1 220px;
+  gap: 6px;
+}
+
+.product-cards-controls .field span {
+  font-size: 0.88rem;
+}
+
+.product-cards-controls .field select {
+  min-height: 40px;
+  font-size: 0.92rem;
+}
+
+.product-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.product-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: var(--card);
+  display: grid;
+  gap: 10px;
+}
+
+.product-card h4 {
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.product-card .metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  padding: 6px 0;
+}
+
+.product-card .metric-label {
+  color: var(--text-secondary);
+}
+
+.product-card .metric-value {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.product-card .insight-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.product-card.priority-high {
+  border-left: 4px solid var(--red);
+}
+
+.product-card.priority-medium {
+  border-left: 4px solid var(--amber);
+}
+
+.product-card.priority-low {
+  border-left: 4px solid var(--green);
+}
+
+/* PRODUCT INSIGHT DISPLAY */
+.product-insight-display {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  background: var(--card);
+  margin-top: 16px;
+}
+
+.product-insight-loading,
+.product-insight-error {
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.product-insight-loading {
+  background: #E3F2FD;
+  color: #0D47A1;
+}
+
+.product-insight-error {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+.product-insight-text {
+  padding: 16px 0;
+}
+
+.insight-detail h4 {
+  margin: 0 0 12px 0;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.insight-section {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.insight-section:last-of-type {
+  border-bottom: none;
+}
+
+.insight-section strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.insight-section p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.insight-source {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* FIELD INLINE FOR PRODUCT SELECTOR */
+.field-inline {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex: 0 1 280px;
+}
+
+.field-inline span {
+  white-space: nowrap;
+  font-size: 0.88rem;
+}
+
+.field-inline select {
+  flex: 1;
+  min-height: 40px;
+  font-size: 0.92rem;
+}
+
 @media (max-width: 1180px) {
+  .data-source-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .data-source-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-cards-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-cards-controls .field {
+    flex: 1;
+  }
+
+  .product-cards-controls .field select,
+  .product-cards-controls .button {
+    width: 100%;
+  }
+
+  .product-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-grid .field-wide,
+  .filter-grid .field-slider,
+  .filter-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 620px) {
+  .data-source-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-cards-controls {
+    flex-direction: column;
+  }
+
+  .product-cards-controls .field {
+    flex: 1;
+  }
+
+  .product-cards-controls .button {
+    width: 100%;
+  }
+}
+
+
   .hero-grid,
   .preview-main-grid,
   .main-grid,

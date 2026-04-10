@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | ReviewIntel</title>
+  <meta name="description" content="ReviewIntel Dashboard - Review Intelligence Engine">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="container nav-row">
+        <a class="brand" href="index.html">ReviewIntel</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+        <nav class="nav-menu" id="nav-menu" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="button button-secondary" href="index.html">Back to Home</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="section dashboard-section" id="dashboard-section">
+        <div class="container">
+          <div class="dashboard-head">
+            <div>
+              <h2>Review Intelligence Engine</h2>
+              <p>Prioritize issues by business impact</p>
+            </div>
+            <div class="dashboard-head-actions">
+              <span id="last-updated">Last updated: Apr 10, 2026 10:12 IST</span>
+              <button class="button button-secondary" type="button" id="refresh-dashboard">Refresh</button>
+            </div>
+          </div>
+
+          <!-- DATA SOURCE CONFIGURATION SECTION -->
+          <section class="card data-source-card" id="data-source-section">
+            <div class="panel-head">
+              <div>
+                <h3>Data Source Configuration</h3>
+                <p>Choose how you want to load data for analysis</p>
+              </div>
+            </div>
+            <div class="data-source-grid">
+              <div class="data-source-option">
+                <h4>API Key Input</h4>
+                <p>Enter your API key to fetch live data</p>
+                <div class="api-input-group">
+                  <input type="password" id="api-key-input" placeholder="Enter API key..." />
+                  <button class="button button-primary" type="button" id="use-api-btn">Connect API</button>
+                </div>
+              </div>
+              <div class="data-source-option">
+                <h4>Upload File</h4>
+                <p>Upload JSON or CSV file</p>
+                <div class="file-upload-group">
+                  <input type="file" id="file-upload" accept=".json,.csv" />
+                  <span id="file-name" class="file-name-display"></span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- FILTERS SECTION -->
+          <section class="card filter-card" aria-labelledby="filter-heading">
+            <div class="filter-card-head">
+              <h3 id="filter-heading">Filters</h3>
+              <button class="text-link debug-toggle" type="button" id="debug-toggle">Show Debug Info</button>
+            </div>
+            <div class="filter-grid">
+              <div class="field">
+                <span>Product</span>
+                <div class="product-filter-container">
+                  <button class="button button-small" type="button" id="select-all-products">Select All</button>
+                  <div id="product-filter" class="product-checkboxes"></div>
+                </div>
+              </div>
+              <div class="field date-row">
+                <div class="date-field">
+                  <label><span>Start Date</span>
+                  <input id="date-start" type="date"></label>
+                </div>
+                <div class="date-field">
+                  <label><span>End Date</span>
+                  <input id="date-end" type="date"></label>
+                </div>
+              </div>
+              <label class="field field-slider">
+                <span>Risk Threshold <strong id="threshold-value">0.70</strong></span>
+                <input id="risk-threshold" type="range" min="0" max="1" step="0.01" value="0.7">
+                <small style="color: #666; font-size: 11px; margin-top: 4px; display: block;">Shows only products with risk probability ≥ this value</small>
+              </label>
+              <label class="field">
+                <span>Severity Category</span>
+                <select id="severity-filter">
+                  <option value="All">All Categories</option>
+                  <option value="High">High Only</option>
+                  <option value="Medium">Medium Only</option>
+                  <option value="Low">Low Only</option>
+                </select>
+                <small style="color: #666; font-size: 11px; margin-top: 4px; display: block;">Filter by severity classification (High: ≥0.7, Medium: 0.4-0.7, Low: &lt;0.4)</small>
+              </label>
+              <div class="filter-actions">
+                <button class="button button-primary" type="button" id="apply-filters">Apply Filters</button>
+                <button class="button button-secondary" type="button" id="reset-filters">Reset Filters</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- KPI CARDS SECTION -->
+          <section class="kpi-grid" id="kpi-grid" aria-label="KPI cards"></section>
+
+          <!-- PRODUCT TABLE SECTION -->
+          <article class="card table-panel">
+            <div class="panel-head">
+              <div>
+                <h3>Product Prioritization</h3>
+                <p>Sorted view of products by issue exposure and business impact</p>
+              </div>
+              <label class="search-field">
+                <span class="sr-only">Search products</span>
+                <input id="table-search" type="search" placeholder="Search products">
+              </label>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th><button class="sort-button" data-sort="name">Product Name</button></th>
+                    <th><button class="sort-button" data-sort="score">Final Score</button></th>
+                    <th><button class="sort-button" data-sort="revenue">Revenue at Risk</button></th>
+                    <th><button class="sort-button" data-sort="probability">Avg Risk</button></th>
+                    <th><button class="sort-button" data-sort="negative">Negative %</button></th>
+                    <th><button class="sort-button" data-sort="quadrant">Quadrant</button></th>
+                  </tr>
+                </thead>
+                <tbody id="product-table-body"></tbody>
+              </table>
+            </div>
+            <div class="empty-state hidden" id="table-empty">No products match the current filters.</div>
+          </article>
+
+          <!-- QUADRANT CHART - NOW BELOW TABLE -->
+          <article class="card chart-panel chart-panel-full">
+            <div class="panel-head">
+              <div>
+                <h3>Impact vs Frequency</h3>
+                <p>Decision quadrant map: Frequency on X-axis, Impact Score on Y-axis</p>
+              </div>
+            </div>
+            <div id="quadrant-chart" class="chart-surface"></div>
+          </article>
+
+          <!-- ML RISK INSIGHTS TABLE - NEW SECTION -->
+          <article class="card ml-insights-card">
+            <div class="panel-head">
+              <div>
+                <h3>ML Risk Insights</h3>
+                <p>Structured machine learning risk predictions by product</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Avg Risk Probability</th>
+                    <th>Revenue at Risk</th>
+                    <th>High Risk Issues</th>
+                    <th>Risk Classification</th>
+                  </tr>
+                </thead>
+                <tbody id="ml-insights-table-body"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <!-- ADDITIONAL CHARTS ROW 1 -->
+          <section class="chart-grid">
+            <article class="card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Revenue at Risk</h3>
+                  <p>Products ranked by revenue exposure</p>
+                </div>
+              </div>
+              <div id="revenue-chart" class="chart-surface compact"></div>
+            </article>
+
+            <article class="card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Rating vs Risk</h3>
+                  <p>Average rating against risk probability</p>
+                </div>
+              </div>
+              <div id="rating-risk-chart" class="chart-surface compact"></div>
+            </article>
+          </section>
+
+          <!-- ADDITIONAL CHARTS ROW 2 -->
+          <section class="chart-grid lower-chart-grid">
+            <article class="card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Top Issues Breakdown</h3>
+                  <p>Issue volume split across delivery, quality, packaging, and support</p>
+                </div>
+              </div>
+              <div id="issues-chart" class="chart-surface compact"></div>
+            </article>
+
+            <article class="card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>High Risk Share</h3>
+                  <p>Risk category distribution across current products</p>
+                </div>
+              </div>
+              <div id="risk-share-chart" class="chart-surface compact"></div>
+            </article>
+          </section>
+
+          <!-- TOP PRIORITY PRODUCT INSIGHTS SECTION - MOVED ABOVE AI INSIGHTS -->
+          <section class="card product-cards-section">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title-row">
+                  <h3>Top Priority Product Insights</h3>
+                  <span class="powered-label">Powered by Grok</span>
+                </div>
+                <p>AI-powered summary for highest impact products</p>
+              </div>
+            </div>
+            <div class="product-cards-controls">
+              <label class="field field-inline">
+                <span>Select Product</span>
+                <select id="product-select-llm">
+                  <option value="">-- Choose a product --</option>
+                </select>
+              </label>
+              <button class="button button-primary" type="button" id="generate-product-insight">Generate Insight</button>
+            </div>
+            <div class="product-insight-display" id="product-insight-display" style="display:none;">
+              <div class="product-insight-loading hidden" id="product-insight-loading">Generating insight...</div>
+              <div class="product-insight-error hidden" id="product-insight-error"></div>
+              <article class="product-insight-text" id="product-insight-text"></article>
+            </div>
+          </section>
+
+          <!-- AI INSIGHTS SECTION - MOVED BELOW TOP PRIORITY PRODUCT INSIGHTS -->
+          <section class="card insights-panel">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title-row">
+                  <h3>AI Insights</h3>
+                  <span class="powered-label">Powered by Grok</span>
+                </div>
+                <p>Generated executive summary based on current filters</p>
+              </div>
+              <div class="insight-actions">
+                <button class="button button-primary" type="button" id="generate-insights">Generate Insights</button>
+                <button class="button button-secondary" type="button" id="refresh-insights">Refresh</button>
+                <button class="button button-secondary" type="button" id="copy-insights">Copy</button>
+              </div>
+            </div>
+            <div class="insight-body">
+              <div class="insight-loading hidden" id="insight-loading">Generating summary...</div>
+              <div class="insight-error hidden" id="insight-error">⚠️ AI insights unavailable for current filters</div>
+              <article class="insight-copy" id="insight-copy"></article>
+            </div>
+          </section>
+
+
+
+          <!-- DEBUG PANEL -->
+          <section class="card debug-panel hidden" id="debug-panel">
+            <div class="panel-head">
+              <div>
+                <h3>Developer Debug Info</h3>
+                <p>Pipeline inspection and verification</p>
+              </div>
+            </div>
+            <div class="debug-grid">
+              <article>
+                <h4>Feature Shape</h4>
+                <pre id="debug-feature-shape"></pre>
+              </article>
+              <article>
+                <h4>LLM Prompt Preview</h4>
+                <pre id="debug-llm-input"></pre>
+              </article>
+              <article>
+                <h4>Raw LLM Output</h4>
+                <pre id="debug-llm-output"></pre>
+              </article>
+              <article>
+                <h4>Aggregated Data Snapshot</h4>
+                <pre id="debug-data-snapshot"></pre>
+              </article>
+              <article>
+                <h4>Risk Prediction Sample</h4>
+                <pre id="debug-risk-sample"></pre>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-row">
+        <p>ReviewIntel</p>
+        <nav aria-label="Footer">
+          <a href="index.html">Home</a>
+          <a href="index.html#top">Terms</a>
+          <a href="index.html#top">Privacy</a>
+          <a href="index.html#top">Contact</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <div class="tooltip hidden" id="chart-tooltip"></div>
+  <script src="script.js"></script>
+</body>
+</html>

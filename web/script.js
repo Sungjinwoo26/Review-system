@@ -18,6 +18,8 @@ const state = {
   search: "",
   sortKey: "score",
   sortDirection: "desc",
+  dataSource: "Default Dataset",
+  lastUpdated: new Date().toLocaleString(),
   filteredProducts: [...PRODUCTS],
   lastInsight: "",
   lastLlmPrompt: "",
@@ -28,35 +30,55 @@ const tooltip = document.getElementById("chart-tooltip");
 
 document.addEventListener("DOMContentLoaded", () => {
   setupNavigation();
-  hydrateFilters();
-  bindEvents();
-  applyFilters({ withLoading: false });
+  
+  // Only initialize dashboard features if on dashboard page
+  if (document.getElementById("dashboard-section")) {
+    hydrateFilters();
+    bindEvents();
+    
+    // Try to load data from API on page load
+    loadDataFromServer()
+      .then(() => applyFilters({ withLoading: false }))
+      .catch(err => {
+        console.warn("Could not load from server, using local data:", err);
+        applyFilters({ withLoading: false });
+      });
+  }
 });
+
+// Load data from the API server
+async function loadDataFromServer() {
+  try {
+    const res = await fetch('/api/data/current');
+    if (!res.ok) {
+      throw new Error('No data on server');
+    }
+    
+    const data = await res.json();
+    if (data.success && data.products && data.products.length > 0) {
+      console.log("Loaded", data.products.length, "products from server");
+      PRODUCTS.splice(0, PRODUCTS.length, ...data.products);
+      return true;
+    }
+  } catch (err) {
+    console.log("Server has no data yet, will use local defaults");
+  }
+  return false;
+}
 
 function setupNavigation() {
   const toggle = document.querySelector(".nav-toggle");
   const topbar = document.querySelector(".topbar");
-  toggle.addEventListener("click", () => {
-    const open = topbar.classList.toggle("menu-open");
-    toggle.setAttribute("aria-expanded", String(open));
-  });
-
-  document.querySelectorAll("[data-scroll-target]").forEach((button) => {
-    button.addEventListener("click", () => {
-      document.querySelector(button.dataset.scrollTarget)?.scrollIntoView({ behavior: "smooth" });
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const open = topbar.classList.toggle("menu-open");
+      toggle.setAttribute("aria-expanded", String(open));
     });
-  });
+  }
 }
 
 function hydrateFilters() {
-  const productFilter = document.getElementById("product-filter");
-  PRODUCTS.forEach((product) => {
-    const option = document.createElement("option");
-    option.value = product.name;
-    option.textContent = product.name;
-    productFilter.appendChild(option);
-  });
-
+  refreshProductFilter();
   document.getElementById("date-start").value = state.startDate;
   document.getElementById("date-end").value = state.endDate;
   document.getElementById("severity-filter").value = state.severity;
@@ -64,9 +86,54 @@ function hydrateFilters() {
   document.getElementById("threshold-value").textContent = state.threshold.toFixed(2);
 }
 
+// Refresh product filter from current PRODUCTS array
+function refreshProductFilter() {
+  const productFilterContainer = document.getElementById("product-filter");
+  const selectedValues = state.selectedProducts || [];
+  productFilterContainer.innerHTML = ""; // Clear existing checkboxes
+  
+  if (PRODUCTS.length === 0) {
+    const emptyDiv = document.createElement("div");
+    emptyDiv.textContent = "No products available";
+    emptyDiv.style.color = "#666";
+    productFilterContainer.appendChild(emptyDiv);
+    return;
+  }
+  
+  PRODUCTS.forEach((product) => {
+    const label = document.createElement("label");
+    label.className = "product-checkbox";
+    
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = product.name;
+    checkbox.checked = selectedValues.includes(product.name);
+    
+    const span = document.createElement("span");
+    span.textContent = product.name;
+    
+    label.appendChild(checkbox);
+    label.appendChild(span);
+    productFilterContainer.appendChild(label);
+  });
+}
+
 function bindEvents() {
   document.getElementById("risk-threshold").addEventListener("input", (event) => {
     document.getElementById("threshold-value").textContent = Number(event.target.value).toFixed(2);
+    applyFilters({ withLoading: true });
+  });
+
+  document.getElementById("severity-filter").addEventListener("change", () => {
+    applyFilters({ withLoading: true });
+  });
+
+  document.getElementById("date-start").addEventListener("change", () => {
+    applyFilters({ withLoading: true });
+  });
+
+  document.getElementById("date-end").addEventListener("change", () => {
+    applyFilters({ withLoading: true });
   });
 
   document.getElementById("apply-filters").addEventListener("click", () => applyFilters({ withLoading: true }));
@@ -94,6 +161,26 @@ function bindEvents() {
   document.getElementById("refresh-insights").addEventListener("click", () => generateInsights(false));
   document.getElementById("copy-insights").addEventListener("click", copyInsights);
   document.getElementById("debug-toggle").addEventListener("click", toggleDebug);
+
+  // Data source configuration handlers
+  document.getElementById("use-api-btn").addEventListener("click", onUseApi);
+  document.getElementById("file-upload").addEventListener("change", onFileUpload);
+
+  // Product cards handlers
+  populateProductSelector();
+  document.getElementById("generate-product-insight").addEventListener("click", onGenerateProductInsight);
+
+  // Select All products button handler
+  const selectAllBtn = document.getElementById("select-all-products");
+  if (selectAllBtn) {
+    selectAllBtn.addEventListener("click", () => {
+      const checkboxes = document.querySelectorAll("#product-filter input[type='checkbox']");
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = !allChecked;
+      });
+    });
+  }
 }
 
 function resetFilters() {
@@ -104,9 +191,9 @@ function resetFilters() {
   state.threshold = 0.7;
   state.search = "";
 
-  const productFilter = document.getElementById("product-filter");
-  Array.from(productFilter.options).forEach((option) => {
-    option.selected = false;
+  const productCheckboxes = document.querySelectorAll("#product-filter input[type='checkbox']");
+  productCheckboxes.forEach((checkbox) => {
+    checkbox.checked = false;
   });
 
   document.getElementById("date-start").value = state.startDate;
@@ -120,7 +207,7 @@ function resetFilters() {
 }
 
 function readFilterInputs() {
-  const selectedProducts = Array.from(document.getElementById("product-filter").selectedOptions).map((option) => option.value);
+  const selectedProducts = Array.from(document.querySelectorAll("#product-filter input[type='checkbox']:checked")).map((checkbox) => checkbox.value);
   state.selectedProducts = selectedProducts;
   state.startDate = document.getElementById("date-start").value;
   state.endDate = document.getElementById("date-end").value;
@@ -132,14 +219,42 @@ function applyFilters({ withLoading, refreshTimestamp = false }) {
   readFilterInputs();
 
   const run = () => {
-    state.filteredProducts = PRODUCTS.filter((product) => {
+    console.log("=== applyFilters.run() ===");
+    console.log("PRODUCTS count:", PRODUCTS.length);
+    console.log("Filter state:", {
+      selectedProducts: state.selectedProducts.length,
+      dateRange: `${state.startDate} to ${state.endDate}`,
+      severity: state.severity,
+      threshold: state.threshold
+    });
+    
+    state.filteredProducts = PRODUCTS.filter((product, idx) => {
       const matchesProduct = !state.selectedProducts.length || state.selectedProducts.includes(product.name);
       const matchesDate = product.date >= state.startDate && product.date <= state.endDate;
       const matchesSeverity = state.severity === "All" || product.severity === state.severity;
       const matchesThreshold = product.riskProbability >= state.threshold;
-      return matchesProduct && matchesDate && matchesSeverity && matchesThreshold;
+      
+      const passes = matchesProduct && matchesDate && matchesSeverity && matchesThreshold;
+      
+      if (idx < 3) { // Log first 3 for debugging
+        console.log(`  ${product.name}: 
+          product=${matchesProduct}, 
+          date=${matchesDate} (${product.date}), 
+          severity=${matchesSeverity} (${product.severity} vs ${state.severity}), 
+          threshold=${matchesThreshold} (${product.riskProbability.toFixed(2)} >= ${state.threshold.toFixed(2)})
+          → PASS=${passes}`);
+      }
+      
+      return passes;
     });
-
+    
+    console.log("Filter result: ", state.filteredProducts.length, "products matched");
+    console.log("Severity breakdown after filters:", {
+      High: state.filteredProducts.filter(p => p.severity === "High").length,
+      Medium: state.filteredProducts.filter(p => p.severity === "Medium").length,
+      Low: state.filteredProducts.filter(p => p.severity === "Low").length
+    });
+    console.log("=== END applyFilters ===");
     renderAll();
     if (refreshTimestamp) {
       updateTimestamp();
@@ -160,16 +275,35 @@ function applyFilters({ withLoading, refreshTimestamp = false }) {
 }
 
 function renderAll() {
-  const products = state.filteredProducts;
-  renderKpis(products);
-  renderTable(products);
-  renderQuadrantChart(products);
-  renderRevenueChart(products);
-  renderRatingRiskChart(products);
-  renderIssuesChart(products);
-  renderRiskShareChart(products);
-  renderDebug(products);
-  generateInsights(false, true);
+  console.log("=== renderAll called ===");
+  console.log("PRODUCTS:", PRODUCTS.length, "products");
+  console.log("filteredProducts:", state.filteredProducts.length, "products");
+  
+  try {
+    const products = state.filteredProducts;
+    console.log("Rendering KPIs...");
+    renderKpis(products);
+    console.log("Rendering Table...");
+    renderTable(products);
+    console.log("Rendering Quadrant Chart...");
+    renderQuadrantChart(products);
+    console.log("Rendering ML Insights...");
+    renderMlInsightsTable(products);
+    console.log("Rendering Product Cards...");
+    renderProductCards(products);
+    console.log("Rendering Charts...");
+    renderRevenueChart(products);
+    renderRatingRiskChart(products);
+    renderIssuesChart(products);
+    renderRiskShareChart(products);
+    console.log("Rendering Debug...");
+    renderDebug(products);
+    console.log("Generating Insights...");
+    generateInsights(false, true);
+    console.log("=== renderAll complete ===");
+  } catch (err) {
+    console.error("Error in renderAll:", err);
+  }
 }
 
 function renderKpis(products) {
@@ -194,6 +328,25 @@ function renderKpis(products) {
       <span>${card.note}</span>
     </article>
   `).join("");
+
+  // DEBUG: Log filter state and results
+  console.log("=== KPI RENDERING DEBUG ===");
+  console.log("Total products in result set:", products.length);
+  console.log("Active filters:", {
+    riskThreshold: state.threshold,
+    severityCategory: state.severity,
+    dateRange: `${state.startDate} to ${state.endDate}`,
+    selectedProducts: state.selectedProducts.length
+  });
+  console.log("Severity distribution:", {
+    High: products.filter(p => p.severity === "High").length,
+    Medium: products.filter(p => p.severity === "Medium").length,
+    Low: products.filter(p => p.severity === "Low").length
+  });
+  console.log("Risk probability range:", {
+    min: Math.min(...products.map(p => p.riskProbability)),
+    max: Math.max(...products.map(p => p.riskProbability))
+  });
 }
 
 function renderTable(products) {
@@ -570,15 +723,492 @@ function toggleDebug() {
 }
 
 function renderDebug(products) {
-  const featureShape = { rows: products.length, columns: 12, activeThreshold: state.threshold.toFixed(2), selectedSeverity: state.severity };
-  const sample = products[0] ? { product: products[0].name, predictedRisk: products[0].riskProbability, severity: products[0].severity, finalScore: products[0].finalScore } : { product: null };
-  const snapshot = products.slice(0, 3).map((item) => ({ name: item.name, revenueAtRisk: item.revenueAtRisk, quadrant: item.quadrant }));
+  const allProducts = PRODUCTS;
+  const featureShape = { 
+    rows: products.length, 
+    columns: 12, 
+    totalAvailable: allProducts.length,
+    activeThreshold: state.threshold.toFixed(2), 
+    selectedSeverity: state.severity,
+    dataSource: state.dataSource || 'Not set',
+    lastUpdated: state.lastUpdated || 'Never'
+  };
 
-  document.getElementById("debug-feature-shape").textContent = JSON.stringify(featureShape, null, 2);
-  document.getElementById("debug-risk-sample").textContent = JSON.stringify(sample, null, 2);
-  document.getElementById("debug-data-snapshot").textContent = JSON.stringify(snapshot, null, 2);
-  document.getElementById("debug-llm-input").textContent = state.lastLlmPrompt || "Waiting for insight generation...";
-  document.getElementById("debug-llm-output").textContent = state.lastLlmOutput || "No LLM output yet.";
+  // Filter state details
+  const filterDetails = {
+    riskThreshold: {
+      mode: "INCLUSIVE",
+      description: `Shows products where riskProbability >= ${state.threshold}`,
+      value: state.threshold
+    },
+    severityCategory: {
+      mode: state.severity === "All" ? "DISABLED" : "INCLUSIVE",
+      description: state.severity === "All" ? 
+        "All severity categories shown" :
+        `Only ${state.severity} severity products`,
+      value: state.severity
+    },
+    dateRange: {
+      from: state.startDate,
+      to: state.endDate
+    },
+    productSelection: {
+      mode: state.selectedProducts.length === 0 ? "ALL" : "SELECTED",
+      count: state.selectedProducts.length
+    }
+  };
+
+  // Severity distribution in FULL dataset vs filtered
+  const allSeverityDist = {
+    High: allProducts.filter(p => p.severity === "High").length,
+    Medium: allProducts.filter(p => p.severity === "Medium").length,
+    Low: allProducts.filter(p => p.severity === "Low").length
+  };
+
+  const filteredSeverityDist = {
+    High: products.filter(p => p.severity === "High").length,
+    Medium: products.filter(p => p.severity === "Medium").length,
+    Low: products.filter(p => p.severity === "Low").length
+  };
+
+  const riskProbabilityRange = allProducts.length ? {
+    min: Math.min(...allProducts.map(p => p.riskProbability)),
+    max: Math.max(...allProducts.map(p => p.riskProbability)),
+    filtered_min: products.length ? Math.min(...products.map(p => p.riskProbability)) : null,
+    filtered_max: products.length ? Math.max(...products.map(p => p.riskProbability)) : null
+  } : {};
+
+  const sample = products[0] ? { 
+    product: products[0].name, 
+    predictedRisk: products[0].riskProbability, 
+    severity: products[0].severity, 
+    finalScore: products[0].finalScore,
+    revenue: products[0].revenueAtRisk,
+    passedThreshold: products[0].riskProbability >= state.threshold,
+    passedSeverity: state.severity === "All" || products[0].severity === state.severity
+  } : { product: null };
+  
+  const snapshot = products.slice(0, 3).map((item) => ({ 
+    name: item.name, 
+    revenueAtRisk: item.revenueAtRisk, 
+    quadrant: item.quadrant,
+    severity: item.severity,
+    riskProbability: item.riskProbability,
+    score: item.finalScore,
+    passedFilters: {
+      threshold: item.riskProbability >= state.threshold,
+      severity: state.severity === "All" || item.severity === state.severity
+    }
+  }));
+
+  // Safe element updates with null checks
+  const updateElement = (id, content) => {
+    const elem = document.getElementById(id);
+    if (elem) elem.textContent = content;
+  };
+
+  updateElement("debug-feature-shape", JSON.stringify(featureShape, null, 2));
+  updateElement("debug-risk-sample", JSON.stringify({
+    activeFilters: filterDetails,
+    severityDistribution: {
+      all_data: allSeverityDist,
+      after_filters: filteredSeverityDist
+    },
+    riskProbabilityRange: riskProbabilityRange,
+    firstProductAnalysis: sample
+  }, null, 2));
+  updateElement("debug-data-snapshot", JSON.stringify({
+    total_filtered: products.length,
+    total_available: allProducts.length,
+    top_3_products: snapshot
+  }, null, 2));
+  updateElement("debug-llm-input", state.lastLlmPrompt || "Waiting for insight generation...");
+  updateElement("debug-llm-output", state.lastLlmOutput || "No LLM output yet.");
+}
+
+// NEW: Data Source Configuration Handlers
+function onUseDefault() {
+  console.log("Loading default data...");
+  showLoadingSpinner(true);
+  
+  fetch('/api/data/default', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(res => res.json())
+  .then(data => {
+    showLoadingSpinner(false);
+    if (data.success) {
+      console.log("Default data loaded:", data.products.length, "products");
+      PRODUCTS.splice(0, PRODUCTS.length, ...data.products);
+      state.filteredProducts = [...PRODUCTS];
+      state.dataSource = "Default Dataset";
+      state.lastUpdated = new Date().toLocaleString();
+      refreshProductFilter();
+      populateProductSelector();
+      applyFilters({ withLoading: false });
+      showSuccessMessage("✓ Default data loaded successfully");
+    } else {
+      showErrorMessage("Failed to load default data: " + data.error);
+    }
+  })
+  .catch(err => {
+    showLoadingSpinner(false);
+    console.error("Error loading default data:", err);
+    showErrorMessage("Error: " + err.message);
+  });
+}
+
+function onUseApi() {
+  const apiKey = document.getElementById("api-key-input").value.trim();
+  
+  if (!apiKey) {
+    showErrorMessage("Please enter an API key.");
+    return;
+  }
+  
+  console.log("Connecting to API with key:", apiKey.substring(0, 8) + "...");
+  showLoadingSpinner(true);
+  
+  fetch('/api/data/fetch', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      api_key: apiKey,
+      use_default: false
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    showLoadingSpinner(false);
+    if (data.success) {
+      console.log("API data loaded:", data.products.length, "products");
+      PRODUCTS.splice(0, PRODUCTS.length, ...data.products);
+      state.filteredProducts = [...PRODUCTS];
+      state.dataSource = "Mosaic API";
+      state.lastUpdated = new Date().toLocaleString();
+      refreshProductFilter();
+      populateProductSelector();
+      applyFilters({ withLoading: false });
+      showSuccessMessage(`✓ Connected! Loaded ${data.products.length} products`);
+      document.getElementById("api-key-input").value = ""; // Clear input
+    } else {
+      showErrorMessage("API Error: " + data.error);
+    }
+  })
+  .catch(err => {
+    showLoadingSpinner(false);
+    console.error("Error connecting to API:", err);
+    showErrorMessage("Connection failed: " + err.message);
+  });
+}
+
+function onFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  console.log("Uploading file:", file.name);
+  
+  // Validate file type
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (!['csv', 'json'].includes(ext)) {
+    showErrorMessage("Invalid file type. Please upload CSV or JSON.");
+    return;
+  }
+  
+  // Validate file size (50MB max)
+  if (file.size > 50 * 1024 * 1024) {
+    showErrorMessage("File is too large. Max 50MB.");
+    return;
+  }
+  
+  showLoadingSpinner(true);
+  
+  const formData = new FormData();
+  formData.append('file', file);
+  
+  fetch('/api/data/upload', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    showLoadingSpinner(false);
+    console.log("Response from server:", data);
+    if (data.success) {
+      console.log("File processed:", data.products.length, "products");
+      PRODUCTS.splice(0, PRODUCTS.length, ...data.products);
+      state.filteredProducts = [...PRODUCTS];
+      state.dataSource = `File: ${file.name}`;
+      state.lastUpdated = new Date().toLocaleString();
+      refreshProductFilter();
+      populateProductSelector();
+      applyFilters({ withLoading: false });
+      showSuccessMessage(`✓ File uploaded! Processed ${data.products.length} products`);
+      document.getElementById("file-name").textContent = `✓ File loaded: ${file.name}`;
+      event.target.value = ""; // Clear input
+    } else {
+      showErrorMessage("File Error: " + data.error);
+      document.getElementById("file-name").textContent = `✗ Error: ${data.error}`;
+    }
+  })
+  .catch(err => {
+    showLoadingSpinner(false);
+    console.error("Error uploading file:", err);
+    showErrorMessage("Upload failed: " + err.message);
+  });
+}
+
+// UI Feedback Functions
+function showLoadingSpinner(show) {
+  // Add a simple loading indicator
+  let spinner = document.getElementById("global-loading");
+  if (!spinner) {
+    spinner = document.createElement("div");
+    spinner.id = "global-loading";
+    spinner.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 30px 50px;
+      border-radius: 12px;
+      z-index: 1000;
+      font-size: 16px;
+      display: none;
+    `;
+    spinner.textContent = "Loading...";
+    document.body.appendChild(spinner);
+  }
+  spinner.style.display = show ? "block" : "none";
+}
+
+function showSuccessMessage(msg) {
+  console.log("[SUCCESS]", msg);
+  
+  let toast = document.getElementById("toast-message");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast-message";
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #16A34A;
+      color: white;
+      padding: 16px 24px;
+      border-radius: 8px;
+      z-index: 999;
+      font-size: 14px;
+      max-width: 300px;
+    `;
+    document.body.appendChild(toast);
+  }
+  
+  toast.textContent = msg;
+  toast.style.display = "block";
+  toast.style.background = "#16A34A";
+  
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 3000);
+}
+
+function showErrorMessage(msg) {
+  console.error("[ERROR]", msg);
+  
+  let toast = document.getElementById("toast-message");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast-message";
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #DC2626;
+      color: white;
+      padding: 16px 24px;
+      border-radius: 8px;
+      z-index: 999;
+      font-size: 14px;
+      max-width: 300px;
+    `;
+    document.body.appendChild(toast);
+  }
+  
+  toast.textContent = msg;
+  toast.style.display = "block";
+  toast.style.background = "#DC2626";
+  
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 5000);
+}
+
+// NEW: ML Risk Insights Table Rendering
+function renderMlInsightsTable(products) {
+  const body = document.getElementById("ml-insights-table-body");
+  if (!body) return; // Element may not exist on landing page
+
+  if (!products.length) {
+    body.innerHTML = "";
+    return;
+  }
+
+  body.innerHTML = products.map((product) => {
+    const riskClass = product.severity === "High" ? "risk-high" : product.severity === "Medium" ? "risk-medium" : "risk-low";
+    return `
+      <tr>
+        <td><strong>${escapeHtml(product.name)}</strong></td>
+        <td>${product.riskProbability.toFixed(2)}</td>
+        <td>${formatCurrency(product.revenueAtRisk)}</td>
+        <td>${product.frequency}</td>
+        <td><span class="${riskClass}">${product.severity}</span></td>
+      </tr>
+    `;
+  }).join("");
+}
+
+// NEW: Populate Product Selector for LLM Product Cards
+function populateProductSelector() {
+  const selector = document.getElementById("product-select-llm");
+  if (!selector) return;
+
+  selector.innerHTML = '<option value="">-- Choose a product --</option>';
+  PRODUCTS.forEach((product) => {
+    const option = document.createElement("option");
+    option.value = product.name;
+    option.textContent = product.name;
+    selector.appendChild(option);
+  });
+}
+
+// NEW: Render Top 5 Priority Product Cards
+function renderProductCards(products) {
+  const grid = document.getElementById("product-cards-grid");
+  if (!grid) return;
+
+  // Sort by risk and take top 5
+  const topProducts = [...products].sort((a, b) => b.riskProbability - a.riskProbability).slice(0, 5);
+
+  if (!topProducts.length) {
+    grid.innerHTML = '<div class="empty-state">No products available for current filters.</div>';
+    return;
+  }
+
+  grid.innerHTML = topProducts.map((product, index) => {
+    const priorityClass = product.severity === "High" ? "priority-high" : product.severity === "Medium" ? "priority-medium" : "priority-low";
+    const sampleInsight = generateProductSampleInsight(product);
+
+    return `
+      <div class="card product-card ${priorityClass}">
+        <h4>${escapeHtml(product.name)}</h4>
+        <div class="metric">
+          <span class="metric-label">Revenue at Risk</span>
+          <span class="metric-value">${formatCurrency(product.revenueAtRisk)}</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Risk Score</span>
+          <span class="metric-value">${product.riskProbability.toFixed(2)}</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Issues</span>
+          <span class="metric-value">${product.frequency}</span>
+        </div>
+        <div class="insight-text">${escapeHtml(sampleInsight)}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+// NEW: Generate Product Sample Insight
+function generateProductSampleInsight(product) {
+  const issues = product.issues;
+  const topIssue = Object.entries(issues).sort(([, a], [, b]) => b - a)[0];
+  const topIssueType = topIssue ? topIssue[0] : 'unknown';
+
+  if (product.severity === "High") {
+    return `High priority: ${product.frequency} issues detected. Top concern: ${topIssueType}. Immediate action recommended to prevent revenue loss.`;
+  } else if (product.severity === "Medium") {
+    return `Medium risk detected with ${product.frequency} reported issues. Primary issue: ${topIssueType}. Monitor closely for escalation.`;
+  } else {
+    return `Low risk profile with ${product.frequency} issues. Routine follow-up recommended to maintain stability.`;
+  }
+}
+
+// NEW: Generate Insight for Selected Product (Powered by Grok)
+function onGenerateProductInsight() {
+  const productName = document.getElementById("product-select-llm").value;
+  if (!productName) {
+    alert("Please select a product.");
+    return;
+  }
+
+  const product = PRODUCTS.find((p) => p.name === productName);
+  if (!product) return;
+
+  const display = document.getElementById("product-insight-display");
+  const loading = document.getElementById("product-insight-loading");
+  const error = document.getElementById("product-insight-error");
+  const text = document.getElementById("product-insight-text");
+
+  // Show display and loading state
+  display.style.display = "block";
+  loading.classList.remove("hidden");
+  error.classList.add("hidden");
+  text.innerHTML = "";
+
+  console.log("Generating LLM insight for product:", productName);
+
+  // Call Flask backend API
+  fetch("/api/insights/product", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ product_name: productName })
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      loading.classList.add("hidden");
+
+      if (!data.success) {
+        error.textContent = `Error: ${data.error}`;
+        error.classList.remove("hidden");
+        return;
+      }
+
+      const insight = data.insight;
+      const html = `
+        <div class="insight-detail">
+          <h4>${productName}</h4>
+          <div class="insight-section">
+            <strong>Summary:</strong>
+            <p>${insight.summary}</p>
+          </div>
+          <div class="insight-section">
+            <strong>Key Driver:</strong>
+            <p>${insight.driver}</p>
+          </div>
+          <div class="insight-section">
+            <strong>Recommendation:</strong>
+            <p>${insight.recommendation}</p>
+          </div>
+          <div class="insight-source">
+            <small>Source: ${insight.source === 'groq' ? 'Grok API' : 'Rule-based'}</small>
+          </div>
+        </div>
+      `;
+
+      text.innerHTML = html;
+      error.classList.add("hidden");
+    })
+    .catch((err) => {
+      loading.classList.add("hidden");
+      error.textContent = `Error: ${err.message}`;
+      error.classList.remove("hidden");
+      console.error("Insight generation failed:", err);
+    });
 }
 
 function updateTimestamp() {

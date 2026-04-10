@@ -14,17 +14,14 @@
   <div class="site-shell">
     <header class="topbar">
       <div class="container nav-row">
-        <a class="brand" href="#top">ReviewIntel</a>
+        <a class="brand" href="index.html">ReviewIntel</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
         <nav class="nav-menu" id="nav-menu" aria-label="Primary">
-          <a href="#dashboard-section">Product</a>
-          <a href="#solutions">Solutions</a>
-          <a href="#resources">Resources</a>
-          <a href="#pricing">Pricing</a>
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
         </nav>
         <div class="nav-actions">
-          <a class="text-link" href="#dashboard-section">Sign in</a>
-          <a class="button button-primary" href="#final-cta">Get Started</a>
+          <a class="button button-primary" href="dashboard.html">Go to Dashboard</a>
         </div>
       </div>
     </header>
@@ -37,7 +34,7 @@
             <h1>Turn customer reviews into decision ready intelligence</h1>
             <p class="hero-text">ReviewIntel analyzes customer feedback, clusters patterns, highlights risk, and helps teams prioritize issues by business impact.</p>
             <div class="hero-actions">
-              <a class="button button-primary" href="#dashboard-section">Get Started</a>
+              <a class="button button-primary" href="dashboard.html">Get Started</a>
               <a class="button button-secondary" href="#dashboard-preview">View Demo</a>
             </div>
             <div class="hero-meta">
@@ -163,7 +160,7 @@
                 <h3>Review Intelligence Engine</h3>
                 <p>Prioritize issues by business impact</p>
               </div>
-              <button class="button button-secondary" type="button" data-scroll-target="#dashboard-section">Open Dashboard</button>
+              <a href="dashboard.html" class="button button-secondary">Open Dashboard</a>
             </div>
             <div class="dashboard-preview-filters">
               <span>Product: All</span>
@@ -210,221 +207,25 @@
         </div>
       </section>
 
-      <section class="section dashboard-section" id="dashboard-section">
-        <div class="container">
-          <div class="dashboard-head">
-            <div>
-              <p class="eyebrow">Product Dashboard</p>
-              <h2>Review Intelligence Engine</h2>
-              <p>Prioritize issues by business impact</p>
-            </div>
-            <div class="dashboard-head-actions">
-              <span id="last-updated">Last updated: Apr 10, 2026 10:12 IST</span>
-              <button class="button button-secondary" type="button" id="refresh-dashboard">Refresh</button>
-            </div>
-          </div>
-          <section class="card filter-card" aria-labelledby="filter-heading">
-            <div class="filter-card-head">
-              <h3 id="filter-heading">Filters</h3>
-              <button class="text-link debug-toggle" type="button" id="debug-toggle">Show Debug Panel</button>
-            </div>
-            <div class="filter-grid">
-              <label class="field field-wide">
-                <span>Product</span>
-                <select id="product-filter" multiple size="6"></select>
-                <small>Default state: All</small>
-              </label>
-              <label class="field">
-                <span>Start date</span>
-                <input id="date-start" type="date">
-              </label>
-              <label class="field">
-                <span>End date</span>
-                <input id="date-end" type="date">
-              </label>
-              <label class="field">
-                <span>Severity</span>
-                <select id="severity-filter">
-                  <option value="All">All</option>
-                  <option value="High">High</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Low">Low</option>
-                </select>
-              </label>
-              <label class="field field-slider">
-                <span>Risk threshold <strong id="threshold-value">0.70</strong></span>
-                <input id="risk-threshold" type="range" min="0" max="1" step="0.01" value="0.7">
-              </label>
-              <div class="filter-actions">
-                <button class="button button-primary" type="button" id="apply-filters">Apply filters</button>
-                <button class="button button-secondary" type="button" id="reset-filters">Reset filters</button>
-              </div>
-            </div>
-          </section>
-
-          <section class="kpi-grid" id="kpi-grid" aria-label="KPI cards"></section>
-
-          <section class="main-grid">
-            <article class="card table-panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Product Prioritization</h3>
-                  <p>Sorted view of products by issue exposure and business impact.</p>
-                </div>
-                <label class="search-field">
-                  <span class="sr-only">Search products</span>
-                  <input id="table-search" type="search" placeholder="Search products">
-                </label>
-              </div>
-              <div class="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th><button class="sort-button" data-sort="name">Product Name</button></th>
-                      <th><button class="sort-button" data-sort="score">Final Score</button></th>
-                      <th><button class="sort-button" data-sort="revenue">Revenue at Risk</button></th>
-                      <th><button class="sort-button" data-sort="probability">Average Risk Probability</button></th>
-                      <th><button class="sort-button" data-sort="negative">Negative Review Percentage</button></th>
-                      <th><button class="sort-button" data-sort="quadrant">Quadrant</button></th>
-                      <th><button class="sort-button" data-sort="trend">Trend Indicator</button></th>
-                    </tr>
-                  </thead>
-                  <tbody id="product-table-body"></tbody>
-                </table>
-              </div>
-              <div class="empty-state hidden" id="table-empty">No products match the current filters.</div>
-            </article>
-
-            <article class="card chart-panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Impact vs Frequency</h3>
-                  <p>Frequency / Volume on X-axis and Impact Score on Y-axis.</p>
-                </div>
-              </div>
-              <div id="quadrant-chart" class="chart-surface"></div>
-            </article>
-          </section>
-
-          <section class="chart-grid">
-            <article class="card chart-panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Revenue at Risk</h3>
-                  <p>Products ranked by revenue exposure.</p>
-                </div>
-              </div>
-              <div id="revenue-chart" class="chart-surface compact"></div>
-            </article>
-
-            <article class="card chart-panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Rating vs Risk</h3>
-                  <p>Average rating against risk probability.</p>
-                </div>
-              </div>
-              <div id="rating-risk-chart" class="chart-surface compact"></div>
-            </article>
-          </section>
-
-          <section class="chart-grid lower-chart-grid">
-            <article class="card chart-panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Top Issues Breakdown</h3>
-                  <p>Issue volume split across delivery, quality, packaging, and support.</p>
-                </div>
-              </div>
-              <div id="issues-chart" class="chart-surface compact"></div>
-            </article>
-
-            <article class="card chart-panel">
-              <div class="panel-head">
-                <div>
-                  <h3>High Risk Share</h3>
-                  <p>Risk category distribution across current products.</p>
-                </div>
-              </div>
-              <div id="risk-share-chart" class="chart-surface compact"></div>
-            </article>
-          </section>
-
-          <section class="card insights-panel">
-            <div class="panel-head">
-              <div>
-                <div class="panel-title-row">
-                  <h3>AI Insights</h3>
-                  <span class="powered-label">Powered by Grok</span>
-                </div>
-                <p>Generated executive summary based on current filters.</p>
-              </div>
-              <div class="insight-actions">
-                <button class="button button-primary" type="button" id="generate-insights">Generate Insights</button>
-                <button class="button button-secondary" type="button" id="refresh-insights">Refresh Insights</button>
-                <button class="button button-secondary" type="button" id="copy-insights">Copy</button>
-              </div>
-            </div>
-            <div class="insight-body">
-              <div class="insight-loading hidden" id="insight-loading">Generating summary...</div>
-              <div class="insight-error hidden" id="insight-error">Unable to generate insights for the current filter set.</div>
-              <article class="insight-copy" id="insight-copy"></article>
-            </div>
-          </section>
-
-          <section class="card debug-panel hidden" id="debug-panel">
-            <div class="panel-head">
-              <div>
-                <h3>Developer Debug Panel</h3>
-                <p>Pipeline inspection output for local verification.</p>
-              </div>
-            </div>
-            <div class="debug-grid">
-              <article>
-                <h4>Feature shape</h4>
-                <pre id="debug-feature-shape"></pre>
-              </article>
-              <article>
-                <h4>Risk prediction sample</h4>
-                <pre id="debug-risk-sample"></pre>
-              </article>
-              <article>
-                <h4>Aggregated data snapshot</h4>
-                <pre id="debug-data-snapshot"></pre>
-              </article>
-              <article>
-                <h4>LLM input preview</h4>
-                <pre id="debug-llm-input"></pre>
-              </article>
-              <article class="debug-span">
-                <h4>Raw LLM output</h4>
-                <pre id="debug-llm-output"></pre>
-              </article>
-            </div>
-          </section>
-        </div>
-      </section>
-
       <section class="section final-cta" id="final-cta">
         <div class="container">
           <div class="card final-cta-card">
             <p class="eyebrow">Start With Clarity</p>
             <h2>Stop reading reviews manually. Start understanding what customers are actually telling you.</h2>
             <div class="hero-actions">
-              <a class="button button-primary" href="#dashboard-section">Get Started</a>
-              <a class="button button-secondary" href="#dashboard-section">See the dashboard</a>
+              <a class="button button-primary" href="dashboard.html">Get Started</a>
+              <a class="button button-secondary" href="dashboard.html">See the dashboard</a>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer" id="pricing">
+    <footer class="footer">
       <div class="container footer-row">
         <p>ReviewIntel</p>
         <nav aria-label="Footer">
-          <a href="#dashboard-section">Product</a>
-          <a href="#pricing">Pricing</a>
+          <a href="#top">Product</a>
           <a href="#top">Terms</a>
           <a href="#top">Privacy</a>
           <a href="#top">Contact</a>
